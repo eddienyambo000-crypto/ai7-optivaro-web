@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ai7 OPTIVARO — AI Automation Agency Kigali, Rwanda</title>
+  <meta name="description" content="Ai7 OPTIVARO is Kigali's leading AI automation agency. We eliminate manual work, reduce operational costs, and build intelligent systems that run your business. Based in Kibagabaga, Rwanda." />
+  <meta name="keywords" content="AI automation agency Rwanda, business automation Kigali, workflow automation Africa, n8n automation Rwanda, AI solutions for businesses Rwanda, process automation Kigali" />
+  <meta property="og:title" content="Ai7 OPTIVARO — Automate Everything. Dominate Anything." />
+  <meta property="og:description" content="Custom AI automation systems for businesses in Rwanda and beyond. Cut costs, eliminate errors, scale faster." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://ai7optivaro.com" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0057FF',
+            cyan: '#00D4FF',
+            bg: '#040812',
+            'bg-secondary': '#070F1E',
+            'bg-surface': '#0A1628',
+            muted: '#8A9BB5',
+            'text-body': '#E8EDF5',
+          },
+          fontFamily: {
+            heading: ['Space Grotesk', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --primary: #0057FF;
+      --cyan: #00D4FF;
+      --bg: #040812;
+      --bg-secondary: #070F1E;
+      --bg-surface: #0A1628;
+      --text: #FFFFFF;
+      --text-body: #E8EDF5;
+      --text-muted: #8A9BB5;
+      --border: rgba(0, 87, 255, 0.12);
+      --glow: rgba(0, 212, 255, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+    }
+
+    /* ── Custom cursor ── */
+    #cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease;
+    }
+    #cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid rgba(0,212,255,0.4);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), width 0.3s ease, height 0.3s ease, border-color 0.2s ease;
+    }
+    body:has(a:hover) #cursor-dot,
+    body:has(button:hover) #cursor-dot { width: 12px; height: 12px; background: #fff; }
+    body:has(a:hover) #cursor-ring,
+    body:has(button:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(0,212,255,0.7); }
+
+    /* ── Marquee ticker ── */
+    .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 0.875rem 0; }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .marquee-dot { width: 4px; height: 4px; background: var(--cyan); border-radius: 50%; opacity: 0.6; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── Split-text chars ── */
+    .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(40px) rotate(4deg);
+      transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .char.in { opacity: 1; transform: translateY(0) rotate(0deg); }
+
+    /* ── Counter number ── */
+    .stat-num { font-variant-numeric: tabular-nums; }
+
+    /* ── Three.js Canvas ── */
+    #dotted-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    /* ── Grain texture ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── All page content sits above canvas ── */
+    .page-content { position: relative; z-index: 2; }
+
+    /* ── Glass card ── */
+    .glass {
+      background: rgba(10, 22, 40, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      box-shadow: 0 0 0 1px rgba(0,87,255,0.08), 0 8px 32px rgba(0,0,0,0.5), 0 0 60px rgba(0,87,255,0.04);
+    }
+
+    /* ── Primary button ── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(0,87,255,0.45), 0 1px 0 rgba(255,255,255,0.1) inset;
+      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,87,255,0.6), 0 0 0 1px rgba(0,212,255,0.3); }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* ── Secondary button ── */
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text-body);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { transform: translateY(-2px); border-color: rgba(0,87,255,0.4); color: #fff; }
+
+    /* ── Section label ── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--cyan);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.375rem 0.875rem;
+      background: rgba(0, 212, 255, 0.06);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── Glow orbs ── */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    /* ── Fade in on scroll ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 0;
+      transition: background 0.3s, backdrop-filter 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(4, 8, 18, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Process steps ── */
+    .step-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--cyan);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Service card ── */
+    .service-card {
+      background: rgba(10, 22, 40, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,87,255,0.3);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 40px rgba(0,87,255,0.08);
+    }
+
+    /* ── Tool badge ── */
+    .tool-badge {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      background: rgba(10, 22, 40, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tool-badge:hover { color: var(--cyan); border-color: rgba(0,212,255,0.2); }
+
+    /* ── FAQ ── */
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+      background: rgba(10,22,40,0.4);
+      overflow: hidden;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .faq-item.open {
+      border-color: rgba(0,87,255,0.3);
+      background: rgba(10,22,40,0.7);
+    }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 1.75rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      gap: 1rem;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--cyan); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .faq-answer.open { max-height: 300px; }
+    .faq-answer-inner {
+      padding: 0 1.75rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+    }
+    .faq-icon {
+      width: 28px; height: 28px;
+      border: 1px solid rgba(0,87,255,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+      color: var(--primary);
+      background: rgba(0,87,255,0.06);
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(0,87,255,0.15); border-color: rgba(0,87,255,0.5); }
+
+    /* ── Mobile nav ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: rgba(4,8,18,0.97);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--cyan); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(0,87,255,0.3); border-radius: 2px; }
+
+    /* ── Status dot ── */
+    .status-dot {
+      width: 8px; height: 8px;
+      background: #00D97E;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #00D97E;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px #00D97E; }
+      50% { opacity: 0.6; box-shadow: 0 0 16px #00D97E; }
+    }
+
+    /* ── Gradient text ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Divider ── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ── 3D card tilt ── */
+    .service-card { transform-style: preserve-3d; will-change: transform; }
+
+    /* ── Animated gradient border on glass card ── */
+    .glass-animated {
+      background: rgba(10, 22, 40, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      position: relative;
+    }
+    .glass-animated::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 21px;
+      background: linear-gradient(135deg, rgba(0,87,255,0.5), rgba(0,212,255,0.2), rgba(0,87,255,0.1), rgba(0,212,255,0.4));
+      background-size: 300% 300%;
+      animation: border-flow 5s ease infinite;
+      z-index: -1;
+    }
+    @keyframes border-flow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ── Form checkbox group ── */
+    .check-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(0,87,255,0.15);
+      border-radius: 8px;
+      background: rgba(0,87,255,0.03);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .check-option:hover { border-color: rgba(0,87,255,0.4); background: rgba(0,87,255,0.06); color: var(--text-body); }
+    .check-option input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
+
+    /* ── Logo placeholder ── */
+    .logo-placeholder {
+      width: 110px; height: 36px;
+      background: linear-gradient(90deg, rgba(0,87,255,0.12), rgba(0,212,255,0.06));
+      border: 1.5px dashed rgba(0,87,255,0.3);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55rem;
+      color: rgba(0,87,255,0.45);
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    /* ── Mobile: hide cursor ring ── */
+    @media (hover: none) {
+      #cursor-dot, #cursor-ring { display: none; }
+      body { cursor: auto; }
+    }
+
+    /* ── Built by Eddie signature ── */
+    .eddie-sig {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(138,155,181,0.5);
+      letter-spacing: 0.04em;
+    }
+    .eddie-sig span { color: var(--primary); font-weight: 600; }
+  </style>
+</head>
+
+<body>
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Three.js Dotted Surface Canvas -->
+  <canvas id="dotted-canvas"></canvas>
+
+  <!-- Grain overlay handled by CSS -->
+
+  <div class="page-content">
+
+    <!-- ══════════════════════════════════════════
+         NAV
+    ══════════════════════════════════════════ -->
+    <nav id="navbar">
+      <div style="max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between;">
+        <!-- Logo -->
+        <a href="#" style="text-decoration:none; display:flex; align-items:center; gap:0.75rem;">
+          <!-- Logo image — replace src when file is ready -->
+          <img src="brand_assets/logo.png" alt="Ai7 OPTIVARO" id="nav-logo-img"
+            style="height:32px; width:auto; display:none;"
+            onerror="this.style.display='none'; document.getElementById('nav-logo-text').style.display='flex';" />
+          <!-- Text fallback + placeholder -->
+          <span id="nav-logo-text" style="display:flex; align-items:center; gap:0.25rem;">
+            <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:1.25rem; color:var(--primary);">Ai7</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:1.25rem; color:#fff;">OPTIVARO</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div style="display:flex; align-items:center; gap:2.5rem;" class="desktop-nav">
+          <a href="#services" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Services</a>
+          <a href="#process" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Process</a>
+          <a href="#sectors" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Industries</a>
+          <a href="#about" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">About</a>
+          <a href="#faq" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">FAQ</a>
+          <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" style="padding:0.6rem 1.25rem; font-size:0.875rem;">Book a Call</a>
+        </div>
+
+        <!-- Hamburger -->
+        <button id="hamburger" aria-label="Open menu" style="display:none; background:transparent; border:none; cursor:pointer; color:#fff; padding:0.25rem;" onclick="toggleMobileMenu()">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <button onclick="toggleMobileMenu()" style="position:absolute; top:1.5rem; right:2rem; background:transparent; border:none; color:#fff; cursor:pointer; font-size:1.5rem;">✕</button>
+      <a href="#services" onclick="toggleMobileMenu()">Services</a>
+      <a href="#process" onclick="toggleMobileMenu()">Process</a>
+      <a href="#sectors" onclick="toggleMobileMenu()">Industries</a>
+      <a href="#about" onclick="toggleMobileMenu()">About</a>
+      <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
+      <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" onclick="toggleMobileMenu()">Book a Call</a>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════ -->
+    <section style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding: 8rem 2rem 6rem; position:relative; overflow:hidden;">
+
+      <!-- Glow orbs -->
+      <div class="glow-orb" style="width:600px; height:600px; background:radial-gradient(circle, rgba(0,87,255,0.12), transparent 70%); top:-100px; left:-100px;"></div>
+      <div class="glow-orb" style="width:400px; height:400px; background:radial-gradient(circle, rgba(0,212,255,0.08), transparent 70%); bottom:0; right:-50px;"></div>
+
+      <div style="max-width:900px; margin:0 auto; text-align:center;">
+        <div class="section-label fade-up">
+          <span style="width:6px; height:6px; background:var(--cyan); border-radius:50%; display:inline-block;"></span>
+          AI Automation Agency · Kigali, Rwanda
+        </div>
+
+        <h1 class="fade-up" style="font-size:clamp(3rem, 8vw, 6rem); font-weight:800; color:#fff; margin-bottom:1.75rem; line-height:1.05; letter-spacing:-0.04em;">
+          Your Business.<br/><span class="gradient-text" style="display:inline-block;">Running Itself.</span>
+        </h1>
+
+        <p class="fade-up" style="font-size:clamp(1.05rem, 2vw, 1.25rem); color:var(--text-body); max-width:620px; margin:0 auto 2.5rem; line-height:1.8; font-weight:400;">
+          We build the AI automation systems that make it happen —<br/>custom-built for your operation, live in weeks.
+        </p>
+
+        <div class="fade-up" style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-bottom:3rem; transition-delay:0.3s">
+          <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary">
+            Book a Free Strategy Call
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#process" class="btn-secondary">
+            See How We Work
+          </a>
+        </div>
+
+        <p class="fade-up" style="font-size:0.8125rem; color:var(--text-muted); font-family:'JetBrains Mono',monospace; transition-delay:0.4s">
+          No commitment. No proposal before a diagnosis.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         MARQUEE TICKER
+    ══════════════════════════════════════════ -->
+    <div class="marquee-wrap">
+      <div class="marquee-track" id="marquee-track">
+        <!-- Items duplicated for seamless loop -->
+        <div class="marquee-item">Lead Automation <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Workflow Intelligence <span class="marquee-dot"></span></div>
+        <div class="marquee-item">AI-Powered Growth <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Zero-Touch Operations <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Process Optimization <span class="marquee-dot"></span></div>
+        <div class="marquee-item">24/7 Systems <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Custom Automation <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Kigali, Rwanda <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Lead Automation <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Workflow Intelligence <span class="marquee-dot"></span></div>
+        <div class="marquee-item">AI-Powered Growth <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Zero-Touch Operations <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Process Optimization <span class="marquee-dot"></span></div>
+        <div class="marquee-item">24/7 Systems <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Custom Automation <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Kigali, Rwanda <span class="marquee-dot"></span></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         PROBLEM
+    ══════════════════════════════════════════ -->
+    <section style="padding:6rem 2rem; position:relative;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div style="max-width:1200px; margin:0 auto;">
+
+        <div style="text-align:center; margin-bottom:4rem;">
+          <div class="section-label fade-up">The Problem</div>
+          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">
+            The Hidden Cost of Running Manually
+          </h2>
+          <p class="fade-up" style="color:var(--text-muted); max-width:560px; margin:0 auto;">
+            Businesses across Rwanda lose an average of <strong style="color:#fff;">30–40% of productive hours</strong> to tasks that don't require human thinking — and most don't see it until they're trying to scale.
+          </p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem;">
+          <!-- Pain cards -->
+          <div class="service-card fade-up">
+            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">⚡</div>
+            <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Leads going cold</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">A prospect reaches out at 8pm. Nobody responds until morning. They've already called someone else.</p>
+          </div>
+          <div class="service-card fade-up">
+            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">📋</div>
+            <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Manual data entry</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Your team copy-pastes data between systems all day — work that takes hours and creates errors.</p>
+          </div>
+          <div class="service-card fade-up">
+            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">📊</div>
+            <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Outdated reporting</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Reports take half a week to compile. Decisions are being made on last week's numbers.</p>
+          </div>
+          <div class="service-card fade-up">
+            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">💸</div>
+            <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Hiring to fix systems</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">You hire more people to handle problems a well-built system could solve permanently — at a fraction of the cost.</p>
+          </div>
+          <div class="service-card fade-up">
+            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">🔁</div>
+            <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Repetitive admin work</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">Invoices, reminders, onboarding — all manual, all dependent on someone remembering to do it.</p>
+          </div>
+          <div class="service-card fade-up" style="background:linear-gradient(135deg, rgba(0,87,255,0.08), rgba(0,22,40,0.8)); border-color:rgba(0,87,255,0.2);">
+            <p style="color:var(--text-body); font-size:1.0625rem; font-weight:500; line-height:1.65;">
+              "This isn't a people problem.<br/>It's a <span style="color:var(--cyan);">systems problem</span> — and it compounds every month you leave it."
+            </p>
+            <p style="color:var(--text-muted); font-size:0.8125rem; margin-top:1rem; font-family:'JetBrains Mono',monospace;">— Founder, Ai7 OPTIVARO</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         WHAT WE DO
+    ══════════════════════════════════════════ -->
+    <section style="padding:6rem 2rem; position:relative;">
+      <div class="glow-orb" style="width:500px; height:500px; background:radial-gradient(circle, rgba(0,87,255,0.07), transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%);"></div>
+      <div style="max-width:1000px; margin:0 auto; text-align:center;">
+        <div class="section-label fade-up">What We Do</div>
+        <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1.5rem;">
+          Intelligent Automation, Built<br/>Around Your Business
+        </h2>
+        <p class="fade-up" style="color:var(--text-muted); font-size:1.0625rem; line-height:1.8; max-width:680px; margin:0 auto 1rem;">
+          Not off-the-shelf tools. Not generic workflows. Systems built from a deep understanding of your processes, your data, and your goals.
+        </p>
+        <p class="fade-up" style="color:var(--text-body); font-size:0.9375rem; font-style:italic; margin-bottom:4rem;">
+          We don't automate for the sake of it. We automate what matters — and leave the rest alone.
+        </p>
+
+        <!-- Stats row -->
+        <div class="fade-up" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1px; background:var(--border); border-radius:16px; overflow:hidden; border:1px solid var(--border);">
+          <div style="background:var(--bg-secondary); padding:2.5rem 1.5rem; text-align:center;">
+            <p class="stat-num" data-target="40" data-suffix="%" data-prefix="30–" style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--primary); line-height:1; margin-bottom:0.5rem;">30–40%</p>
+            <p style="color:var(--text-muted); font-size:0.8125rem; line-height:1.5;">of work hours lost to tasks that don't require human thinking</p>
+          </div>
+          <div style="background:var(--bg-secondary); padding:2.5rem 1.5rem; text-align:center;">
+            <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--cyan); line-height:1; margin-bottom:0.5rem;">2–4 wks</p>
+            <p style="color:var(--text-muted); font-size:0.8125rem; line-height:1.5;">average time to go live for most automation systems</p>
+          </div>
+          <div style="background:var(--bg-secondary); padding:2.5rem 1.5rem; text-align:center;">
+            <p class="stat-num" data-target="70" data-suffix="%+" style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--primary); line-height:1; margin-bottom:0.5rem;">70%+</p>
+            <p style="color:var(--text-muted); font-size:0.8125rem; line-height:1.5;">reduction in admin time per client achieved in active engagements</p>
+          </div>
+          <div style="background:var(--bg-secondary); padding:2.5rem 1.5rem; text-align:center;">
+            <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--cyan); line-height:1; margin-bottom:0.5rem;">24/7</p>
+            <p style="color:var(--text-muted); font-size:0.8125rem; line-height:1.5;">operation — your systems work while your team sleeps</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SERVICES
+    ══════════════════════════════════════════ -->
+    <section id="services" style="padding:6rem 2rem;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div style="max-width:1200px; margin:0 auto;">
+        <div style="margin-bottom:4rem;">
+          <div class="section-label fade-up">Services</div>
+          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; max-width:500px;">What We Build For You</h2>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:1.5rem;">
+
+          <div class="service-card fade-up">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">⚙️</div>
+              <h3 style="font-size:1.125rem; font-weight:700;">Workflow & Process Automation</h3>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Every internal process that depends on someone remembering to act — approvals, handoffs, notifications, task routing — rebuilt as a system that runs itself. Your team stops being the glue.</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">💬</div>
+              <h3 style="font-size:1.125rem; font-weight:700;">AI Customer Interaction & WhatsApp Bots</h3>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Intelligent assistants that respond, qualify, book, and escalate — 24/7, across WhatsApp, your website, or any channel your customers use. No more slow responses. No more lost leads.</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">🎯</div>
+              <h3 style="font-size:1.125rem; font-weight:700;">Sales & Lead Nurturing Automation</h3>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Automated sequences that capture leads, follow up at the right time, and move prospects toward a decision — without a salesperson manually managing each one.</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">📈</div>
+              <h3 style="font-size:1.125rem; font-weight:700;">Live Reporting & Business Intelligence</h3>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Real-time dashboards connected to your actual data. You stop waiting for someone to compile a report and start seeing your business as it is — right now.</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
+              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">📄</div>
+              <h3 style="font-size:1.125rem; font-weight:700;">Document & Admin Automation</h3>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Invoices, contracts, onboarding, scheduling — handled automatically. Hours of admin compressed into seconds, with zero human error.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         PROCESS
+    ══════════════════════════════════════════ -->
+    <section id="process" style="padding:6rem 2rem; position:relative;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div class="glow-orb" style="width:400px; height:400px; background:radial-gradient(circle, rgba(0,212,255,0.05), transparent 70%); right:-100px; top:50%;"></div>
+
+      <div style="max-width:1200px; margin:0 auto;">
+        <div style="text-align:center; margin-bottom:5rem;">
+          <div class="section-label fade-up">Our Process</div>
+          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">A Methodical Approach. No Shortcuts.</h2>
+          <p class="fade-up" style="color:var(--text-muted); max-width:500px; margin:0 auto;">We don't start by recommending tools. We start by understanding your business.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
+
+          <div class="fade-up">
+            <div class="glass" style="border-radius:16px; padding:2.5rem; height:100%; position:relative; overflow:hidden;">
+              <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--primary), var(--cyan));"></div>
+              <div class="step-number" style="margin-bottom:1rem;">01 — DISCOVER & DIAGNOSE</div>
+              <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:1rem; color:#fff;">Understand First. Automate Second.</h3>
+              <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">We map how your operation actually runs — goals, constraints, handoffs, and what a real win looks like. We audit your processes and decide what should and shouldn't be automated. Part of our value is knowing the difference.</p>
+            </div>
+          </div>
+
+          <div class="fade-up">
+            <div class="glass" style="border-radius:16px; padding:2.5rem; height:100%; position:relative; overflow:hidden;">
+              <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--cyan), var(--primary));"></div>
+              <div class="step-number" style="margin-bottom:1rem;">02 — DESIGN, BUILD & VALIDATE</div>
+              <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:1rem; color:#fff;">Custom Solutions, Tested Before Launch.</h3>
+              <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">We prioritize the highest-impact opportunities and build custom workflows around your data. Every component is tested in a real-world environment before it goes live. No black boxes. No trust-us-it-works.</p>
+            </div>
+          </div>
+
+          <div class="fade-up">
+            <div class="glass" style="border-radius:16px; padding:2.5rem; height:100%; position:relative; overflow:hidden;">
+              <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--primary), var(--cyan));"></div>
+              <div class="step-number" style="margin-bottom:1rem;">03 — LAUNCH, MONITOR & OPTIMIZE</div>
+              <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:1rem; color:#fff;">Continuous Improvement, Not a One-Off Project.</h3>
+              <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">We go live with clear success metrics and safeguards. Then we stay — monitoring performance, collecting feedback, and refining the system. It gets better over time. That's by design.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SECTORS
+    ══════════════════════════════════════════ -->
+    <section id="sectors" style="padding:6rem 2rem;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div style="max-width:1200px; margin:0 auto;">
+        <div style="text-align:center; margin-bottom:4rem;">
+          <div class="section-label fade-up">Industries</div>
+          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">We Know Your Industry</h2>
+          <p class="fade-up" style="color:var(--text-muted); max-width:560px; margin:0 auto;">Every industry runs on repetitive processes. We make those processes invisible — so your team can focus on what actually moves the needle.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem;">
+
+          <div class="service-card fade-up">
+            <div style="font-size:2rem; margin-bottom:1rem;">🏦</div>
+            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Financial Services</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Banks, SACCOs, accounting firms, microfinance. We automate loan processing, onboarding, collections follow-up, and financial reporting.</p>
+            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Faster turnaround · Fewer errors · Elite client experience</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="font-size:2rem; margin-bottom:1rem;">🏥</div>
+            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Healthcare</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Clinics, pharmacies, hospitals. We automate appointments, patient reminders, billing, and records — so your staff focuses on care, not paperwork.</p>
+            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">More appointments kept · Less admin · Happier patients</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="font-size:2rem; margin-bottom:1rem;">🛒</div>
+            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Retail & E-commerce</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Inventory that updates itself. Orders that track automatically. Customer follow-ups that go out without anyone scheduling them.</p>
+            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Fewer stockouts · More repeat buyers · Less chaos</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="font-size:2rem; margin-bottom:1rem;">🏨</div>
+            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Hospitality</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Hotels, restaurants, tour operators. We automate reservations, guest communication, review collection, and internal coordination.</p>
+            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Higher occupancy · Better reviews · Premium experience</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="font-size:2rem; margin-bottom:1rem;">🎓</div>
+            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Education</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Schools, universities, training centers. We automate enrollment, fee tracking, student communications, and reporting — freeing educators to teach.</p>
+            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Smoother enrollment · Fewer dropouts · Less admin</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="font-size:2rem; margin-bottom:1rem;">🌾</div>
+            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Agriculture</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Agribusinesses, cooperatives, and farms. We automate supplier coordination, payment processing, field reporting, and market price alerts.</p>
+            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Better coordination · Faster payments · Stronger margins</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="font-size:2rem; margin-bottom:1rem;">🏗️</div>
+            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Real Estate</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Agencies, developers, and property managers. We automate lead follow-ups, viewing scheduling, contract workflows, and tenant communications.</p>
+            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">More deals closed · Faster follow-up · Zero leads lost</p>
+          </div>
+
+          <div class="service-card fade-up">
+            <div style="font-size:2rem; margin-bottom:1rem;">🚛</div>
+            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Transport & Logistics</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Freight companies, delivery services, fleet operators. We automate dispatch, tracking updates, invoicing, and driver coordination.</p>
+            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Faster delivery · Leaner ops · Real-time visibility</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         WHY US (DIFFERENTIATOR)
+    ══════════════════════════════════════════ -->
+    <section style="padding:6rem 2rem;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;" class="split-section">
+        <div>
+          <div class="section-label fade-up">Why Us</div>
+          <h2 class="fade-up" style="font-size:clamp(1.8rem, 3.5vw, 2.75rem); color:#fff; margin-bottom:1.5rem;">What Makes Us Different</h2>
+          <p class="fade-up" style="color:var(--text-muted); line-height:1.8; margin-bottom:1.5rem; font-size:0.9375rem;">Most automation vendors sell you a tool and leave. We don't. We are a specialized AI automation agency — not a software reseller, not a generalist IT company.</p>
+          <p class="fade-up" style="color:var(--text-muted); line-height:1.8; margin-bottom:1.5rem; font-size:0.9375rem;">We're based in Kigali. We understand the Rwandan market — its pace, its constraints, and its opportunity. We build with that reality in mind, not against it.</p>
+          <p class="fade-up" style="color:var(--text-body); line-height:1.8; font-size:0.9375rem;">We stay accountable beyond launch. If the system isn't performing, we fix it. That's not standard in this industry. <span style="color:var(--cyan);">It is here.</span></p>
+        </div>
+        <div class="fade-up">
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <div class="glass" style="border-radius:12px; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
+              <div style="width:36px; height:36px; background:rgba(0,87,255,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">🔍</div>
+              <div>
+                <p style="font-weight:600; font-size:0.9375rem; margin-bottom:0.2rem;">Diagnosis before proposal</p>
+                <p style="color:var(--text-muted); font-size:0.8125rem;">We never recommend a solution we haven't diagnosed the problem for first.</p>
+              </div>
+            </div>
+            <div class="glass" style="border-radius:12px; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
+              <div style="width:36px; height:36px; background:rgba(0,87,255,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">🛠️</div>
+              <div>
+                <p style="font-weight:600; font-size:0.9375rem; margin-bottom:0.2rem;">Custom, not templated</p>
+                <p style="color:var(--text-muted); font-size:0.8125rem;">Every system is built around your specific operation — not adapted from a generic workflow.</p>
+              </div>
+            </div>
+            <div class="glass" style="border-radius:12px; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
+              <div style="width:36px; height:36px; background:rgba(0,87,255,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">📍</div>
+              <div>
+                <p style="font-weight:600; font-size:0.9375rem; margin-bottom:0.2rem;">Rwanda-native, globally capable</p>
+                <p style="color:var(--text-muted); font-size:0.8125rem;">We understand the local market. We build with global-standard technology.</p>
+              </div>
+            </div>
+            <div class="glass" style="border-radius:12px; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
+              <div style="width:36px; height:36px; background:rgba(0,87,255,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">📊</div>
+              <div>
+                <p style="font-weight:600; font-size:0.9375rem; margin-bottom:0.2rem;">Accountable beyond launch</p>
+                <p style="color:var(--text-muted); font-size:0.8125rem;">We monitor, refine, and fix. You're not left with a system and a good luck.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CASE STUDY
+    ══════════════════════════════════════════ -->
+    <section style="padding:6rem 2rem;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div style="max-width:900px; margin:0 auto; text-align:center;">
+        <div class="section-label fade-up">Current Work</div>
+        <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">Built for Businesses That Mean Business.</h2>
+        <p class="fade-up" style="color:var(--text-muted); margin-bottom:3.5rem; max-width:500px; margin-left:auto; margin-right:auto;">We keep our client roster intentionally small. Every engagement gets senior attention from day one.</p>
+
+        <div class="glass fade-up" style="border-radius:20px; padding:3rem; text-align:left; position:relative; overflow:hidden;">
+          <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--primary), var(--cyan));"></div>
+          <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
+            <div style="width:48px; height:48px; background:rgba(0,87,255,0.15); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--primary);">S</div>
+            <div>
+              <h3 style="font-size:1.25rem; font-weight:700;">StepIn</h3>
+              <p style="color:var(--text-muted); font-size:0.875rem;">Kigali, Rwanda</p>
+            </div>
+            <div style="margin-left:auto; display:flex; align-items:center; gap:0.5rem;">
+              <div class="status-dot"></div>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#00D97E;">Active Engagement</span>
+            </div>
+          </div>
+          <p style="color:var(--text-body); line-height:1.8; margin-bottom:1.5rem;">StepIn helps domain experts turn their knowledge into profitable businesses. We are building their complete client acquisition and onboarding automation infrastructure — replacing a fully manual intake process with an intelligent system that qualifies leads, triggers onboarding sequences, and routes clients automatically.</p>
+          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+            <div style="background:rgba(0,87,255,0.06); border:1px solid var(--border); border-radius:8px; padding:0.75rem 1.25rem;">
+              <p style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.25rem;">PROJECTED OUTCOME</p>
+              <p style="font-size:0.9375rem; font-weight:600; color:var(--cyan);">70%+ reduction in admin time per new client</p>
+            </div>
+            <div style="background:rgba(0,87,255,0.06); border:1px solid var(--border); border-radius:8px; padding:0.75rem 1.25rem;">
+              <p style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.25rem;">RESULT</p>
+              <p style="font-size:0.9375rem; font-weight:600; color:#fff;">Full team bandwidth redirected to delivery</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="fade-up" style="color:var(--text-muted); margin-top:2rem; font-size:0.875rem; font-family:'JetBrains Mono',monospace;">
+          Currently accepting new clients for Q2 2026 — <a href="#contact" style="color:var(--cyan); text-decoration:none;">Check availability →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         ABOUT
+    ══════════════════════════════════════════ -->
+    <section id="about" style="padding:6rem 2rem;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;" class="split-section">
+        <div class="fade-up">
+          <div style="background:linear-gradient(160deg, rgba(0,87,255,0.08) 0%, rgba(7,15,30,0.9) 60%); border-radius:20px; border:1px solid rgba(0,87,255,0.2); padding:3rem 2.5rem; position:relative; overflow:hidden; height:100%;">
+            <!-- Corner glow -->
+            <div style="position:absolute; top:-40px; right:-40px; width:160px; height:160px; background:radial-gradient(circle, rgba(0,212,255,0.1), transparent 70%); border-radius:50%;"></div>
+            <div style="position:absolute; bottom:-40px; left:-40px; width:140px; height:140px; background:radial-gradient(circle, rgba(0,87,255,0.1), transparent 70%); border-radius:50%;"></div>
+
+            <!-- Founder photo placeholder -->
+            <div style="width:100%; aspect-ratio:4/5; max-height:280px; background:linear-gradient(160deg, rgba(0,87,255,0.08), rgba(0,212,255,0.04)); border-radius:14px; border:1.5px dashed rgba(0,87,255,0.35); display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:1.75rem; position:relative; overflow:hidden;">
+              <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="rgba(0,87,255,0.5)" stroke-width="1.5" style="margin-bottom:0.75rem;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <p style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:rgba(0,87,255,0.5); letter-spacing:0.08em; text-align:center;">FOUNDER PHOTO<br/>COMING SOON</p>
+            </div>
+
+            <p style="color:var(--cyan); font-size:0.8125rem; font-family:'JetBrains Mono',monospace; margin-bottom:0.5rem; position:relative;">Founder, Ai7 OPTIVARO</p>
+            <p style="color:var(--text-muted); font-size:0.8125rem; display:flex; align-items:center; gap:0.4rem; margin-bottom:2rem; position:relative;">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Kigali, Kibagabaga, Rwanda
+            </p>
+
+            <!-- Divider -->
+            <div style="height:1px; background:var(--border); margin-bottom:1.5rem; position:relative;"></div>
+
+            <p style="color:var(--text-muted); font-size:0.875rem; line-height:1.7; position:relative; font-style:italic;">"The businesses that win are the ones that figured out which parts of their operation could run without them — and built accordingly."</p>
+          </div>
+        </div>
+        <div>
+          <div class="section-label fade-up">About</div>
+          <h2 class="fade-up" style="font-size:clamp(1.8rem, 3.5vw, 2.75rem); color:#fff; margin-bottom:1.5rem;">Built to Close the Automation Gap in African Business.</h2>
+          <p class="fade-up" style="color:var(--text-muted); line-height:1.8; margin-bottom:1.25rem; font-size:0.9375rem;">I started Ai7 OPTIVARO because I watched too many capable businesses in Rwanda operate at a fraction of their potential — not from lack of ambition, but from lack of the right systems.</p>
+          <p class="fade-up" style="color:var(--text-muted); line-height:1.8; margin-bottom:1.25rem; font-size:0.9375rem;">The automation infrastructure that larger companies use to stay ahead isn't exclusive to them. It's accessible. And when built properly around a specific business, it changes how that business competes.</p>
+          <p class="fade-up" style="color:var(--text-body); line-height:1.8; font-size:0.9375rem;">We're not here to sell you a tool. We're here to build something that actually works — and stay accountable to it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         FAQ
+    ══════════════════════════════════════════ -->
+    <section id="faq" style="padding:6rem 2rem;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div style="max-width:800px; margin:0 auto;">
+        <div style="text-align:center; margin-bottom:4rem;">
+          <div class="section-label fade-up">FAQ</div>
+          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:0.5rem;">The Questions You're Probably Thinking.</h2>
+          <p class="fade-up" style="color:var(--text-muted); font-size:0.9375rem; max-width:480px; margin:0 auto;">We'd rather you asked them. Here are honest answers — no spin.</p>
+        </div>
+
+        <div class="fade-up">
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Does this actually work?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Yes — and we can show you. Our current engagement with StepIn replaced a fully manual client intake process with an intelligent system that qualifies leads, triggers onboarding, and routes clients automatically — reducing their admin time by over 70%. We don't take projects we can't deliver. Before we build anything, we do a discovery session to confirm that automation is the right move for your specific situation. If it's not, we'll tell you that too.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Can your systems really work for my business?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">If your business has processes that repeat — and every business does — we can automate them. We've built for financial services, healthcare, hospitality, retail, education, agriculture, real estate, and logistics. Every system we build is custom-mapped to how your operation actually runs, not adapted from a template. The first call is how we confirm fit. No assumptions, no pressure.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Will it break my business?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">We build alongside your existing operation — not on top of it. Nothing goes live until it's tested against real workflows and signed off by your team. We don't flip a switch and disappear. Launches are staged. Your team knows what's happening at every step. The risk of disruption is factored into how we design from day one.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Will setting up AI disrupt my current business operations?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Good automation is invisible. Your team won't notice a disruption — they'll notice that things stopped falling through the cracks. We design every system to integrate with what you're already using: your inbox, your WhatsApp, your spreadsheets, your CRM. We don't ask you to change how you work. We make what you already do faster and more reliable.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Will it make me money?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Automation makes you money in two direct ways: it recovers revenue you're currently losing (leads that go cold, follow-ups that never happen, clients who churn because nobody followed up) and it cuts the cost of doing what you're already doing manually. Most clients see the system pay for itself within the first few months — not because we promise it, but because the math is straightforward. We'll map it out for your specific business on the strategy call.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Is my business data safe?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">We take data security seriously. Every system we build uses encrypted connections, access controls, and industry-standard security protocols. We only access the data we need to build what we're building — nothing more. We'll walk you through exactly what data flows through your system, where it's stored, and who can access it. Full transparency, always.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              What if something stops working?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">We monitor what we build. If something breaks during the engagement period, we fix it — no extra charge, no excuses. After handoff, we offer ongoing support retainers for clients who want continued maintenance and optimization. You won't be left holding something you don't understand. We document everything and train your team before we step back.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Do you offer support after building the system?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Yes. Every engagement includes a defined support period after launch. For clients who want ongoing monitoring, new automations as their business grows, or continuous optimization, we offer monthly retainer agreements. We're not in the business of building something and disappearing. Your system's long-term performance matters to us because our reputation depends on it.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Will I be supported through the process?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Completely. You'll know exactly what's being built, why, and when. We give you a clear timeline before work starts. You'll get regular updates during the build. We won't go quiet on you. If something changes or a decision needs to be made, we bring it to you — we don't make calls on your behalf and tell you after the fact. This is a collaboration, not a handoff.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Why should I trust you?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">We're based in Kigali. We understand the Rwandan market — not from the outside, but from inside it. We have active clients. We show results before we ask for commitment. The strategy call costs you nothing, and we'll give you a clear, honest picture of what's possible for your business specifically. No vague promises. No pressure. And if automation isn't the right move for you right now, we'll tell you that too — because our reputation matters more than any single deal.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CONTACT FORM
+    ══════════════════════════════════════════ -->
+    <section id="contact" style="padding:6rem 2rem;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div style="max-width:720px; margin:0 auto;">
+        <div style="text-align:center; margin-bottom:3.5rem;">
+          <div class="section-label fade-up">Get In Touch</div>
+          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">Tell Us About Your Business.</h2>
+          <p class="fade-up" style="color:var(--text-muted); font-size:0.9375rem; max-width:500px; margin:0 auto;">Fill in the form below and we'll get back to you within 24 hours with a clear picture of what's possible.</p>
+        </div>
+
+        <form class="fade-up" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display:flex; flex-direction:column; gap:1.25rem;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;" class="form-row">
+            <div>
+              <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">YOUR NAME</label>
+              <input type="text" name="name" placeholder="e.g. John Doe" required
+                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
+            </div>
+            <div>
+              <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">BUSINESS NAME</label>
+              <input type="text" name="business" placeholder="e.g. StepIn Rwanda" required
+                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;" class="form-row">
+            <div>
+              <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">EMAIL ADDRESS</label>
+              <input type="email" name="email" placeholder="you@company.com" required
+                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
+            </div>
+            <div>
+              <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">WHATSAPP NUMBER</label>
+              <input type="tel" name="whatsapp" placeholder="+250 7XX XXX XXX"
+                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">YOUR MESSAGE</label>
+            <textarea name="message" placeholder="Briefly describe your business and what you'd like to automate..." rows="5" required
+              style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; resize:vertical; transition:border-color 0.2s; min-height:130px;"
+              onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'"></textarea>
+          </div>
+
+          <div>
+            <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.75rem;">WHAT ARE YOU HOPING TO IMPROVE WITH AI OR AUTOMATION? *</label>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem;" class="form-row">
+              <label class="check-option">
+                <input type="checkbox" name="goals" value="Lead generation or sales" />
+                Lead generation or sales
+              </label>
+              <label class="check-option">
+                <input type="checkbox" name="goals" value="Customer support" />
+                Customer support
+              </label>
+              <label class="check-option">
+                <input type="checkbox" name="goals" value="Internal operations" />
+                Internal operations
+              </label>
+              <label class="check-option">
+                <input type="checkbox" name="goals" value="Data processing or reporting" />
+                Data processing or reporting
+              </label>
+              <label class="check-option">
+                <input type="checkbox" name="goals" value="Content or marketing workflows" />
+                Content or marketing workflows
+              </label>
+              <label class="check-option">
+                <input type="checkbox" name="goals" value="Not sure yet" />
+                Not sure yet
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" style="align-self:flex-start; display:flex; align-items:center; gap:0.625rem; font-size:1rem; padding:1rem 2.5rem; cursor:none; border:none;">
+            Send Message
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+
+        <!-- Alternative contact line -->
+        <div class="fade-up" style="display:flex; align-items:center; gap:1.5rem; margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--border); flex-wrap:wrap;">
+          <p style="color:var(--text-muted); font-size:0.875rem;">Prefer direct contact?</p>
+          <a href="mailto:info@optivaro.com" style="color:var(--cyan); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@optivaro.com
+          </a>
+          <a href="https://wa.me/250783282759" target="_blank" style="color:var(--cyan); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.554 4.103 1.522 5.828L.057 24l6.348-1.633A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.938a9.938 9.938 0 0 1-5.073-1.384l-.364-.217-3.768.969.999-3.671-.237-.375A9.938 9.938 0 0 1 2.062 12C2.062 6.508 6.508 2.062 12 2.062S21.938 6.508 21.938 12 17.492 21.938 12 21.938z"/></svg>
+            +250 783 282 759
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         FINAL CTA
+    ══════════════════════════════════════════ -->
+    <section style="padding:8rem 2rem; position:relative; overflow:hidden;">
+      <div class="section-divider" style="margin-bottom:6rem;"></div>
+      <div class="glow-orb" style="width:700px; height:700px; background:radial-gradient(circle, rgba(0,87,255,0.12), transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%);"></div>
+
+      <div style="max-width:700px; margin:0 auto; text-align:center; position:relative;">
+        <div class="section-label fade-up">Let's Talk</div>
+        <h2 class="fade-up" style="font-size:clamp(2rem, 5vw, 3.5rem); color:#fff; margin-bottom:1.5rem; line-height:1.1;">
+          The Only Way to Lose Here<br/>Is to Do Nothing.
+        </h2>
+        <p class="fade-up" style="color:var(--text-muted); font-size:1.0625rem; line-height:1.8; margin-bottom:1rem; max-width:560px; margin-left:auto; margin-right:auto;">
+          Book a 30-minute strategy call. We'll map your biggest automation opportunities and tell you honestly what's possible.
+        </p>
+        <p class="fade-up" style="color:var(--text-body); font-size:0.9375rem; margin-bottom:3rem;">
+          No pitch. No proposal before a diagnosis. <strong style="color:#fff;">There is no downside to this call.</strong>
+        </p>
+
+        <div class="fade-up" style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-bottom:3rem;">
+          <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" style="font-size:1rem; padding:1rem 2.5rem;">
+            Book Your Free Strategy Call
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="fade-up" style="display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; align-items:center;">
+          <a href="mailto:info@optivaro.com" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.5rem; transition:color 0.2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@optivaro.com
+          </a>
+          <a href="https://wa.me/250783282759" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.5rem; transition:color 0.2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            +250 783 282 759
+          </a>
+          <span style="color:var(--text-muted); font-size:0.875rem; display:flex; align-items:center; gap:0.5rem;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Kigali, Kibagabaga, Rwanda
+          </span>
+        </div>
+
+        <p class="fade-up" style="color:var(--text-muted); font-size:0.8125rem; margin-top:2rem; font-family:'JetBrains Mono',monospace;">
+          Limited spots per month. We take quality over quantity — always.
+        </p>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════ -->
+    <footer style="border-top:1px solid var(--border); padding:4rem 2rem 2rem;">
+      <div style="max-width:1200px; margin:0 auto;">
+
+        <!-- Top row -->
+        <div style="display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:3rem; margin-bottom:3rem;" class="footer-grid">
+          <!-- Brand col -->
+          <div>
+            <!-- Footer logo placeholder -->
+            <div style="margin-bottom:1.25rem;">
+              <img src="brand_assets/logo.png" alt="Ai7 OPTIVARO" id="footer-logo-img"
+                style="height:38px; width:auto; display:none;"
+                onerror="this.style.display='none'; document.getElementById('footer-logo-text').style.display='flex';" />
+              <div id="footer-logo-text" style="display:flex; align-items:center; gap:0.25rem; margin-bottom:0.75rem;">
+                <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:1.5rem; color:var(--primary);">Ai7</span>
+                <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:1.5rem; color:#fff;">OPTIVARO</span>
+              </div>
+              <!-- Logo image placeholder box -->
+              <div class="logo-placeholder" style="margin-bottom:1rem;" title="Drop logo.png in brand_assets/ to activate">LOGO · COMING SOON</div>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.875rem; line-height:1.7; margin-bottom:1rem; max-width:280px;">We build the AI automation systems that let your business run itself. Custom-built for Rwanda and beyond.</p>
+            <p style="color:var(--text-muted); font-size:0.8125rem; display:flex; align-items:center; gap:0.4rem;">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Kigali, Kibagabaga, Rwanda
+            </p>
+          </div>
+
+          <!-- Nav col -->
+          <div>
+            <p style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color:var(--text-muted); margin-bottom:1.25rem;">NAVIGATION</p>
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <a href="#services" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Services</a>
+              <a href="#process" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">How We Work</a>
+              <a href="#sectors" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Industries</a>
+              <a href="#about" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">About</a>
+              <a href="#faq" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">FAQ</a>
+              <a href="#contact" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Contact</a>
+            </div>
+          </div>
+
+          <!-- Contact col -->
+          <div>
+            <p style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color:var(--text-muted); margin-bottom:1.25rem;">GET IN TOUCH</p>
+            <div style="display:flex; flex-direction:column; gap:0.875rem;">
+              <a href="mailto:info@optivaro.com" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.5rem; transition:color 0.2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                info@optivaro.com
+              </a>
+              <a href="https://wa.me/250783282759" target="_blank" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.5rem; transition:color 0.2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.554 4.103 1.522 5.828L.057 24l6.348-1.633A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.938a9.938 9.938 0 0 1-5.073-1.384l-.364-.217-3.768.969.999-3.671-.237-.375A9.938 9.938 0 0 1 2.062 12C2.062 6.508 6.508 2.062 12 2.062S21.938 6.508 21.938 12 17.492 21.938 12 21.938z"/></svg>
+                +250 783 282 759
+              </a>
+              <a href="https://www.instagram.com/ai7group25/" target="_blank" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.5rem; transition:color 0.2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                @ai7group25
+              </a>
+              <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" style="color:var(--primary); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.5rem; font-weight:500; transition:color 0.2s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--primary)'">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Book a Strategy Call →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div style="padding-top:2rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <p style="color:var(--text-muted); font-size:0.75rem;">© 2026 Ai7 OPTIVARO. All rights reserved. · Kigali, Rwanda</p>
+          <p class="eddie-sig">crafted by <span>Eddie</span></p>
+        </div>
+
+      </div>
+    </footer>
+
+  </div><!-- end page-content -->
+
+  <script>
+    // ── Three.js Dotted Surface ──
+    (function() {
+      const canvas = document.getElementById('dotted-canvas');
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
+      camera.position.set(0, 355, 1220);
+
+      const SEPARATION = 150, AMOUNTX = 40, AMOUNTY = 60;
+      const positions = [], colors = [];
+
+      for (let ix = 0; ix < AMOUNTX; ix++) {
+        for (let iy = 0; iy < AMOUNTY; iy++) {
+          positions.push(ix * SEPARATION - (AMOUNTX * SEPARATION) / 2, 0, iy * SEPARATION - (AMOUNTY * SEPARATION) / 2);
+          // Electric blue dots
+          colors.push(0, 87/255, 1);
+        }
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+      const material = new THREE.PointsMaterial({ size: 10, vertexColors: true, transparent: true, opacity: 1.0, sizeAttenuation: true });
+      const points = new THREE.Points(geometry, material);
+      scene.add(points);
+
+      let count = 0;
+      function animate() {
+        requestAnimationFrame(animate);
+        const pos = geometry.attributes.position.array;
+        let i = 0;
+        for (let ix = 0; ix < AMOUNTX; ix++) {
+          for (let iy = 0; iy < AMOUNTY; iy++) {
+            pos[i * 3 + 1] = Math.sin((ix + count) * 0.3) * 50 + Math.sin((iy + count) * 0.5) * 50;
+            i++;
+          }
+        }
+        geometry.attributes.position.needsUpdate = true;
+        renderer.render(scene, camera);
+        count += 0.07;
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    })();
+
+    // ── Navbar scroll effect ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ── Mobile menu ──
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    // ── Responsive hamburger ──
+    function checkNavResponsive() {
+      const hamburger = document.getElementById('hamburger');
+      const desktopNav = document.querySelector('.desktop-nav');
+      if (window.innerWidth < 768) {
+        hamburger.style.display = 'block';
+        desktopNav.style.display = 'none';
+      } else {
+        hamburger.style.display = 'none';
+        desktopNav.style.display = 'flex';
+        document.getElementById('mobileMenu').classList.remove('open');
+      }
+    }
+    checkNavResponsive();
+    window.addEventListener('resize', checkNavResponsive);
+
+    // ── Responsive split sections ──
+    function checkSplitSections() {
+      document.querySelectorAll('.split-section').forEach(el => {
+        el.style.gridTemplateColumns = window.innerWidth < 900 ? '1fr' : '1fr 1fr';
+        el.style.gap = window.innerWidth < 900 ? '3rem' : '5rem';
+      });
+      document.querySelectorAll('.form-row').forEach(el => {
+        el.style.gridTemplateColumns = window.innerWidth < 640 ? '1fr' : '1fr 1fr';
+      });
+      const footerGrid = document.querySelector('.footer-grid');
+      if (footerGrid) footerGrid.style.gridTemplateColumns = window.innerWidth < 768 ? '1fr' : '1.5fr 1fr 1fr';
+    }
+    checkSplitSections();
+    window.addEventListener('resize', checkSplitSections);
+
+    // ── Scroll fade-up animation ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Fallback: make all visible after 3s in case observer missed them
+    setTimeout(() => {
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+    }, 3000);
+
+    // ── FAQ toggle ──
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').classList.remove('open');
+      });
+
+      // Open clicked if was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.classList.add('open');
+      }
+    }
+
+    // ── Custom cursor ──
+    (function() {
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      if (!dot || !ring) return;
+      let mx = -200, my = -200, rx = -200, ry = -200;
+      window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      function tickCursor() {
+        dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+        rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        requestAnimationFrame(tickCursor);
+      }
+      tickCursor();
+    })();
+
+    // ── Hero H1 split-text reveal ──
+    (function() {
+      const h1 = document.querySelector('h1.fade-up');
+      if (!h1) return;
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          setTimeout(() => {
+            let charIndex = 0;
+            function splitNode(node) {
+              // Skip: gradient-text spans (would break background-clip), BR tags
+              if (node.nodeType === Node.ELEMENT_NODE &&
+                  (node.classList.contains('gradient-text') || node.tagName === 'BR')) {
+                // Animate the whole gradient span as one unit
+                if (node.classList.contains('gradient-text')) {
+                  node.style.opacity = '0';
+                  node.style.transform = 'translateY(30px)';
+                  node.style.transition = 'opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)';
+                  node.style.transitionDelay = (charIndex * 0.018 + 0.15) + 's';
+                  node.style.display = 'inline-block';
+                  setTimeout(() => { node.style.opacity = '1'; node.style.transform = 'translateY(0)'; }, 50);
+                }
+                return;
+              }
+              if (node.nodeType === Node.TEXT_NODE) {
+                const frag = document.createDocumentFragment();
+                [...node.textContent].forEach(ch => {
+                  if (ch === ' ' || ch === '\u00A0') {
+                    frag.appendChild(document.createTextNode('\u00A0'));
+                    return;
+                  }
+                  const span = document.createElement('span');
+                  span.className = 'char';
+                  span.textContent = ch;
+                  span.style.transitionDelay = (charIndex * 0.018) + 's';
+                  charIndex++;
+                  frag.appendChild(span);
+                });
+                node.replaceWith(frag);
+              } else if (node.nodeType === Node.ELEMENT_NODE) {
+                [...node.childNodes].forEach(splitNode);
+              }
+            }
+            [...h1.childNodes].forEach(splitNode);
+            requestAnimationFrame(() => {
+              document.querySelectorAll('h1 .char').forEach(c => c.classList.add('in'));
+            });
+          }, 150);
+        });
+      }, { threshold: 0.1 });
+      observer.observe(h1);
+    })();
+
+    // ── Counter animation ──
+    (function() {
+      const statEls = document.querySelectorAll('.stat-num[data-target]');
+      const counterObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          counterObs.unobserve(entry.target);
+          const el = entry.target;
+          const target = parseInt(el.dataset.target);
+          const suffix = el.dataset.suffix || '';
+          const prefix = el.dataset.prefix || '';
+          let current = 0;
+          const duration = 1400;
+          const steps = 60;
+          const step = target / steps;
+          const interval = duration / steps;
+          const timer = setInterval(() => {
+            current = Math.min(current + step, target);
+            el.textContent = prefix + Math.round(current) + suffix;
+            if (current >= target) clearInterval(timer);
+          }, interval);
+        });
+      }, { threshold: 0.5 });
+      statEls.forEach(el => counterObs.observe(el));
+    })();
+
+    // ── 3D card tilt ──
+    (function() {
+      document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `perspective(600px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+          card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+        });
+        card.addEventListener('mouseenter', () => {
+          card.style.transition = 'transform 0.08s ease';
+        });
+      });
+    })();
+
+    // ── Animated underline on section labels hover ──
+    (function() {
+      document.querySelectorAll('.section-label').forEach(el => {
+        el.style.cursor = 'default';
+      });
+    })();
+
+    // ── Smooth scroll with offset for fixed nav ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+    // ── Parallax glow orbs on hero ──
+    (function() {
+      const orbs = document.querySelectorAll('section:first-of-type .glow-orb');
+      window.addEventListener('mousemove', e => {
+        const xRatio = (e.clientX / window.innerWidth - 0.5) * 30;
+        const yRatio = (e.clientY / window.innerHeight - 0.5) * 20;
+        orbs.forEach((orb, i) => {
+          const factor = i % 2 === 0 ? 1 : -0.6;
+          orb.style.transform = `translate(${xRatio * factor}px, ${yRatio * factor}px)`;
+          orb.style.transition = 'transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
