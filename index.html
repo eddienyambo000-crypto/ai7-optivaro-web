@@ -6,10 +6,30 @@
   <title>Ai7 OPTIVARO — AI Automation Agency Kigali, Rwanda</title>
   <meta name="description" content="Ai7 OPTIVARO is Kigali's leading AI automation agency. We eliminate manual work, reduce operational costs, and build intelligent systems that run your business. Based in Kibagabaga, Rwanda." />
   <meta name="keywords" content="AI automation agency Rwanda, business automation Kigali, workflow automation Africa, n8n automation Rwanda, AI solutions for businesses Rwanda, process automation Kigali" />
-  <meta property="og:title" content="Ai7 OPTIVARO — Automate Everything. Dominate Anything." />
-  <meta property="og:description" content="Custom AI automation systems for businesses in Rwanda and beyond. Cut costs, eliminate errors, scale faster." />
+
+  <!-- Open Graph — controls how link looks when shared on WhatsApp, LinkedIn, Facebook -->
   <meta property="og:type" content="website" />
-  <link rel="canonical" href="https://ai7optivaro.com" />
+  <meta property="og:url" content="https://ai7-optivaro-web.vercel.app/" />
+  <meta property="og:title" content="Ai7 OPTIVARO — Automate Everything. Dominate Anything." />
+  <meta property="og:description" content="Custom AI automation systems for businesses in Rwanda and beyond. Cut costs, eliminate errors, scale faster. Live in weeks." />
+  <meta property="og:image" content="https://placehold.co/1200x630/040812/0057FF?text=Ai7+OPTIVARO" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Ai7 OPTIVARO" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ai7 OPTIVARO — Automate Everything. Dominate Anything." />
+  <meta name="twitter:description" content="Custom AI automation systems for businesses in Rwanda and beyond. Cut costs, eliminate errors, scale faster." />
+  <meta name="twitter:image" content="https://placehold.co/1200x630/040812/0057FF?text=Ai7+OPTIVARO" />
+
+  <link rel="canonical" href="https://ai7-optivaro-web.vercel.app/" />
+
+  <!-- Favicon — branded SVG, works in all modern browsers -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23040812'/><text x='7' y='46' font-family='Arial Black,Arial' font-weight='900' font-size='32' fill='%230057FF'>Ai</text><text x='40' y='46' font-family='Arial Black,Arial' font-weight='900' font-size='32' fill='%2300D4FF'>7</text></svg>" />
+  <link rel="alternate icon" href="data:image/png;base64,iVBORw0KGgo=" />
+  <meta name="theme-color" content="#040812" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -1603,6 +1623,80 @@
       });
     })();
   </script>
+
+  <!-- ══════════════════════════════════════════
+       WHATSAPP FLOATING BUTTON
+  ══════════════════════════════════════════ -->
+  <style>
+    @keyframes wa-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+      70%  { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+    #wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      animation: wa-pulse 2.5s ease-out infinite;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), background 0.2s;
+    }
+    #wa-float:hover {
+      transform: scale(1.12);
+      background: #20bc5a;
+      animation: none;
+      box-shadow: 0 6px 32px rgba(37,211,102,0.55);
+    }
+    #wa-tooltip {
+      position: fixed;
+      bottom: 2.6rem;
+      right: 5.5rem;
+      background: #fff;
+      color: #111;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 0.45rem 0.875rem;
+      border-radius: 8px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(6px);
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    #wa-tooltip::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 6px solid transparent;
+      border-left-color: #fff;
+      border-right: none;
+    }
+    #wa-float:hover + #wa-tooltip,
+    #wa-float:focus + #wa-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  </style>
+
+  <a href="https://wa.me/250783282759?text=Hi%20Ai7%20OPTIVARO%2C%20I%27d%20like%20to%20discuss%20automation%20for%20my%20business." target="_blank" id="wa-float" aria-label="Chat on WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.554 4.103 1.522 5.828L.057 24l6.348-1.633A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.938a9.938 9.938 0 0 1-5.073-1.384l-.364-.217-3.768.969.999-3.671-.237-.375A9.938 9.938 0 0 1 2.062 12C2.062 6.508 6.508 2.062 12 2.062S21.938 6.508 21.938 12 17.492 21.938 12 21.938z"/>
+    </svg>
+  </a>
+  <span id="wa-tooltip">Chat on WhatsApp</span>
 
 </body>
 </html>
