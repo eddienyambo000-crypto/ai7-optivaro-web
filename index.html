@@ -230,6 +230,7 @@
       border: 1px solid rgba(0, 212, 255, 0.15);
       border-radius: 100px;
       margin-bottom: 1.25rem;
+      white-space: nowrap;
     }
 
     /* ── Glow orbs ── */
@@ -485,6 +486,15 @@
       letter-spacing: 0.04em;
     }
     .eddie-sig span { color: var(--primary); font-weight: 600; }
+
+    /* ── Mobile fixes ── */
+    @media (max-width: 480px) {
+      .section-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.06em;
+        padding: 0.3rem 0.625rem;
+      }
+    }
   </style>
 </head>
 
@@ -561,7 +571,7 @@
           AI Automation Agency · Kigali, Rwanda
         </div>
 
-        <h1 class="fade-up" style="font-size:clamp(3rem, 8vw, 6rem); font-weight:800; color:#fff; margin-bottom:1.75rem; line-height:1.05; letter-spacing:-0.04em;">
+        <h1 class="fade-up" style="font-size:clamp(2rem, 7vw, 6rem); font-weight:800; color:#fff; margin-bottom:1.75rem; line-height:1.05; letter-spacing:-0.04em; word-break:keep-all; hyphens:none; overflow-wrap:normal;">
           Your Business.<br/><span class="gradient-text" style="display:inline-block;">Running Itself.</span>
         </h1>
 
