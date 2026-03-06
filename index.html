@@ -1333,7 +1333,11 @@
 
         <!-- Bottom bar -->
         <div style="padding-top:2rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-          <p style="color:var(--text-muted); font-size:0.75rem;">© 2026 Ai7 OPTIVARO. All rights reserved. · Kigali, Rwanda</p>
+          <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+            <p style="color:var(--text-muted); font-size:0.75rem;">© 2026 Ai7 OPTIVARO. All rights reserved. · Kigali, Rwanda</p>
+            <button onclick="document.getElementById('modal-privacy').style.display='flex'" style="background:none; border:none; color:var(--text-muted); font-size:0.75rem; cursor:pointer; padding:0; font-family:'DM Sans',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</button>
+            <button onclick="document.getElementById('modal-terms').style.display='flex'" style="background:none; border:none; color:var(--text-muted); font-size:0.75rem; cursor:pointer; padding:0; font-family:'DM Sans',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Terms & Conditions</button>
+          </div>
           <p class="eddie-sig">crafted by <span>Eddie</span></p>
         </div>
 
@@ -1623,6 +1627,212 @@
       });
     })();
   </script>
+
+  <!-- ══════════════════════════════════════════
+       PRIVACY POLICY + TERMS MODALS
+  ══════════════════════════════════════════ -->
+  <style>
+    .legal-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(4,8,18,0.85);
+      backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .legal-modal-box {
+      background: #0b1221;
+      border: 1px solid rgba(0,87,255,0.2);
+      border-radius: 20px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 3rem;
+      position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,87,255,0.3) transparent;
+    }
+    .legal-modal-box::-webkit-scrollbar { width: 4px; }
+    .legal-modal-box::-webkit-scrollbar-track { background: transparent; }
+    .legal-modal-box::-webkit-scrollbar-thumb { background: rgba(0,87,255,0.3); border-radius: 4px; }
+    .legal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.06);
+      border: none;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .legal-close:hover { background: rgba(255,255,255,0.12); }
+    .legal-modal-box h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .legal-modal-box .legal-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      display: block;
+    }
+    .legal-modal-box h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 1.75rem 0 0.5rem;
+    }
+    .legal-modal-box p, .legal-modal-box li {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .legal-modal-box ul {
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+    .legal-modal-box li { margin-bottom: 0.4rem; }
+    .legal-modal-box a { color: var(--cyan); text-decoration: none; }
+    .legal-modal-box a:hover { text-decoration: underline; }
+  </style>
+
+  <!-- PRIVACY POLICY MODAL -->
+  <div class="legal-modal" id="modal-privacy" onclick="if(event.target===this)this.style.display='none'">
+    <div class="legal-modal-box">
+      <button class="legal-close" onclick="document.getElementById('modal-privacy').style.display='none'">✕</button>
+      <h2>Privacy Policy</h2>
+      <span class="legal-date">Effective: March 2026 · Ai7 OPTIVARO</span>
+
+      <p>At Ai7 OPTIVARO, we take your privacy seriously. This policy explains what information we collect, why we collect it, and how we protect it. By using our website or submitting our contact form, you agree to the practices described here.</p>
+
+      <h3>1. Who We Are</h3>
+      <p>Ai7 OPTIVARO is an AI automation agency based in Kigali, Kibagabaga, Rwanda. We build custom automation systems for businesses across Rwanda and beyond. You can reach us at <a href="mailto:info@optivaro.com">info@optivaro.com</a> or via WhatsApp at +250 783 282 759.</p>
+
+      <h3>2. Information We Collect</h3>
+      <p>When you submit our contact form, we collect:</p>
+      <ul>
+        <li>Your full name</li>
+        <li>Your business or company name</li>
+        <li>Your email address</li>
+        <li>Your WhatsApp number</li>
+        <li>Your goals and areas of interest (as selected from the form checkboxes)</li>
+        <li>Any additional message you choose to include</li>
+      </ul>
+      <p>We do not collect payment information, cookies for tracking, or any sensitive personal data through this website.</p>
+
+      <h3>3. How We Use Your Information</h3>
+      <p>We use the information you provide solely to:</p>
+      <ul>
+        <li>Respond to your inquiry and understand your business needs</li>
+        <li>Schedule and conduct discovery calls or consultations</li>
+        <li>Send relevant information about our services when you have requested it</li>
+        <li>Deliver the services you engage us for</li>
+      </ul>
+      <p>We do not sell, rent, or share your personal information with third parties for marketing purposes — ever.</p>
+
+      <h3>4. How Your Data Is Processed</h3>
+      <p>Form submissions are processed through <strong>Formspree</strong> (formspree.io), a third-party form service that routes your submission to our email inbox. Formspree may temporarily store your submission data on its servers. You can review Formspree's own privacy policy at formspree.io/legal/privacy-policy. Beyond that, your data is stored securely within our internal business tools and is accessible only to the Ai7 OPTIVARO team.</p>
+
+      <h3>5. Data Retention</h3>
+      <p>We retain your contact information for as long as necessary to respond to your inquiry or to fulfil the services agreed upon. If you choose not to engage with us, we will delete your information within 90 days of your submission. You may request deletion at any time.</p>
+
+      <h3>6. Your Rights</h3>
+      <p>You have the right to:</p>
+      <ul>
+        <li>Request a copy of the personal data we hold about you</li>
+        <li>Request correction of any inaccurate information</li>
+        <li>Request deletion of your data at any time</li>
+        <li>Withdraw consent for any ongoing communication</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <a href="mailto:info@optivaro.com">info@optivaro.com</a>.</p>
+
+      <h3>7. Security</h3>
+      <p>We take reasonable precautions to protect your information from unauthorised access, misuse, or disclosure. Our website is served over HTTPS and we do not store sensitive data on this website's infrastructure.</p>
+
+      <h3>8. Changes to This Policy</h3>
+      <p>We may update this Privacy Policy from time to time. Any changes will be reflected here with an updated effective date. Continued use of the site after changes are posted constitutes acceptance of the revised policy.</p>
+
+      <h3>9. Contact</h3>
+      <p>Questions about this policy? Reach us at <a href="mailto:info@optivaro.com">info@optivaro.com</a> or WhatsApp <a href="https://wa.me/250783282759">+250 783 282 759</a>.</p>
+    </div>
+  </div>
+
+  <!-- TERMS & CONDITIONS MODAL -->
+  <div class="legal-modal" id="modal-terms" onclick="if(event.target===this)this.style.display='none'">
+    <div class="legal-modal-box">
+      <button class="legal-close" onclick="document.getElementById('modal-terms').style.display='none'">✕</button>
+      <h2>Terms & Conditions</h2>
+      <span class="legal-date">Effective: March 2026 · Ai7 OPTIVARO</span>
+
+      <p>These Terms & Conditions govern your use of the Ai7 OPTIVARO website and the professional services we provide. By engaging with our website or entering into a service agreement with us, you accept these terms in full.</p>
+
+      <h3>1. Services</h3>
+      <p>Ai7 OPTIVARO provides custom AI automation consulting, workflow design, system integration, and implementation services. The specific scope, deliverables, and timeline for any engagement are defined in a separate written agreement (Scope of Work or Service Agreement) signed before any work begins. Nothing on this website constitutes a binding service offer.</p>
+
+      <h3>2. Engagement Process</h3>
+      <p>All engagements begin with a free discovery call to assess fit and feasibility. No work is started and no fees are charged before both parties have agreed on scope and signed a formal agreement. We reserve the right to decline any project that does not meet our delivery standards or ethical guidelines.</p>
+
+      <h3>3. Payment Terms</h3>
+      <p>Unless otherwise stated in a signed agreement:</p>
+      <ul>
+        <li>A deposit of 50% is required before work begins</li>
+        <li>The remaining 50% is due upon project completion and handover</li>
+        <li>Invoices are payable within 7 business days of issue</li>
+        <li>Late payments may incur a 5% monthly charge on the outstanding balance</li>
+        <li>All fees are quoted in USD or Rwandan Francs (RWF) as agreed</li>
+      </ul>
+
+      <h3>4. Intellectual Property</h3>
+      <p>Upon receipt of full payment, the client owns all custom-built automation systems, workflows, and deliverables created specifically for their project. Ai7 OPTIVARO retains ownership of any proprietary frameworks, templates, or methodologies used in the delivery process. We may reference completed projects as case studies (without disclosing confidential data) unless explicitly agreed otherwise.</p>
+
+      <h3>5. Confidentiality</h3>
+      <p>Both parties agree to keep confidential any non-public business information, credentials, process data, or strategic details shared during the engagement. This obligation continues for 2 years following the conclusion of the project. We will never share your business data with third parties without your explicit written consent.</p>
+
+      <h3>6. Client Responsibilities</h3>
+      <p>The client agrees to:</p>
+      <ul>
+        <li>Provide accurate and complete information required for the project</li>
+        <li>Grant necessary access to tools, accounts, and systems in a timely manner</li>
+        <li>Assign a point of contact who can make decisions on behalf of the business</li>
+        <li>Review and provide feedback on deliverables within agreed timelines</li>
+      </ul>
+      <p>Delays caused by the client's failure to meet these responsibilities may affect project timelines and are not the liability of Ai7 OPTIVARO.</p>
+
+      <h3>7. Limitation of Liability</h3>
+      <p>Ai7 OPTIVARO is not liable for any indirect, incidental, or consequential damages arising from the use of our services or any system we build, including but not limited to loss of revenue, data loss, or operational disruption. Our total liability in any claim shall not exceed the total fees paid by the client for the specific project in question. All systems are tested before handover; post-launch issues arising from third-party platform changes are outside our control.</p>
+
+      <h3>8. Termination</h3>
+      <p>Either party may terminate a project engagement with 14 days' written notice. Upon termination, the client is responsible for payment of all work completed up to the termination date. Deposits are non-refundable once work has commenced.</p>
+
+      <h3>9. Governing Law</h3>
+      <p>These Terms are governed by the laws of the Republic of Rwanda. Any disputes arising from these terms or from a service engagement shall first be resolved through good-faith negotiation. If unresolved, disputes shall be submitted to the appropriate courts in Kigali, Rwanda.</p>
+
+      <h3>10. Changes to These Terms</h3>
+      <p>We may update these Terms from time to time. The current version is always available on this website. Continued use of our services after any update constitutes acceptance of the revised terms.</p>
+
+      <h3>11. Contact</h3>
+      <p>For any questions about these Terms, contact us at <a href="mailto:info@optivaro.com">info@optivaro.com</a> or WhatsApp <a href="https://wa.me/250783282759">+250 783 282 759</a>.</p>
+    </div>
+  </div>
 
   <!-- ══════════════════════════════════════════
        WHATSAPP FLOATING BUTTON
