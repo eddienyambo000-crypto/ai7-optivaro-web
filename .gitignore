@@ -1,7 +1,7 @@
 node_modules/
 temporary screenshots/
-*.png
-*.jpg
-*.jpeg
 .DS_Store
 Thumbs.db
+# Allow brand assets
+!brand_assets/*.png
+!brand_assets/*.jpg
