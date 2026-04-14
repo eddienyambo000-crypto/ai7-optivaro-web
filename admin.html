@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ai7 OPTIVARO — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #040812;
+      --surface: #0b1221;
+      --border: rgba(255,255,255,0.06);
+      --primary: #0057FF;
+      --cyan: #00D4FF;
+      --text: #ffffff;
+      --text-muted: #8a9bb5;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* ── Login Screen ── */
+    #login-screen {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .login-logo img {
+      height: 48px;
+      width: auto;
+      filter: drop-shadow(0 0 12px rgba(0,212,255,0.5));
+      margin-bottom: 0.75rem;
+    }
+
+    .login-logo h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .login-logo h1 span { color: var(--primary); }
+
+    .login-logo p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--cyan);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 0.25rem;
+    }
+
+    .login-card {
+      background: var(--surface);
+      border: 1px solid rgba(0,87,255,0.2);
+      border-radius: 20px;
+      padding: 2.5rem;
+    }
+
+    .login-card h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.375rem;
+    }
+
+    .login-card p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .form-group input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.875rem 1rem;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9375rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: rgba(0,87,255,0.5);
+    }
+
+    .login-btn {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.9rem;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .login-btn:hover { background: #0047dd; transform: translateY(-1px); }
+    .login-btn:active { transform: translateY(0); }
+
+    .login-error {
+      color: #ff4d4d;
+      font-size: 0.8125rem;
+      margin-top: 0.75rem;
+      text-align: center;
+      display: none;
+    }
+
+    /* ── Dashboard ── */
+    #dashboard {
+      display: none;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .dash-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dash-logo img {
+      height: 40px;
+      filter: drop-shadow(0 0 10px rgba(0,212,255,0.4));
+    }
+
+    .dash-logo span {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .dash-logo span b { color: var(--primary); font-weight: 800; }
+
+    .dash-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .dash-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--cyan);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(0,212,255,0.06);
+      border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 100px;
+      padding: 0.3rem 0.75rem;
+    }
+
+    .logout-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 8px;
+      padding: 0.4rem 0.875rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8125rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+    .dash-welcome {
+      margin-bottom: 2.5rem;
+    }
+
+    .dash-welcome h2 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    .dash-welcome p {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--cyan);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .dash-card {
+      background: var(--surface);
+      border: 1px solid rgba(0,87,255,0.15);
+      border-radius: 16px;
+      padding: 1.75rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dash-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--cyan));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .dash-card:hover {
+      border-color: rgba(0,87,255,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,87,255,0.15);
+    }
+
+    .dash-card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon.blue { background: rgba(0,87,255,0.15); }
+    .card-icon.cyan { background: rgba(0,212,255,0.1); }
+    .card-icon.green { background: rgba(0,200,100,0.1); }
+    .card-icon.orange { background: rgba(255,150,0,0.1); }
+    .card-icon.purple { background: rgba(120,80,255,0.1); }
+
+    .card-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.375rem;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .card-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--cyan);
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .dash-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .info-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+
+    .info-card .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card .value {
+      font-size: 0.875rem;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .info-card .value a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .info-card .value a:hover { text-decoration: underline; }
+
+    .dash-footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── LOGIN SCREEN ── -->
+  <div id="login-screen">
+    <div class="login-logo">
+      <img src="brand_assets/logo.png" alt="Ai7" onerror="this.style.display='none'" />
+      <h1><span>Ai7</span> OPTIVARO</h1>
+      <p>Admin Portal</p>
+    </div>
+
+    <div class="login-card">
+      <h2>Welcome back.</h2>
+      <p>Sign in to access the Ai7 OPTIVARO control panel.</p>
+
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter username" autocomplete="off" />
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password" onkeydown="if(event.key==='Enter') login()" />
+      </div>
+
+      <button class="login-btn" onclick="login()">Sign In →</button>
+      <p class="login-error" id="login-error">Incorrect credentials. Try again.</p>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ── -->
+  <div id="dashboard">
+    <div class="dash-header">
+      <div class="dash-logo">
+        <img src="brand_assets/logo.png" alt="Ai7" onerror="this.style.display='none'" />
+        <span><b>Ai7</b> OPTIVARO</span>
+      </div>
+      <div class="dash-meta">
+        <span class="dash-badge">Admin Panel</span>
+        <button class="logout-btn" onclick="logout()">Sign Out</button>
+      </div>
+    </div>
+
+    <div class="dash-welcome">
+      <h2>Good to see you, Boss.</h2>
+      <p>Everything running. Here's your control panel for Ai7 OPTIVARO.</p>
+    </div>
+
+    <p class="section-title">Core Tools</p>
+    <div class="cards-grid">
+
+      <a href="https://analytics.google.com" target="_blank" class="dash-card">
+        <div class="card-icon blue">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#0057FF" stroke-width="1.75"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <div class="card-title">Google Analytics</div>
+        <div class="card-desc">See who visits the website, where they come from, and how long they stay.</div>
+        <div class="card-link">Open Dashboard →</div>
+      </a>
+
+      <a href="https://formspree.io/forms" target="_blank" class="dash-card">
+        <div class="card-icon cyan">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00D4FF" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="card-title">Lead Submissions</div>
+        <div class="card-desc">View every contact form submission — name, email, WhatsApp, goals.</div>
+        <div class="card-link">View Leads →</div>
+      </a>
+
+      <a href="https://search.google.com/search-console" target="_blank" class="dash-card">
+        <div class="card-icon green">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00c864" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <div class="card-title">Google Search Console</div>
+        <div class="card-desc">See how the site ranks on Google — search terms, clicks, impressions.</div>
+        <div class="card-link">View Search Data →</div>
+      </a>
+
+      <a href="https://vercel.com/dashboard" target="_blank" class="dash-card">
+        <div class="card-icon orange">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#ff9600" stroke-width="1.75"><path d="M12 2L2 19.8h20L12 2z"/></svg>
+        </div>
+        <div class="card-title">Vercel Deployments</div>
+        <div class="card-desc">Monitor the live website — deployments, uptime, and performance.</div>
+        <div class="card-link">Open Vercel →</div>
+      </a>
+
+      <a href="https://improvmx.com" target="_blank" class="dash-card">
+        <div class="card-icon purple">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#7850ff" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="card-title">Email Forwarding</div>
+        <div class="card-desc">Manage company email addresses — info@ai7optivaro.com and team emails.</div>
+        <div class="card-link">Manage Emails →</div>
+      </a>
+
+      <a href="https://ai7optivaro.com" target="_blank" class="dash-card">
+        <div class="card-icon cyan">
+          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00D4FF" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="card-title">Live Website</div>
+        <div class="card-desc">View the public-facing Ai7 OPTIVARO website as clients see it.</div>
+        <div class="card-link">Visit Site →</div>
+      </a>
+
+    </div>
+
+    <div class="dash-divider"></div>
+
+    <p class="section-title">Business Info</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="label">Website</div>
+        <div class="value"><a href="https://ai7optivaro.com" target="_blank">ai7optivaro.com</a></div>
+      </div>
+      <div class="info-card">
+        <div class="label">Business Email</div>
+        <div class="value"><a href="mailto:info@ai7optivaro.com">info@ai7optivaro.com</a></div>
+      </div>
+      <div class="info-card">
+        <div class="label">WhatsApp</div>
+        <div class="value"><a href="https://wa.me/250783282759" target="_blank">+250 783 282 759</a></div>
+      </div>
+      <div class="info-card">
+        <div class="label">Instagram</div>
+        <div class="value"><a href="https://www.instagram.com/ai7group25/" target="_blank">@ai7group25</a></div>
+      </div>
+      <div class="info-card">
+        <div class="label">Book a Call</div>
+        <div class="value"><a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank">Calendar Link</a></div>
+      </div>
+      <div class="info-card">
+        <div class="label">Location</div>
+        <div class="value">Kigali, Kibagabaga, Rwanda</div>
+      </div>
+    </div>
+
+    <div class="dash-footer">
+      Ai7 OPTIVARO Admin Panel · Built by Eddie & the Ai7 team
+    </div>
+  </div>
+
+  <script>
+    const CREDENTIALS = {
+      username: 'ai7admin',
+      password: 'Optivaro2026!'
+    };
+
+    function login() {
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      const err = document.getElementById('login-error');
+
+      if (u === CREDENTIALS.username && p === CREDENTIALS.password) {
+        sessionStorage.setItem('ai7_admin', 'true');
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        err.style.display = 'none';
+      } else {
+        err.style.display = 'block';
+        document.getElementById('password').value = '';
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('ai7_admin');
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('login-screen').style.display = 'block';
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+    }
+
+    // Auto-login if session exists
+    if (sessionStorage.getItem('ai7_admin') === 'true') {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
