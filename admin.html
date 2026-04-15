@@ -100,7 +100,8 @@
       text-transform: uppercase;
     }
 
-    .form-group input {
+    .form-group input,
+    .form-group textarea {
       width: 100%;
       background: rgba(255,255,255,0.04);
       border: 1px solid var(--border);
@@ -111,10 +112,21 @@
       font-size: 0.9375rem;
       outline: none;
       transition: border-color 0.2s;
+      resize: vertical;
     }
 
-    .form-group input:focus {
+    .form-group textarea { min-height: 80px; line-height: 1.6; }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
       border-color: rgba(0,87,255,0.5);
+    }
+
+    .form-group .hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .login-btn {
@@ -212,7 +224,7 @@
     .logout-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
 
     .dash-welcome {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .dash-welcome h2 {
@@ -227,6 +239,39 @@
       color: var(--text-muted);
       font-size: 0.9375rem;
     }
+
+    /* ── Tabs ── */
+    .tab-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0.625rem 1.25rem;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .tab-btn:hover { color: #fff; }
+
+    .tab-btn.active {
+      color: #fff;
+      border-bottom-color: var(--primary);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
 
     .section-title {
       font-family: 'JetBrains Mono', monospace;
@@ -356,6 +401,165 @@
 
     .info-card .value a:hover { text-decoration: underline; }
 
+    /* ── Site Editor ── */
+    .editor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 700px) {
+      .editor-grid { grid-template-columns: 1fr; }
+    }
+
+    .editor-card {
+      background: var(--surface);
+      border: 1px solid rgba(0,87,255,0.15);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+
+    .editor-card.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .editor-card h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.375rem;
+    }
+
+    .editor-card .sub {
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+      margin-bottom: 1.75rem;
+      line-height: 1.6;
+    }
+
+    .token-setup {
+      background: rgba(0,87,255,0.05);
+      border: 1px solid rgba(0,87,255,0.2);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .token-setup h4 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .token-setup ol {
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+      line-height: 1.9;
+      padding-left: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .token-setup ol li { margin-bottom: 0.125rem; }
+
+    .token-setup .connected {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: #00c864;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover { background: #0047dd; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { background: #1a2a4a; color: #4a6080; cursor: not-allowed; transform: none; }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9375rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+    .btn-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 1.75rem;
+    }
+
+    .editor-status {
+      font-size: 0.8125rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .editor-status.success {
+      background: rgba(0,200,100,0.08);
+      border: 1px solid rgba(0,200,100,0.2);
+      color: #00c864;
+    }
+
+    .editor-status.error {
+      background: rgba(255,77,77,0.08);
+      border: 1px solid rgba(255,77,77,0.2);
+      color: #ff6b6b;
+    }
+
+    .editor-status.loading {
+      background: rgba(0,87,255,0.08);
+      border: 1px solid rgba(0,87,255,0.2);
+      color: var(--cyan);
+    }
+
+    .disconnect-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 0;
+      margin-left: 0.5rem;
+    }
+
+    .disconnect-btn:hover { color: #ff6b6b; }
+
     .dash-footer {
       margin-top: 3rem;
       text-align: center;
@@ -412,94 +616,204 @@
       <p>Everything running. Here's your control panel for Ai7 OPTIVARO.</p>
     </div>
 
-    <p class="section-title">Core Tools</p>
-    <div class="cards-grid">
-
-      <a href="https://analytics.google.com" target="_blank" class="dash-card">
-        <div class="card-icon blue">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#0057FF" stroke-width="1.75"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-        </div>
-        <div class="card-title">Google Analytics</div>
-        <div class="card-desc">See who visits the website, where they come from, and how long they stay.</div>
-        <div class="card-link">Open Dashboard →</div>
-      </a>
-
-      <a href="https://formspree.io/forms" target="_blank" class="dash-card">
-        <div class="card-icon cyan">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00D4FF" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div class="card-title">Lead Submissions</div>
-        <div class="card-desc">View every contact form submission — name, email, WhatsApp, goals.</div>
-        <div class="card-link">View Leads →</div>
-      </a>
-
-      <a href="https://search.google.com/search-console" target="_blank" class="dash-card">
-        <div class="card-icon green">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00c864" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        </div>
-        <div class="card-title">Google Search Console</div>
-        <div class="card-desc">See how the site ranks on Google — search terms, clicks, impressions.</div>
-        <div class="card-link">View Search Data →</div>
-      </a>
-
-      <a href="https://vercel.com/dashboard" target="_blank" class="dash-card">
-        <div class="card-icon orange">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#ff9600" stroke-width="1.75"><path d="M12 2L2 19.8h20L12 2z"/></svg>
-        </div>
-        <div class="card-title">Vercel Deployments</div>
-        <div class="card-desc">Monitor the live website — deployments, uptime, and performance.</div>
-        <div class="card-link">Open Vercel →</div>
-      </a>
-
-      <a href="https://improvmx.com" target="_blank" class="dash-card">
-        <div class="card-icon purple">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#7850ff" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div class="card-title">Email Forwarding</div>
-        <div class="card-desc">Manage company email addresses — info@ai7optivaro.com and team emails.</div>
-        <div class="card-link">Manage Emails →</div>
-      </a>
-
-      <a href="https://ai7optivaro.com" target="_blank" class="dash-card">
-        <div class="card-icon cyan">
-          <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00D4FF" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </div>
-        <div class="card-title">Live Website</div>
-        <div class="card-desc">View the public-facing Ai7 OPTIVARO website as clients see it.</div>
-        <div class="card-link">Visit Site →</div>
-      </a>
-
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('tools')">Dashboard</button>
+      <button class="tab-btn" onclick="switchTab('editor')">Edit Website</button>
     </div>
 
-    <div class="dash-divider"></div>
+    <!-- ── TAB: Dashboard ── -->
+    <div id="tab-tools" class="tab-panel active">
 
-    <p class="section-title">Business Info</p>
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="label">Website</div>
-        <div class="value"><a href="https://ai7optivaro.com" target="_blank">ai7optivaro.com</a></div>
+      <p class="section-title">Core Tools</p>
+      <div class="cards-grid">
+
+        <a href="https://analytics.google.com" target="_blank" class="dash-card">
+          <div class="card-icon blue">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#0057FF" stroke-width="1.75"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          </div>
+          <div class="card-title">Google Analytics</div>
+          <div class="card-desc">See who visits the website, where they come from, and how long they stay.</div>
+          <div class="card-link">Open Dashboard →</div>
+        </a>
+
+        <a href="https://formspree.io/forms" target="_blank" class="dash-card">
+          <div class="card-icon cyan">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00D4FF" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="card-title">Lead Submissions</div>
+          <div class="card-desc">View every contact form submission — name, email, WhatsApp, goals.</div>
+          <div class="card-link">View Leads →</div>
+        </a>
+
+        <a href="https://search.google.com/search-console" target="_blank" class="dash-card">
+          <div class="card-icon green">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00c864" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <div class="card-title">Google Search Console</div>
+          <div class="card-desc">See how the site ranks on Google — search terms, clicks, impressions.</div>
+          <div class="card-link">View Search Data →</div>
+        </a>
+
+        <a href="https://vercel.com/dashboard" target="_blank" class="dash-card">
+          <div class="card-icon orange">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#ff9600" stroke-width="1.75"><path d="M12 2L2 19.8h20L12 2z"/></svg>
+          </div>
+          <div class="card-title">Vercel Deployments</div>
+          <div class="card-desc">Monitor the live website — deployments, uptime, and performance.</div>
+          <div class="card-link">Open Vercel →</div>
+        </a>
+
+        <a href="https://improvmx.com" target="_blank" class="dash-card">
+          <div class="card-icon purple">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#7850ff" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="card-title">Email Forwarding</div>
+          <div class="card-desc">Manage company email addresses — info@ai7optivaro.com and team emails.</div>
+          <div class="card-link">Manage Emails →</div>
+        </a>
+
+        <a href="https://ai7optivaro.com" target="_blank" class="dash-card">
+          <div class="card-icon cyan">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00D4FF" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="card-title">Live Website</div>
+          <div class="card-desc">View the public-facing Ai7 OPTIVARO website as clients see it.</div>
+          <div class="card-link">Visit Site →</div>
+        </a>
+
       </div>
-      <div class="info-card">
-        <div class="label">Business Email</div>
-        <div class="value"><a href="mailto:info@ai7optivaro.com">info@ai7optivaro.com</a></div>
+
+      <div class="dash-divider"></div>
+
+      <p class="section-title">Business Info</p>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="label">Website</div>
+          <div class="value"><a href="https://ai7optivaro.com" target="_blank">ai7optivaro.com</a></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Business Email</div>
+          <div class="value"><a href="mailto:info@ai7optivaro.com">info@ai7optivaro.com</a></div>
+        </div>
+        <div class="info-card">
+          <div class="label">WhatsApp</div>
+          <div class="value"><a href="https://wa.me/250783282759" target="_blank">+250 783 282 759</a></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Instagram</div>
+          <div class="value"><a href="https://www.instagram.com/ai7group25/" target="_blank">@ai7group25</a></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Book a Call</div>
+          <div class="value"><a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank">Calendar Link</a></div>
+        </div>
+        <div class="info-card">
+          <div class="label">Location</div>
+          <div class="value">Kigali, Kibagabaga, Rwanda</div>
+        </div>
       </div>
-      <div class="info-card">
-        <div class="label">WhatsApp</div>
-        <div class="value"><a href="https://wa.me/250783282759" target="_blank">+250 783 282 759</a></div>
+
+    </div><!-- /tab-tools -->
+
+    <!-- ── TAB: Edit Website ── -->
+    <div id="tab-editor" class="tab-panel">
+
+      <!-- GitHub Token Setup -->
+      <div class="editor-card full-width" style="margin-bottom: 1.5rem;">
+        <h3>GitHub Connection</h3>
+        <p class="sub">Connect your GitHub account once. This lets you save changes directly to the live website.</p>
+
+        <div id="token-setup-block" class="token-setup">
+          <h4>
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#0057FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            One-time setup — takes 2 minutes
+          </h4>
+          <ol>
+            <li>Go to <strong>github.com → Settings → Developer settings → Personal access tokens → Tokens (classic)</strong></li>
+            <li>Click <strong>"Generate new token (classic)"</strong></li>
+            <li>Give it a name like <em>ai7-admin</em>, set expiration to <strong>No expiration</strong></li>
+            <li>Check the <strong>repo</strong> box (full repository access)</li>
+            <li>Click <strong>"Generate token"</strong> and copy it</li>
+            <li>Paste it below — it's saved on this device only</li>
+          </ol>
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label>GitHub Personal Access Token</label>
+            <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+          </div>
+          <button class="btn-primary" onclick="saveToken()">Connect GitHub →</button>
+        </div>
+
+        <div id="token-connected-block" style="display:none;">
+          <div class="token-setup" style="background: rgba(0,200,100,0.05); border-color: rgba(0,200,100,0.2);">
+            <div class="connected">
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#00c864" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              GitHub connected — changes go live in ~30 seconds after saving
+              <button class="disconnect-btn" onclick="disconnectToken()">Disconnect</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="info-card">
-        <div class="label">Instagram</div>
-        <div class="value"><a href="https://www.instagram.com/ai7group25/" target="_blank">@ai7group25</a></div>
+
+      <!-- Content Fields -->
+      <div class="editor-grid">
+
+        <!-- Hero Text -->
+        <div class="editor-card">
+          <h3>Hero Section</h3>
+          <p class="sub">The main headline and subheadline visitors see first.</p>
+
+          <div class="form-group">
+            <label>Headline — Line 1</label>
+            <input type="text" id="edit-h1-line1" placeholder="Your Business." />
+          </div>
+          <div class="form-group">
+            <label>Headline — Line 2 (gradient text)</label>
+            <input type="text" id="edit-h1-line2" placeholder="Running Itself." />
+          </div>
+          <div class="form-group">
+            <label>Subheadline</label>
+            <textarea id="edit-sub" placeholder="We build the AI automation systems..."></textarea>
+          </div>
+        </div>
+
+        <!-- Contact & Links -->
+        <div class="editor-card">
+          <h3>Contact & Links</h3>
+          <p class="sub">Phone, calendar, Instagram — updated everywhere on the site at once.</p>
+
+          <div class="form-group">
+            <label>WhatsApp Number</label>
+            <input type="text" id="edit-whatsapp" placeholder="250783282759" />
+            <div class="hint">Digits only, no spaces or +. Example: 250783282759</div>
+          </div>
+          <div class="form-group">
+            <label>Calendar Booking Link</label>
+            <input type="text" id="edit-calendar" placeholder="https://calendar.app.google/..." />
+          </div>
+          <div class="form-group">
+            <label>Instagram Handle</label>
+            <input type="text" id="edit-instagram" placeholder="ai7group25" />
+            <div class="hint">Without the @ symbol</div>
+          </div>
+        </div>
+
+      </div><!-- /editor-grid -->
+
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="loadSiteContent()">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.08"/></svg>
+          Load Current Values
+        </button>
+        <button class="btn-primary" id="save-btn" onclick="saveSiteContent()">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save & Publish
+        </button>
       </div>
-      <div class="info-card">
-        <div class="label">Book a Call</div>
-        <div class="value"><a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank">Calendar Link</a></div>
-      </div>
-      <div class="info-card">
-        <div class="label">Location</div>
-        <div class="value">Kigali, Kibagabaga, Rwanda</div>
-      </div>
-    </div>
+
+      <div id="editor-status" class="editor-status"></div>
+
+    </div><!-- /tab-editor -->
 
     <div class="dash-footer">
       Ai7 OPTIVARO Admin Panel · Built by Eddie & the Ai7 team
@@ -507,21 +821,19 @@
   </div>
 
   <script>
-    const CREDENTIALS = {
-      username: 'ai7admin',
-      password: 'Optivaro2026!'
-    };
+    /* ── Auth ── */
+    const CREDENTIALS = { username: 'ai7admin', password: 'Optivaro2026!' };
 
     function login() {
       const u = document.getElementById('username').value.trim();
       const p = document.getElementById('password').value.trim();
       const err = document.getElementById('login-error');
-
       if (u === CREDENTIALS.username && p === CREDENTIALS.password) {
         sessionStorage.setItem('ai7_admin', 'true');
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
         err.style.display = 'none';
+        checkTokenStatus();
       } else {
         err.style.display = 'block';
         document.getElementById('password').value = '';
@@ -536,10 +848,223 @@
       document.getElementById('password').value = '';
     }
 
-    // Auto-login if session exists
     if (sessionStorage.getItem('ai7_admin') === 'true') {
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
+      checkTokenStatus();
+    }
+
+    /* ── Tabs ── */
+    function switchTab(name) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    /* ── GitHub Token ── */
+    function checkTokenStatus() {
+      const token = localStorage.getItem('gh_token');
+      document.getElementById('token-setup-block').style.display = token ? 'none' : 'block';
+      document.getElementById('token-connected-block').style.display = token ? 'block' : 'none';
+    }
+
+    function saveToken() {
+      const t = document.getElementById('gh-token-input').value.trim();
+      if (!t) return;
+      localStorage.setItem('gh_token', t);
+      checkTokenStatus();
+      showStatus('GitHub connected! Click "Load Current Values" to pull the site content.', 'success');
+    }
+
+    function disconnectToken() {
+      localStorage.removeItem('gh_token');
+      document.getElementById('gh-token-input').value = '';
+      checkTokenStatus();
+      showStatus('Disconnected from GitHub.', 'error');
+    }
+
+    /* ── GitHub API ── */
+    const GITHUB = {
+      owner: 'eddienyambo000-crypto',
+      repo: 'ai7-optivaro-web',
+      file: 'index.html',
+      branch: 'master'
+    };
+
+    async function fetchFile(token) {
+      const res = await fetch(
+        `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${GITHUB.file}`,
+        { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' } }
+      );
+      if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+      return res.json();
+    }
+
+    async function loadSiteContent() {
+      const token = localStorage.getItem('gh_token');
+      if (!token) { showStatus('Connect GitHub first (see setup above).', 'error'); return; }
+      showStatus('Loading current site content…', 'loading');
+      try {
+        const data = await fetchFile(token);
+        const html = decodeBase64(data.content);
+
+        // Hero H1 line 1 — text before <br/>
+        const h1Match = html.match(/class="gradient-text"[^>]*>([^<]+)<\/span>/);
+        const h1FullMatch = html.match(/([^<\n]{3,60})<br\/>.*?class="gradient-text"[^>]*>([^<]+)<\/span>/);
+        if (h1FullMatch) {
+          document.getElementById('edit-h1-line1').value = h1FullMatch[1].trim();
+          document.getElementById('edit-h1-line2').value = h1FullMatch[2].trim();
+        }
+
+        // Subheadline
+        const subMatch = html.match(/We build the AI automation systems[^<]*/);
+        if (subMatch) document.getElementById('edit-sub').value = subMatch[0].trim();
+
+        // Calendar link
+        const calMatch = html.match(/https:\/\/calendar\.app\.google\/[A-Za-z0-9]+/);
+        if (calMatch) document.getElementById('edit-calendar').value = calMatch[0];
+
+        // WhatsApp wa.me number
+        const waMatch = html.match(/wa\.me\/(\d+)/);
+        if (waMatch) document.getElementById('edit-whatsapp').value = waMatch[1];
+
+        // Instagram handle
+        const igMatch = html.match(/instagram\.com\/([^/"?\s]+)/);
+        if (igMatch) document.getElementById('edit-instagram').value = igMatch[1];
+
+        showStatus('Loaded. Edit the fields above and click Save & Publish.', 'success');
+      } catch (e) {
+        showStatus('Failed to load: ' + e.message + ' — check your token has repo access.', 'error');
+      }
+    }
+
+    async function saveSiteContent() {
+      const token = localStorage.getItem('gh_token');
+      if (!token) { showStatus('Connect GitHub first.', 'error'); return; }
+
+      const btn = document.getElementById('save-btn');
+      btn.disabled = true;
+      showStatus('Saving to GitHub…', 'loading');
+
+      try {
+        const data = await fetchFile(token);
+        let html = decodeBase64(data.content);
+        const sha = data.sha;
+
+        const newH1Line1   = document.getElementById('edit-h1-line1').value.trim();
+        const newH1Line2   = document.getElementById('edit-h1-line2').value.trim();
+        const newSub       = document.getElementById('edit-sub').value.trim();
+        const newWa        = document.getElementById('edit-whatsapp').value.trim().replace(/\D/g, '');
+        const newCal       = document.getElementById('edit-calendar').value.trim();
+        const newIg        = document.getElementById('edit-instagram').value.trim().replace(/^@/, '');
+
+        // Replace H1 — match "Line1<br/><span class="gradient-text"...>Line2</span>"
+        html = html.replace(
+          /([^<\n]{2,80})<br\/>(<span[^>]*class="gradient-text"[^>]*>)[^<]+(<\/span>)/,
+          `${newH1Line1}<br/>$2${newH1Line2}$3`
+        );
+
+        // Replace subheadline — find unique paragraph text
+        const oldSubMatch = html.match(/We build the AI automation systems[^<]*/);
+        if (oldSubMatch && newSub) {
+          html = html.split(oldSubMatch[0]).join(newSub);
+        }
+
+        // Replace all calendar links
+        if (newCal) {
+          html = html.replace(/https:\/\/calendar\.app\.google\/[A-Za-z0-9]+/g, newCal);
+        }
+
+        // Replace WhatsApp wa.me numbers
+        if (newWa) {
+          const oldWaMatch = html.match(/wa\.me\/(\d+)/);
+          if (oldWaMatch) {
+            const oldWa = oldWaMatch[1];
+            // Replace wa.me links
+            html = html.split(`wa.me/${oldWa}`).join(`wa.me/${newWa}`);
+            // Replace display phone (formatted: +XXX XXX XXX XXX)
+            const oldDisplay = formatPhone(oldWa);
+            const newDisplay = formatPhone(newWa);
+            html = html.split(oldDisplay).join(newDisplay);
+            // Also replace unformatted in href="tel:..." if present
+            html = html.split(oldWa).join(newWa);
+          }
+        }
+
+        // Replace Instagram handle
+        if (newIg) {
+          const oldIgMatch = html.match(/instagram\.com\/([^/"?\s]+)/);
+          if (oldIgMatch) {
+            const oldIg = oldIgMatch[1];
+            html = html.split(`instagram.com/${oldIg}`).join(`instagram.com/${newIg}/`);
+            html = html.split(`@${oldIg}`).join(`@${newIg}`);
+          }
+        }
+
+        // Commit to GitHub
+        const body = JSON.stringify({
+          message: 'update site content via admin panel',
+          content: encodeBase64(html),
+          sha: sha,
+          branch: GITHUB.branch
+        });
+
+        const putRes = await fetch(
+          `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${GITHUB.file}`,
+          {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+              'Accept': 'application/vnd.github.v3+json'
+            },
+            body
+          }
+        );
+
+        if (putRes.ok) {
+          showStatus('Saved! Site is updating now — live in about 30 seconds. Refresh ai7optivaro.com to see changes.', 'success');
+        } else {
+          const errData = await putRes.json();
+          throw new Error(errData.message || putRes.status);
+        }
+      } catch (e) {
+        showStatus('Save failed: ' + e.message, 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    /* ── Helpers ── */
+    function formatPhone(digits) {
+      const d = digits.replace(/\D/g, '');
+      if (d.length === 12) return `+${d.slice(0,3)} ${d.slice(3,6)} ${d.slice(6,9)} ${d.slice(9)}`;
+      if (d.length === 9) return `+250 ${d.slice(0,3)} ${d.slice(3,6)} ${d.slice(6)}`;
+      return '+' + d;
+    }
+
+    function decodeBase64(b64) {
+      return decodeURIComponent(
+        Array.from(atob(b64.replace(/\n/g, '')))
+          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+    }
+
+    function encodeBase64(str) {
+      return btoa(
+        encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p1) =>
+          String.fromCharCode(parseInt(p1, 16))
+        )
+      );
+    }
+
+    function showStatus(msg, type) {
+      const el = document.getElementById('editor-status');
+      el.textContent = msg;
+      el.className = 'editor-status ' + type;
+      el.style.display = 'block';
     }
   </script>
 
