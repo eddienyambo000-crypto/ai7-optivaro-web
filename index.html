@@ -39,7 +39,7 @@
   <link rel="apple-touch-icon" href="brand_assets/logo.png" />
   <meta name="theme-color" content="#040812" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.84/build/spline-viewer.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script>
@@ -536,8 +536,6 @@
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
 
-  <!-- Three.js Dotted Surface Canvas -->
-  <canvas id="dotted-canvas"></canvas>
 
   <!-- Grain overlay handled by CSS -->
 
@@ -559,9 +557,9 @@
 
         <!-- Desktop Nav Links -->
         <div style="display:flex; align-items:center; gap:2.5rem;" class="desktop-nav">
-          <a href="#services" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Services</a>
-          <a href="#process" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Process</a>
-          <a href="#sectors" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Industries</a>
+          <a href="/services" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Services</a>
+          <a href="/process" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Process</a>
+          <a href="/industries" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Industries</a>
           <a href="#faq" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">FAQ</a>
           <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" style="padding:0.6rem 1.25rem; font-size:0.875rem;">Book a Call</a>
         </div>
@@ -576,9 +574,9 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
       <button onclick="toggleMobileMenu()" style="position:absolute; top:1.5rem; right:2rem; background:transparent; border:none; color:#fff; cursor:pointer; font-size:1.5rem;">✕</button>
-      <a href="#services" onclick="toggleMobileMenu()">Services</a>
-      <a href="#process" onclick="toggleMobileMenu()">Process</a>
-      <a href="#sectors" onclick="toggleMobileMenu()">Industries</a>
+      <a href="/services" onclick="toggleMobileMenu()">Services</a>
+      <a href="/process" onclick="toggleMobileMenu()">Process</a>
+      <a href="/industries" onclick="toggleMobileMenu()">Industries</a>
       <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
       <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" onclick="toggleMobileMenu()">Book a Call</a>
     </div>
@@ -588,11 +586,14 @@
     ══════════════════════════════════════════ -->
     <section style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding: 8rem 2rem 6rem; position:relative; overflow:hidden;">
 
+      <!-- Spline 3D Background -->
+      <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" style="position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:0.55;"></spline-viewer>
+
       <!-- Glow orbs -->
       <div class="glow-orb" style="width:600px; height:600px; background:radial-gradient(circle, rgba(0,87,255,0.12), transparent 70%); top:-100px; left:-100px;"></div>
       <div class="glow-orb" style="width:400px; height:400px; background:radial-gradient(circle, rgba(0,212,255,0.08), transparent 70%); bottom:0; right:-50px;"></div>
 
-      <div style="max-width:900px; margin:0 auto; text-align:center;">
+      <div style="max-width:900px; margin:0 auto; text-align:center; position:relative; z-index:1;">
         <div class="section-label fade-up">
           <span style="width:6px; height:6px; background:var(--cyan); border-radius:50%; display:inline-block;"></span>
           AI Automation Agency · Kigali, Rwanda
@@ -611,7 +612,7 @@
             Book a Free Strategy Call
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="#process" class="btn-secondary">
+          <a href="/process" class="btn-secondary">
             See How We Work
           </a>
         </div>
@@ -741,184 +742,6 @@
     </section>
 
     <!-- ══════════════════════════════════════════
-         SERVICES
-    ══════════════════════════════════════════ -->
-    <section id="services" style="padding:6rem 2rem;">
-      <div class="section-divider" style="margin-bottom:6rem;"></div>
-      <div style="max-width:1200px; margin:0 auto;">
-        <div style="margin-bottom:4rem;">
-          <div class="section-label fade-up">Services</div>
-          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; max-width:500px;">What We Build For You</h2>
-        </div>
-
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:1.5rem;">
-
-          <div class="service-card fade-up">
-            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
-              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">⚙️</div>
-              <h3 style="font-size:1.125rem; font-weight:700;">Workflow & Process Automation</h3>
-            </div>
-            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Every internal process that depends on someone remembering to act — approvals, handoffs, notifications, task routing — rebuilt as a system that runs itself. Your team stops being the glue.</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
-              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">💬</div>
-              <h3 style="font-size:1.125rem; font-weight:700;">AI Customer Interaction & WhatsApp Bots</h3>
-            </div>
-            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Intelligent assistants that respond, qualify, book, and escalate — 24/7, across WhatsApp, your website, or any channel your customers use. No more slow responses. No more lost leads.</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
-              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">🎯</div>
-              <h3 style="font-size:1.125rem; font-weight:700;">Sales & Lead Nurturing Automation</h3>
-            </div>
-            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Automated sequences that capture leads, follow up at the right time, and move prospects toward a decision — without a salesperson manually managing each one.</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
-              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">📈</div>
-              <h3 style="font-size:1.125rem; font-weight:700;">Live Reporting & Business Intelligence</h3>
-            </div>
-            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Real-time dashboards connected to your actual data. You stop waiting for someone to compile a report and start seeing your business as it is — right now.</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
-              <div style="width:44px; height:44px; background:rgba(0,87,255,0.12); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">📄</div>
-              <h3 style="font-size:1.125rem; font-weight:700;">Document & Admin Automation</h3>
-            </div>
-            <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">Invoices, contracts, onboarding, scheduling — handled automatically. Hours of admin compressed into seconds, with zero human error.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         PROCESS
-    ══════════════════════════════════════════ -->
-    <section id="process" style="padding:6rem 2rem; position:relative;">
-      <div class="section-divider" style="margin-bottom:6rem;"></div>
-      <div class="glow-orb" style="width:400px; height:400px; background:radial-gradient(circle, rgba(0,212,255,0.05), transparent 70%); right:-100px; top:50%;"></div>
-
-      <div style="max-width:1200px; margin:0 auto;">
-        <div style="text-align:center; margin-bottom:5rem;">
-          <div class="section-label fade-up">Our Process</div>
-          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">A Methodical Approach. No Shortcuts.</h2>
-          <p class="fade-up" style="color:var(--text-muted); max-width:500px; margin:0 auto;">We don't start by recommending tools. We start by understanding your business.</p>
-        </div>
-
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
-
-          <div class="fade-up">
-            <div class="glass" style="border-radius:16px; padding:2.5rem; height:100%; position:relative; overflow:hidden;">
-              <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--primary), var(--cyan));"></div>
-              <div class="step-number" style="margin-bottom:1rem;">01 — DISCOVER & DIAGNOSE</div>
-              <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:1rem; color:#fff;">Understand First. Automate Second.</h3>
-              <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">We map how your operation actually runs — goals, constraints, handoffs, and what a real win looks like. We audit your processes and decide what should and shouldn't be automated. Part of our value is knowing the difference.</p>
-            </div>
-          </div>
-
-          <div class="fade-up">
-            <div class="glass" style="border-radius:16px; padding:2.5rem; height:100%; position:relative; overflow:hidden;">
-              <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--cyan), var(--primary));"></div>
-              <div class="step-number" style="margin-bottom:1rem;">02 — DESIGN, BUILD & VALIDATE</div>
-              <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:1rem; color:#fff;">Custom Solutions, Tested Before Launch.</h3>
-              <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">We prioritize the highest-impact opportunities and build custom workflows around your data. Every component is tested in a real-world environment before it goes live. No black boxes. No trust-us-it-works.</p>
-            </div>
-          </div>
-
-          <div class="fade-up">
-            <div class="glass" style="border-radius:16px; padding:2.5rem; height:100%; position:relative; overflow:hidden;">
-              <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--primary), var(--cyan));"></div>
-              <div class="step-number" style="margin-bottom:1rem;">03 — LAUNCH, MONITOR & OPTIMIZE</div>
-              <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:1rem; color:#fff;">Continuous Improvement, Not a One-Off Project.</h3>
-              <p style="color:var(--text-muted); font-size:0.9375rem; line-height:1.75;">We go live with clear success metrics and safeguards. Then we stay — monitoring performance, collecting feedback, and refining the system. It gets better over time. That's by design.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         SECTORS
-    ══════════════════════════════════════════ -->
-    <section id="sectors" style="padding:6rem 2rem;">
-      <div class="section-divider" style="margin-bottom:6rem;"></div>
-      <div style="max-width:1200px; margin:0 auto;">
-        <div style="text-align:center; margin-bottom:4rem;">
-          <div class="section-label fade-up">Industries</div>
-          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">We Know Your Industry</h2>
-          <p class="fade-up" style="color:var(--text-muted); max-width:560px; margin:0 auto;">Every industry runs on repetitive processes. We make those processes invisible — so your team can focus on what actually moves the needle.</p>
-        </div>
-
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem;">
-
-          <div class="service-card fade-up">
-            <div style="font-size:2rem; margin-bottom:1rem;">🏦</div>
-            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Financial Services</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Banks, SACCOs, accounting firms, microfinance. We automate loan processing, onboarding, collections follow-up, and financial reporting.</p>
-            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Faster turnaround · Fewer errors · Elite client experience</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="font-size:2rem; margin-bottom:1rem;">🏥</div>
-            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Healthcare</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Clinics, pharmacies, hospitals. We automate appointments, patient reminders, billing, and records — so your staff focuses on care, not paperwork.</p>
-            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">More appointments kept · Less admin · Happier patients</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="font-size:2rem; margin-bottom:1rem;">🛒</div>
-            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Retail & E-commerce</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Inventory that updates itself. Orders that track automatically. Customer follow-ups that go out without anyone scheduling them.</p>
-            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Fewer stockouts · More repeat buyers · Less chaos</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="font-size:2rem; margin-bottom:1rem;">🏨</div>
-            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Hospitality</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Hotels, restaurants, tour operators. We automate reservations, guest communication, review collection, and internal coordination.</p>
-            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Higher occupancy · Better reviews · Premium experience</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="font-size:2rem; margin-bottom:1rem;">🎓</div>
-            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Education</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Schools, universities, training centers. We automate enrollment, fee tracking, student communications, and reporting — freeing educators to teach.</p>
-            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Smoother enrollment · Fewer dropouts · Less admin</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="font-size:2rem; margin-bottom:1rem;">🌾</div>
-            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Agriculture</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Agribusinesses, cooperatives, and farms. We automate supplier coordination, payment processing, field reporting, and market price alerts.</p>
-            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Better coordination · Faster payments · Stronger margins</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="font-size:2rem; margin-bottom:1rem;">🏗️</div>
-            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Real Estate</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Agencies, developers, and property managers. We automate lead follow-ups, viewing scheduling, contract workflows, and tenant communications.</p>
-            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">More deals closed · Faster follow-up · Zero leads lost</p>
-          </div>
-
-          <div class="service-card fade-up">
-            <div style="font-size:2rem; margin-bottom:1rem;">🚛</div>
-            <h3 style="font-size:1.125rem; font-weight:700; margin-bottom:0.75rem;">Transport & Logistics</h3>
-            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.75; margin-bottom:1rem;">Freight companies, delivery services, fleet operators. We automate dispatch, tracking updates, invoicing, and driver coordination.</p>
-            <p style="font-size:0.8125rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">Faster delivery · Leaner ops · Real-time visibility</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
          WHY US (DIFFERENTIATOR)
     ══════════════════════════════════════════ -->
     <section style="padding:6rem 2rem;">
@@ -1003,7 +826,7 @@
         </div>
 
         <p class="fade-up" style="color:var(--text-muted); margin-top:2rem; font-size:0.875rem; font-family:'JetBrains Mono',monospace;">
-          Currently accepting new clients for Q2 2026 — <a href="#contact" style="color:var(--cyan); text-decoration:none;">Check availability →</a>
+          Currently accepting new clients for Q2 2026 — <a href="/contact" style="color:var(--cyan); text-decoration:none;">Check availability →</a>
         </p>
       </div>
     </section>
@@ -1128,107 +951,6 @@
     </section>
 
     <!-- ══════════════════════════════════════════
-         CONTACT FORM
-    ══════════════════════════════════════════ -->
-    <section id="contact" style="padding:6rem 2rem;">
-      <div class="section-divider" style="margin-bottom:6rem;"></div>
-      <div style="max-width:720px; margin:0 auto;">
-        <div style="text-align:center; margin-bottom:3.5rem;">
-          <div class="section-label fade-up">Get In Touch</div>
-          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">Tell Us About Your Business.</h2>
-          <p class="fade-up" style="color:var(--text-muted); font-size:0.9375rem; max-width:500px; margin:0 auto;">Fill in the form below and we'll get back to you within 24 hours with a clear picture of what's possible.</p>
-        </div>
-
-        <form class="fade-up" action="https://formspree.io/f/xyknykdz" method="POST" style="display:flex; flex-direction:column; gap:1.25rem;">
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;" class="form-row">
-            <div>
-              <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">YOUR NAME</label>
-              <input type="text" name="name" placeholder="e.g. John Doe" required
-                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
-                onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
-            </div>
-            <div>
-              <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">BUSINESS NAME</label>
-              <input type="text" name="business" placeholder="e.g. StepIn Rwanda" required
-                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
-                onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
-            </div>
-          </div>
-
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;" class="form-row">
-            <div>
-              <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">EMAIL ADDRESS</label>
-              <input type="email" name="email" placeholder="you@company.com" required
-                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
-                onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
-            </div>
-            <div>
-              <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">WHATSAPP NUMBER</label>
-              <input type="tel" name="whatsapp" placeholder="+250 7XX XXX XXX"
-                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
-                onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
-            </div>
-          </div>
-
-          <div>
-            <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">YOUR MESSAGE</label>
-            <textarea name="message" placeholder="Briefly describe your business and what you'd like to automate..." rows="5" required
-              style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'Inter',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; resize:vertical; transition:border-color 0.2s; min-height:130px;"
-              onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'"></textarea>
-          </div>
-
-          <div>
-            <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.75rem;">WHAT ARE YOU HOPING TO IMPROVE WITH AI OR AUTOMATION? *</label>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem;" class="form-row">
-              <label class="check-option">
-                <input type="checkbox" name="goals" value="Lead generation or sales" />
-                Lead generation or sales
-              </label>
-              <label class="check-option">
-                <input type="checkbox" name="goals" value="Customer support" />
-                Customer support
-              </label>
-              <label class="check-option">
-                <input type="checkbox" name="goals" value="Internal operations" />
-                Internal operations
-              </label>
-              <label class="check-option">
-                <input type="checkbox" name="goals" value="Data processing or reporting" />
-                Data processing or reporting
-              </label>
-              <label class="check-option">
-                <input type="checkbox" name="goals" value="Content or marketing workflows" />
-                Content or marketing workflows
-              </label>
-              <label class="check-option">
-                <input type="checkbox" name="goals" value="Not sure yet" />
-                Not sure yet
-              </label>
-            </div>
-          </div>
-
-          <button type="submit" class="btn-primary" style="align-self:flex-start; display:flex; align-items:center; gap:0.625rem; font-size:1rem; padding:1rem 2.5rem; cursor:none; border:none;">
-            Send Message
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          </button>
-        </form>
-
-        <!-- Alternative contact line -->
-        <div class="fade-up" style="display:flex; align-items:center; gap:1.5rem; margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--border); flex-wrap:wrap;">
-          <p style="color:var(--text-muted); font-size:0.875rem;">Prefer direct contact?</p>
-          <a href="mailto:info@optivaro.com" style="color:var(--cyan); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">
-            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            info@optivaro.com
-          </a>
-          <a href="https://wa.me/250783282759" target="_blank" style="color:var(--cyan); font-size:0.875rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem;">
-            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.554 4.103 1.522 5.828L.057 24l6.348-1.633A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.938a9.938 9.938 0 0 1-5.073-1.384l-.364-.217-3.768.969.999-3.671-.237-.375A9.938 9.938 0 0 1 2.062 12C2.062 6.508 6.508 2.062 12 2.062S21.938 6.508 21.938 12 17.492 21.938 12 21.938z"/></svg>
-            +250 783 282 759
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
          FINAL CTA
     ══════════════════════════════════════════ -->
     <section style="padding:8rem 2rem; position:relative; overflow:hidden;">
@@ -1304,11 +1026,11 @@
           <div>
             <p style="font-family:'JetBrains Mono',monospace; font-size:0.65rem; letter-spacing:0.1em; color:var(--text-muted); margin-bottom:1.25rem;">NAVIGATION</p>
             <div style="display:flex; flex-direction:column; gap:0.75rem;">
-              <a href="#services" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Services</a>
-              <a href="#process" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">How We Work</a>
-              <a href="#sectors" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Industries</a>
+              <a href="/services" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Services</a>
+              <a href="/process" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">How We Work</a>
+              <a href="/industries" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Industries</a>
               <a href="#faq" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">FAQ</a>
-              <a href="#contact" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Contact</a>
+              <a href="/contact" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Contact</a>
             </div>
           </div>
 
@@ -1352,59 +1074,6 @@
   </div><!-- end page-content -->
 
   <script>
-    // ── Three.js Dotted Surface ──
-    (function() {
-      const canvas = document.getElementById('dotted-canvas');
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(window.innerWidth, window.innerHeight);
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
-      camera.position.set(0, 355, 1220);
-
-      const SEPARATION = 150, AMOUNTX = 40, AMOUNTY = 60;
-      const positions = [], colors = [];
-
-      for (let ix = 0; ix < AMOUNTX; ix++) {
-        for (let iy = 0; iy < AMOUNTY; iy++) {
-          positions.push(ix * SEPARATION - (AMOUNTX * SEPARATION) / 2, 0, iy * SEPARATION - (AMOUNTY * SEPARATION) / 2);
-          // Electric blue dots
-          colors.push(0, 87/255, 1);
-        }
-      }
-
-      const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-
-      const material = new THREE.PointsMaterial({ size: 10, vertexColors: true, transparent: true, opacity: 1.0, sizeAttenuation: true });
-      const points = new THREE.Points(geometry, material);
-      scene.add(points);
-
-      let count = 0;
-      function animate() {
-        requestAnimationFrame(animate);
-        const pos = geometry.attributes.position.array;
-        let i = 0;
-        for (let ix = 0; ix < AMOUNTX; ix++) {
-          for (let iy = 0; iy < AMOUNTY; iy++) {
-            pos[i * 3 + 1] = Math.sin((ix + count) * 0.3) * 50 + Math.sin((iy + count) * 0.5) * 50;
-            i++;
-          }
-        }
-        geometry.attributes.position.needsUpdate = true;
-        renderer.render(scene, camera);
-        count += 0.07;
-      }
-      animate();
-
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-    })();
 
     // ── Navbar scroll effect ──
     const navbar = document.getElementById('navbar');
@@ -1905,7 +1574,6 @@
     }
   </style>
 
-  <script src="nova-embed.js"></script>
 
   <a href="https://wa.me/250783282759?text=Hi%20Ai7%20OPTIVARO%2C%20I%27d%20like%20to%20discuss%20automation%20for%20my%20business." target="_blank" id="wa-float" aria-label="Chat on WhatsApp">
     <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
