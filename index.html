@@ -1576,6 +1576,18 @@
       opacity: 1;
       transform: translateX(0);
     }
+
+    /* Nuclear option: cover the Spline badge position */
+    #spline-badge-cover {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 50px;
+      background: var(--bg);
+      z-index: 9990;
+      pointer-events: none;
+    }
   </style>
 
 
@@ -1586,6 +1598,27 @@
     </svg>
   </a>
   <span id="wa-tooltip">Chat on WhatsApp</span>
+
+  <!-- Nuclear cover: hides Spline "Built with Spline" badge (bottom-right) -->
+  <div id="spline-badge-cover"></div>
+
+  <script>
+    // Shadow DOM removal — runs on interval until badge found or timeout
+    (function() {
+      function killSplineBadge() {
+        var viewer = document.getElementById('spline-hero');
+        if (!viewer || !viewer.shadowRoot) return false;
+        var selectors = ['a[href*="spline"]', '[class*="logo"]', '[class*="watermark"]', '[class*="badge"]', 'a[target="_blank"]'];
+        for (var i = 0; i < selectors.length; i++) {
+          var el = viewer.shadowRoot.querySelector(selectors[i]);
+          if (el) { el.style.cssText = 'display:none!important'; return true; }
+        }
+        return false;
+      }
+      var iv = setInterval(function() { if (killSplineBadge()) clearInterval(iv); }, 300);
+      setTimeout(function() { clearInterval(iv); }, 15000);
+    })();
+  </script>
 
 </body>
 </html>
