@@ -434,6 +434,25 @@ nav.scrolled {
 }
 .eddie-sig span { color: var(--primary); font-weight: 600; }
 
+/* ── Hide Spline watermark ── */
+spline-viewer::part(logo) { display: none !important; }
+spline-viewer::part(watermark) { display: none !important; }
+
+/* ── Mobile hero: show full robot ── */
+@media (max-width: 768px) {
+  #hero-section {
+    min-height: 100svh;
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+    align-items: flex-start !important;
+  }
+  #spline-hero {
+    top: -5% !important;
+    height: 115% !important;
+    transform-origin: top center;
+  }
+}
+
 /* ── Mobile fixes ── */
 @media (max-width: 768px) {
   .split-section { grid-template-columns: 1fr !important; gap: 3rem !important; }
