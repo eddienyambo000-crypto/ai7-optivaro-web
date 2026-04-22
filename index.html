@@ -878,24 +878,8 @@
         <div class="glass fade-up" style="border-radius:24px; padding:3.5rem; position:relative; overflow:hidden;">
           <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--primary), var(--cyan));"></div>
 
-          <!-- Opening quote mark -->
-          <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:6rem; font-weight:800; color:var(--cyan); opacity:0.2; line-height:0.8; margin-bottom:1.5rem; user-select:none;">"</div>
-
-          <!-- Quote body -->
-          <blockquote style="margin:0; border:none; padding:0;">
-            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">Before Ai7 Group, I was the whole sales team. Someone messages me about my programs — I reply 3 hours later. They're gone. I forget to follow up after a call. Another client lost. I was working hard but losing money in the gaps.</p>
-            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">They built me something called <strong style="color:var(--cyan);">Amina</strong> — an AI that responds to every lead in 60 seconds, qualifies them, and books them straight onto my calendar. While I'm sleeping, coaching, or eating, Amina is out there having conversations, sending follow-ups, and telling me who's ready to close.</p>
-            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">My phone now tells me: <em style="color:#fff; font-style:italic;">"Jean, this person is ready. Here's their name, what they want, and a direct link to message them."</em> I just show up and close.</p>
-            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">My content posts automatically every day. My pipeline is visible on a dashboard. Nothing falls through the cracks anymore.</p>
-            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">I didn't get more hours. I got a system that works for me 24/7. That's the difference.</p>
-            <p style="color:var(--cyan); font-size:1.0625rem; line-height:1.9; font-weight:500;">If you run a business in Rwanda and you're still doing everything manually — you're losing clients you don't even know you're losing.</p>
-          </blockquote>
-
-          <!-- Divider -->
-          <div style="height:1px; background:var(--border); margin:2.5rem 0;"></div>
-
-          <!-- Attribution row -->
-          <div class="testimonial-attribution" style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+          <!-- Attribution row — always visible -->
+          <div class="testimonial-attribution" style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; margin-bottom:2rem;">
             <img src="brand_assets/stepin-logo.png" alt="StepIn" style="height:52px; width:auto; object-fit:contain;" onerror="this.style.display='none'" />
             <div>
               <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:1.0625rem; font-weight:700; color:#fff; margin-bottom:0.2rem;">Jean de Dieu Habaguhirwa</p>
@@ -905,6 +889,33 @@
             <div style="margin-left:auto; display:flex; align-items:center; gap:0.5rem;">
               <div class="status-dot"></div>
               <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#00D97E;">Active Client</span>
+            </div>
+          </div>
+
+          <!-- Preview line — always visible -->
+          <p style="color:rgba(255,255,255,0.55); font-size:1rem; line-height:1.8; font-style:italic; margin-bottom:1.5rem;">
+            "Before Ai7 OPTIVARO, I was the whole sales team… I was working hard but losing money in the gaps."
+          </p>
+
+          <!-- Read more toggle button -->
+          <button onclick="toggleTestimonial(this)" style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.25); color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.8125rem; padding:0.6rem 1.25rem; border-radius:8px; cursor:pointer; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)';this.style.borderColor='rgba(0,212,255,0.5)'" onmouseout="this.style.background='rgba(0,212,255,0.08)';this.style.borderColor='rgba(0,212,255,0.25)'">
+            <span class="toggle-label">Read full testimonial</span>
+            <svg class="toggle-chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.3s;"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+
+          <!-- Collapsible full quote -->
+          <div class="testimonial-body" style="max-height:0; overflow:hidden; transition:max-height 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s; opacity:0;">
+            <div style="padding-top:2rem;">
+              <!-- Opening quote mark -->
+              <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:6rem; font-weight:800; color:var(--cyan); opacity:0.2; line-height:0.8; margin-bottom:1.5rem; user-select:none;">"</div>
+              <blockquote style="margin:0; border:none; padding:0;">
+                <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">Before Ai7 OPTIVARO, I was the whole sales team. Someone messages me about my programs — I reply 3 hours later. They're gone. I forget to follow up after a call. Another client lost. I was working hard but losing money in the gaps.</p>
+                <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">They built me something called <strong style="color:var(--cyan);">Amina</strong> — an AI that responds to every lead in 60 seconds, qualifies them, and books them straight onto my calendar. While I'm sleeping, coaching, or eating, Amina is out there having conversations, sending follow-ups, and telling me who's ready to close.</p>
+                <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">My phone now tells me: <em style="color:#fff;">"Jean, this person is ready. Here's their name, what they want, and a direct link to message them."</em> I just show up and close.</p>
+                <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">My content posts automatically every day. My pipeline is visible on a dashboard. Nothing falls through the cracks anymore.</p>
+                <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">I didn't get more hours. I got a system that works for me 24/7. That's the difference.</p>
+                <p style="color:var(--cyan); font-size:1.0625rem; line-height:1.9; font-weight:500;">If you run a business in Rwanda and you're still doing everything manually — you're losing clients you don't even know you're losing.</p>
+              </blockquote>
             </div>
           </div>
         </div>
@@ -1259,6 +1270,25 @@
     setTimeout(() => {
       document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
     }, 3000);
+
+    // ── Testimonial expand/collapse ──
+    function toggleTestimonial(btn) {
+      const body = btn.closest('.glass').querySelector('.testimonial-body');
+      const label = btn.querySelector('.toggle-label');
+      const chevron = btn.querySelector('.toggle-chevron');
+      const isOpen = body.style.maxHeight !== '0px' && body.style.maxHeight !== '';
+      if (isOpen) {
+        body.style.maxHeight = '0';
+        body.style.opacity = '0';
+        label.textContent = 'Read full testimonial';
+        chevron.style.transform = 'rotate(0deg)';
+      } else {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        body.style.opacity = '1';
+        label.textContent = 'Collapse';
+        chevron.style.transform = 'rotate(180deg)';
+      }
+    }
 
     // ── FAQ toggle ──
     function toggleFaq(btn) {
