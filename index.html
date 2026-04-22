@@ -34,6 +34,46 @@
 
   <link rel="canonical" href="https://ai7optivaro.com/" />
 
+  <!-- Structured data — helps Google understand who we are -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["Organization", "LocalBusiness"],
+    "name": "Ai7 OPTIVARO",
+    "alternateName": "Ai7 Group",
+    "url": "https://ai7optivaro.com",
+    "logo": "https://ai7optivaro.com/brand_assets/logo.png",
+    "description": "AI automation agency based in Kigali, Rwanda. We build custom AI systems that eliminate manual work, automate lead follow-up, and let businesses run 24/7 without adding headcount.",
+    "slogan": "Automate Everything. Dominate Anything.",
+    "foundingDate": "2025",
+    "email": "info@ai7optivaro.com",
+    "telephone": "+250783282759",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Kibagabaga",
+      "addressLocality": "Kigali",
+      "addressCountry": "RW"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -1.9441,
+      "longitude": 30.0619
+    },
+    "areaServed": ["Rwanda", "Africa"],
+    "serviceType": ["AI Automation", "Workflow Automation", "WhatsApp Automation", "Lead Qualification AI", "Business Process Automation"],
+    "sameAs": [
+      "https://www.instagram.com/ai7optivaro/",
+      "https://www.linkedin.com/company/ai7-optivaro/"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+250783282759",
+      "contactType": "customer service",
+      "availableLanguage": ["English", "French", "Kinyarwanda"]
+    }
+  }
+  </script>
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="brand_assets/logo.png" />
   <link rel="apple-touch-icon" href="brand_assets/logo.png" />
@@ -537,6 +577,13 @@
         padding: 0.3rem 0.625rem;
       }
     }
+
+    /* Testimonial metric grid — stack on mobile */
+    @media (max-width: 600px) {
+      .metric-grid { grid-template-columns: 1fr !important; }
+      .testimonial-attribution { flex-direction: column; align-items: flex-start !important; }
+      .testimonial-attribution .status-badge { margin-left: 0 !important; }
+    }
   </style>
 </head>
 
@@ -638,22 +685,22 @@
     <div class="marquee-wrap">
       <div class="marquee-track" id="marquee-track">
         <!-- Items duplicated for seamless loop -->
-        <div class="marquee-item">Lead Automation <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Workflow Intelligence <span class="marquee-dot"></span></div>
-        <div class="marquee-item">AI-Powered Growth <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Zero-Touch Operations <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Process Optimization <span class="marquee-dot"></span></div>
-        <div class="marquee-item">24/7 Systems <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Custom Automation <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Kigali, Rwanda <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Lead Automation <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Workflow Intelligence <span class="marquee-dot"></span></div>
-        <div class="marquee-item">AI-Powered Growth <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Zero-Touch Operations <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Process Optimization <span class="marquee-dot"></span></div>
-        <div class="marquee-item">24/7 Systems <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Custom Automation <span class="marquee-dot"></span></div>
-        <div class="marquee-item">Kigali, Rwanda <span class="marquee-dot"></span></div>
+        <div class="marquee-item">60-Second Lead Response <span class="marquee-dot"></span></div>
+        <div class="marquee-item">WhatsApp Automation <span class="marquee-dot"></span></div>
+        <div class="marquee-item">AI Sales Systems <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Zero Leads Lost <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Client Onboarding AI <span class="marquee-dot"></span></div>
+        <div class="marquee-item">24/7 Follow-Up Engine <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Built in Kigali, Rwanda <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Custom Automation Builds <span class="marquee-dot"></span></div>
+        <div class="marquee-item">60-Second Lead Response <span class="marquee-dot"></span></div>
+        <div class="marquee-item">WhatsApp Automation <span class="marquee-dot"></span></div>
+        <div class="marquee-item">AI Sales Systems <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Zero Leads Lost <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Client Onboarding AI <span class="marquee-dot"></span></div>
+        <div class="marquee-item">24/7 Follow-Up Engine <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Built in Kigali, Rwanda <span class="marquee-dot"></span></div>
+        <div class="marquee-item">Custom Automation Builds <span class="marquee-dot"></span></div>
       </div>
     </div>
 
@@ -799,42 +846,70 @@
     </section>
 
     <!-- ══════════════════════════════════════════
-         CASE STUDY
+         TESTIMONIAL
     ══════════════════════════════════════════ -->
     <section style="padding:6rem 2rem;">
       <div class="section-divider" style="margin-bottom:6rem;"></div>
-      <div style="max-width:900px; margin:0 auto; text-align:center;">
-        <div class="section-label fade-up">Current Work</div>
-        <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">Built for Businesses That Mean Business.</h2>
-        <p class="fade-up" style="color:var(--text-muted); margin-bottom:3.5rem; max-width:500px; margin-left:auto; margin-right:auto;">We keep our client roster intentionally small. Every engagement gets senior attention from day one.</p>
+      <div style="max-width:960px; margin:0 auto;">
 
-        <div class="glass fade-up" style="border-radius:20px; padding:3rem; text-align:left; position:relative; overflow:hidden;">
+        <div style="text-align:center; margin-bottom:3.5rem;">
+          <div class="section-label fade-up">Client Results</div>
+          <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1rem;">Don't Take Our Word For It.</h2>
+          <p class="fade-up" style="color:var(--text-muted); max-width:500px; margin:0 auto;">Here's what happens when you stop losing leads you never knew you were losing.</p>
+        </div>
+
+        <!-- Result metrics row -->
+        <div class="fade-up metric-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:3rem;">
+          <div style="background:rgba(0,212,255,0.04); border:1px solid rgba(0,212,255,0.15); border-radius:16px; padding:1.75rem; text-align:center;">
+            <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--cyan); letter-spacing:-0.03em; margin-bottom:0.25rem;">60s</p>
+            <p style="color:var(--text-muted); font-size:0.875rem; line-height:1.5;">Average lead<br/>response time</p>
+          </div>
+          <div style="background:rgba(0,212,255,0.04); border:1px solid rgba(0,212,255,0.15); border-radius:16px; padding:1.75rem; text-align:center;">
+            <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--cyan); letter-spacing:-0.03em; margin-bottom:0.25rem;">24/7</p>
+            <p style="color:var(--text-muted); font-size:0.875rem; line-height:1.5;">AI working while<br/>founder sleeps</p>
+          </div>
+          <div style="background:rgba(0,212,255,0.04); border:1px solid rgba(0,212,255,0.15); border-radius:16px; padding:1.75rem; text-align:center;">
+            <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--cyan); letter-spacing:-0.03em; margin-bottom:0.25rem;">0</p>
+            <p style="color:var(--text-muted); font-size:0.875rem; line-height:1.5;">Leads falling<br/>through cracks</p>
+          </div>
+        </div>
+
+        <!-- Testimonial card -->
+        <div class="glass fade-up" style="border-radius:24px; padding:3.5rem; position:relative; overflow:hidden;">
           <div style="position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--primary), var(--cyan));"></div>
-          <div style="display:flex; align-items:center; gap:1rem; margin-bottom:2rem;">
-            <div style="width:48px; height:48px; background:rgba(0,87,255,0.15); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--primary);">S</div>
+
+          <!-- Opening quote mark -->
+          <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:6rem; font-weight:800; color:var(--cyan); opacity:0.2; line-height:0.8; margin-bottom:1.5rem; user-select:none;">"</div>
+
+          <!-- Quote body -->
+          <blockquote style="margin:0; border:none; padding:0;">
+            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">Before Ai7 Group, I was the whole sales team. Someone messages me about my programs — I reply 3 hours later. They're gone. I forget to follow up after a call. Another client lost. I was working hard but losing money in the gaps.</p>
+            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">They built me something called <strong style="color:var(--cyan);">Amina</strong> — an AI that responds to every lead in 60 seconds, qualifies them, and books them straight onto my calendar. While I'm sleeping, coaching, or eating, Amina is out there having conversations, sending follow-ups, and telling me who's ready to close.</p>
+            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">My phone now tells me: <em style="color:#fff; font-style:italic;">"Jean, this person is ready. Here's their name, what they want, and a direct link to message them."</em> I just show up and close.</p>
+            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">My content posts automatically every day. My pipeline is visible on a dashboard. Nothing falls through the cracks anymore.</p>
+            <p style="color:rgba(255,255,255,0.9); font-size:1.0625rem; line-height:1.9; margin-bottom:1.25rem;">I didn't get more hours. I got a system that works for me 24/7. That's the difference.</p>
+            <p style="color:var(--cyan); font-size:1.0625rem; line-height:1.9; font-weight:500;">If you run a business in Rwanda and you're still doing everything manually — you're losing clients you don't even know you're losing.</p>
+          </blockquote>
+
+          <!-- Divider -->
+          <div style="height:1px; background:var(--border); margin:2.5rem 0;"></div>
+
+          <!-- Attribution row -->
+          <div class="testimonial-attribution" style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+            <img src="brand_assets/stepin-logo.png" alt="StepIn" style="height:52px; width:auto; object-fit:contain;" onerror="this.style.display='none'" />
             <div>
-              <h3 style="font-size:1.25rem; font-weight:700;">StepIn</h3>
-              <p style="color:var(--text-muted); font-size:0.875rem;">Kigali, Rwanda</p>
+              <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:1.0625rem; font-weight:700; color:#fff; margin-bottom:0.2rem;">Jean de Dieu Habaguhirwa</p>
+              <p style="color:var(--text-muted); font-size:0.875rem;">Founder, StepIn Knowledge Business Coaching</p>
+              <a href="https://stepin.rw" target="_blank" rel="noopener noreferrer" style="color:var(--cyan); font-size:0.8125rem; text-decoration:none; font-family:'JetBrains Mono',monospace; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">stepin.rw →</a>
             </div>
             <div style="margin-left:auto; display:flex; align-items:center; gap:0.5rem;">
               <div class="status-dot"></div>
-              <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#00D97E;">Active Engagement</span>
-            </div>
-          </div>
-          <p style="color:var(--text-body); line-height:1.8; margin-bottom:1.5rem;">StepIn helps domain experts turn their knowledge into profitable businesses. We are building their complete client acquisition and onboarding automation infrastructure — replacing a fully manual intake process with an intelligent system that qualifies leads, triggers onboarding sequences, and routes clients automatically.</p>
-          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-            <div style="background:rgba(0,87,255,0.06); border:1px solid var(--border); border-radius:8px; padding:0.75rem 1.25rem;">
-              <p style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.25rem;">PROJECTED OUTCOME</p>
-              <p style="font-size:0.9375rem; font-weight:600; color:var(--cyan);">70%+ reduction in admin time per new client</p>
-            </div>
-            <div style="background:rgba(0,87,255,0.06); border:1px solid var(--border); border-radius:8px; padding:0.75rem 1.25rem;">
-              <p style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--text-muted); margin-bottom:0.25rem;">RESULT</p>
-              <p style="font-size:0.9375rem; font-weight:600; color:#fff;">Full team bandwidth redirected to delivery</p>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#00D97E;">Active Client</span>
             </div>
           </div>
         </div>
 
-        <p class="fade-up" style="color:var(--text-muted); margin-top:2rem; font-size:0.875rem; font-family:'JetBrains Mono',monospace;">
+        <p class="fade-up" style="color:var(--text-muted); margin-top:2rem; font-size:0.875rem; font-family:'JetBrains Mono',monospace; text-align:center;">
           Currently accepting new clients for Q2 2026 — <a href="/contact" style="color:var(--cyan); text-decoration:none;">Check availability →</a>
         </p>
       </div>
@@ -942,6 +1017,36 @@
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">Completely. You'll know exactly what's being built, why, and when. We give you a clear timeline before work starts. You'll get regular updates during the build. We won't go quiet on you. If something changes or a decision needs to be made, we bring it to you — we don't make calls on your behalf and tell you after the fact. This is a collaboration, not a handoff.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              How long does it take to build my system?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Most automations go live in 2–4 weeks. The timeline depends on how many systems we're connecting and how complex your workflows are. We'll give you a clear delivery date before we start — not a vague estimate. You'll always know where we are in the build.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              Do I need to understand AI or tech to work with you?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">No. Your job is to run your business and explain how things work today. Our job is to translate that into automation. We handle every technical decision. You never touch code, servers, or configuration. We explain what we build in plain language, and we only launch when you feel confident about what's running.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFaq(this)">
+              What tools do you use to build these systems?
+              <div class="faq-icon">+</div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">We primarily build on n8n and Make for automation workflows, OpenAI for AI-powered responses and decisions, and WhatsApp Business API for messaging. We connect whatever you already use — Google Sheets, Gmail, Notion, Calendly, your CRM, your website forms. We don't lock you into proprietary tools only we can maintain.</div>
             </div>
           </div>
 
