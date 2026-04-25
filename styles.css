@@ -1,14 +1,14 @@
 :root {
-  --primary: #0057FF;
-  --cyan: #00D4FF;
-  --bg: #040812;
-  --bg-secondary: #070F1E;
-  --bg-surface: #0A1628;
+  --primary: #FF6B00;
+  --cyan: #FFB300;
+  --bg: #080601;
+  --bg-secondary: #100A02;
+  --bg-surface: #1A1006;
   --text: #FFFFFF;
-  --text-body: #E8EDF5;
-  --text-muted: #8A9BB5;
-  --border: rgba(0, 87, 255, 0.12);
-  --glow: rgba(0, 212, 255, 0.12);
+  --text-body: #F5EDD8;
+  --text-muted: #9E8A6E;
+  --border: rgba(255, 107, 0, 0.12);
+  --glow: rgba(255, 179, 0, 0.12);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +45,7 @@ h1, h2, h3, h4 {
 }
 #cursor-ring {
   width: 36px; height: 36px;
-  border: 1.5px solid rgba(0,212,255,0.4);
+  border: 1.5px solid rgba(255,179,0,0.4);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -56,7 +56,7 @@ h1, h2, h3, h4 {
 body:has(a:hover) #cursor-dot,
 body:has(button:hover) #cursor-dot { width: 12px; height: 12px; background: #fff; }
 body:has(a:hover) #cursor-ring,
-body:has(button:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(0,212,255,0.7); }
+body:has(button:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(255,179,0,0.7); }
 
 /* ── Marquee ticker ── */
 .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 0.875rem 0; }
@@ -112,7 +112,7 @@ body::after {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border);
-  box-shadow: 0 0 0 1px rgba(0,87,255,0.08), 0 8px 32px rgba(0,0,0,0.5), 0 0 60px rgba(0,87,255,0.04);
+  box-shadow: 0 0 0 1px rgba(255,107,0,0.08), 0 8px 32px rgba(0,0,0,0.5), 0 0 60px rgba(255,107,0,0.04);
 }
 
 /* ── Primary button ── */
@@ -130,7 +130,7 @@ body::after {
   border: none;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 4px 24px rgba(0,87,255,0.45), 0 1px 0 rgba(255,255,255,0.1) inset;
+  box-shadow: 0 4px 24px rgba(255,107,0,0.45), 0 1px 0 rgba(255,255,255,0.1) inset;
   transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s cubic-bezier(0.16,1,0.3,1);
   position: relative;
   overflow: hidden;
@@ -143,7 +143,7 @@ body::after {
   opacity: 0;
   transition: opacity 0.2s;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,87,255,0.6), 0 0 0 1px rgba(0,212,255,0.3); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,0,0.6), 0 0 0 1px rgba(255,179,0,0.3); }
 .btn-primary:hover::before { opacity: 1; }
 .btn-primary:active { transform: translateY(0); }
 
@@ -178,8 +178,8 @@ body::after {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.375rem 0.875rem;
-  background: rgba(0, 212, 255, 0.06);
-  border: 1px solid rgba(0, 212, 255, 0.15);
+  background: rgba(255, 179, 0, 0.06);
+  border: 1px solid rgba(255, 179, 0, 0.15);
   border-radius: 100px;
   margin-bottom: 1.25rem;
   white-space: nowrap;
@@ -238,8 +238,8 @@ nav.scrolled {
 }
 .service-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(0,87,255,0.3);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 40px rgba(0,87,255,0.08);
+  border-color: rgba(255,107,0,0.3);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 40px rgba(255,107,0,0.08);
 }
 
 /* ── Tool badge ── */
@@ -255,7 +255,7 @@ nav.scrolled {
   padding: 0.5rem 1rem;
   transition: color 0.2s, border-color 0.2s;
 }
-.tool-badge:hover { color: var(--cyan); border-color: rgba(0,212,255,0.2); }
+.tool-badge:hover { color: var(--cyan); border-color: rgba(255,179,0,0.2); }
 
 /* ── FAQ ── */
 .faq-item {
@@ -267,7 +267,7 @@ nav.scrolled {
   transition: border-color 0.2s, background 0.2s;
 }
 .faq-item.open {
-  border-color: rgba(0,87,255,0.3);
+  border-color: rgba(255,107,0,0.3);
   background: rgba(10,22,40,0.7);
 }
 .faq-question {
@@ -304,16 +304,16 @@ nav.scrolled {
 }
 .faq-icon {
   width: 28px; height: 28px;
-  border: 1px solid rgba(0,87,255,0.3);
+  border: 1px solid rgba(255,107,0,0.3);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   font-size: 1.1rem;
   color: var(--primary);
-  background: rgba(0,87,255,0.06);
+  background: rgba(255,107,0,0.06);
   transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s;
 }
-.faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(0,87,255,0.15); border-color: rgba(0,87,255,0.5); }
+.faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(255,107,0,0.15); border-color: rgba(255,107,0,0.5); }
 
 /* ── Mobile nav ── */
 .mobile-menu {
@@ -342,7 +342,7 @@ nav.scrolled {
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: rgba(0,87,255,0.3); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: rgba(255,107,0,0.3); border-radius: 2px; }
 
 /* ── Status dot ── */
 .status-dot {
@@ -384,7 +384,7 @@ nav.scrolled {
   position: absolute;
   inset: -1px;
   border-radius: 21px;
-  background: linear-gradient(135deg, rgba(0,87,255,0.5), rgba(0,212,255,0.2), rgba(0,87,255,0.1), rgba(0,212,255,0.4));
+  background: linear-gradient(135deg, rgba(255,107,0,0.5), rgba(255,179,0,0.2), rgba(255,107,0,0.1), rgba(255,179,0,0.4));
   background-size: 300% 300%;
   animation: border-flow 5s ease infinite;
   z-index: -1;
@@ -401,15 +401,15 @@ nav.scrolled {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  border: 1px solid rgba(0,87,255,0.15);
+  border: 1px solid rgba(255,107,0,0.15);
   border-radius: 8px;
-  background: rgba(0,87,255,0.03);
+  background: rgba(255,107,0,0.03);
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
   font-size: 0.9rem;
   color: var(--text-muted);
 }
-.check-option:hover { border-color: rgba(0,87,255,0.4); background: rgba(0,87,255,0.06); color: var(--text-body); }
+.check-option:hover { border-color: rgba(0,87,255,0.4); background: rgba(255,107,0,0.06); color: var(--text-body); }
 .check-option input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
 
 /* ── Page hero banner (for sub-pages) ── */

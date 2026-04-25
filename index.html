@@ -77,7 +77,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="brand_assets/logo.png" />
   <link rel="apple-touch-icon" href="brand_assets/logo.png" />
-  <meta name="theme-color" content="#040812" />
+  <meta name="theme-color" content="#080601" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     /* Load Spline only after page is interactive to avoid blocking render */
@@ -99,13 +99,13 @@
       theme: {
         extend: {
           colors: {
-            primary: '#0057FF',
-            cyan: '#00D4FF',
-            bg: '#040812',
-            'bg-secondary': '#070F1E',
-            'bg-surface': '#0A1628',
-            muted: '#8A9BB5',
-            'text-body': '#E8EDF5',
+            primary: '#FF6B00',
+            cyan: '#FFB300',
+            bg: '#080601',
+            'bg-secondary': '#100A02',
+            'bg-surface': '#1A1006',
+            muted: '#9E8A6E',
+            'text-body': '#F5EDD8',
           },
           fontFamily: {
             heading: ['Space Grotesk', 'sans-serif'],
@@ -119,16 +119,16 @@
 
   <style>
     :root {
-      --primary: #0057FF;
-      --cyan: #00D4FF;
-      --bg: #040812;
-      --bg-secondary: #070F1E;
-      --bg-surface: #0A1628;
+      --primary: #FF6B00;
+      --cyan: #FFB300;
+      --bg: #080601;
+      --bg-secondary: #100A02;
+      --bg-surface: #1A1006;
       --text: #FFFFFF;
-      --text-body: #E8EDF5;
-      --text-muted: #8A9BB5;
-      --border: rgba(0, 87, 255, 0.12);
-      --glow: rgba(0, 212, 255, 0.12);
+      --text-body: #F5EDD8;
+      --text-muted: #9E8A6E;
+      --border: rgba(255, 107, 0, 0.12);
+      --glow: rgba(255, 179, 0, 0.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -165,7 +165,7 @@
     }
     #cursor-ring {
       width: 36px; height: 36px;
-      border: 1.5px solid rgba(0,212,255,0.4);
+      border: 1.5px solid rgba(255,179,0,0.4);
       border-radius: 50%;
       position: fixed;
       pointer-events: none;
@@ -176,7 +176,7 @@
     body:has(a:hover) #cursor-dot,
     body:has(button:hover) #cursor-dot { width: 12px; height: 12px; background: #fff; }
     body:has(a:hover) #cursor-ring,
-    body:has(button:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(0,212,255,0.7); }
+    body:has(button:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(255,179,0,0.7); }
 
     /* ── Marquee ticker ── */
     .marquee-wrap { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 0.875rem 0; }
@@ -234,7 +234,7 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      box-shadow: 0 0 0 1px rgba(0,87,255,0.08), 0 8px 32px rgba(0,0,0,0.5), 0 0 60px rgba(0,87,255,0.04);
+      box-shadow: 0 0 0 1px rgba(255,107,0,0.08), 0 8px 32px rgba(0,0,0,0.5), 0 0 60px rgba(255,107,0,0.04);
     }
 
     /* ── Primary button ── */
@@ -252,7 +252,7 @@
       border: none;
       cursor: pointer;
       text-decoration: none;
-      box-shadow: 0 4px 24px rgba(0,87,255,0.45), 0 1px 0 rgba(255,255,255,0.1) inset;
+      box-shadow: 0 4px 24px rgba(255,107,0,0.45), 0 1px 0 rgba(255,255,255,0.1) inset;
       transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s cubic-bezier(0.16,1,0.3,1);
       position: relative;
       overflow: hidden;
@@ -265,7 +265,7 @@
       opacity: 0;
       transition: opacity 0.2s;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,87,255,0.6), 0 0 0 1px rgba(0,212,255,0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,0,0.6), 0 0 0 1px rgba(255,179,0,0.3); }
     .btn-primary:hover::before { opacity: 1; }
     .btn-primary:active { transform: translateY(0); }
 
@@ -286,7 +286,7 @@
       text-decoration: none;
       transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), border-color 0.2s, color 0.2s;
     }
-    .btn-secondary:hover { transform: translateY(-2px); border-color: rgba(0,87,255,0.4); color: #fff; }
+    .btn-secondary:hover { transform: translateY(-2px); border-color: rgba(255,107,0,0.4); color: #fff; }
 
     /* ── Section label ── */
     .section-label {
@@ -300,8 +300,8 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       padding: 0.375rem 0.875rem;
-      background: rgba(0, 212, 255, 0.06);
-      border: 1px solid rgba(0, 212, 255, 0.15);
+      background: rgba(255, 179, 0, 0.06);
+      border: 1px solid rgba(255, 179, 0, 0.15);
       border-radius: 100px;
       margin-bottom: 1.25rem;
       white-space: nowrap;
@@ -358,8 +358,8 @@
     }
     .service-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(0,87,255,0.3);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 40px rgba(0,87,255,0.08);
+      border-color: rgba(255,107,0,0.3);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 40px rgba(255,107,0,0.08);
     }
 
     /* ── Tool badge ── */
@@ -375,7 +375,7 @@
       padding: 0.5rem 1rem;
       transition: color 0.2s, border-color 0.2s;
     }
-    .tool-badge:hover { color: var(--cyan); border-color: rgba(0,212,255,0.2); }
+    .tool-badge:hover { color: var(--cyan); border-color: rgba(255,179,0,0.2); }
 
     /* ── FAQ ── */
     .faq-item {
@@ -387,7 +387,7 @@
       transition: border-color 0.2s, background 0.2s;
     }
     .faq-item.open {
-      border-color: rgba(0,87,255,0.3);
+      border-color: rgba(255,107,0,0.3);
       background: rgba(10,22,40,0.7);
     }
     .faq-question {
@@ -424,16 +424,16 @@
     }
     .faq-icon {
       width: 28px; height: 28px;
-      border: 1px solid rgba(0,87,255,0.3);
+      border: 1px solid rgba(255,107,0,0.3);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       font-size: 1.1rem;
       color: var(--primary);
-      background: rgba(0,87,255,0.06);
+      background: rgba(255,107,0,0.06);
       transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s;
     }
-    .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(0,87,255,0.15); border-color: rgba(0,87,255,0.5); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(255,107,0,0.15); border-color: rgba(255,107,0,0.5); }
 
     /* ── Mobile nav ── */
     .mobile-menu {
@@ -462,7 +462,7 @@
     /* ── Scrollbar ── */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: rgba(0,87,255,0.3); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,107,0,0.3); border-radius: 2px; }
 
     /* ── Status dot ── */
     .status-dot {
@@ -507,7 +507,7 @@
       position: absolute;
       inset: -1px;
       border-radius: 21px;
-      background: linear-gradient(135deg, rgba(0,87,255,0.5), rgba(0,212,255,0.2), rgba(0,87,255,0.1), rgba(0,212,255,0.4));
+      background: linear-gradient(135deg, rgba(255,107,0,0.5), rgba(255,179,0,0.2), rgba(255,107,0,0.1), rgba(255,179,0,0.4));
       background-size: 300% 300%;
       animation: border-flow 5s ease infinite;
       z-index: -1;
@@ -524,27 +524,27 @@
       align-items: center;
       gap: 0.75rem;
       padding: 0.75rem 1rem;
-      border: 1px solid rgba(0,87,255,0.15);
+      border: 1px solid rgba(255,107,0,0.15);
       border-radius: 8px;
-      background: rgba(0,87,255,0.03);
+      background: rgba(255,107,0,0.03);
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s;
       font-size: 0.9rem;
       color: var(--text-muted);
     }
-    .check-option:hover { border-color: rgba(0,87,255,0.4); background: rgba(0,87,255,0.06); color: var(--text-body); }
+    .check-option:hover { border-color: rgba(255,107,0,0.4); background: rgba(255,107,0,0.06); color: var(--text-body); }
     .check-option input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
 
     /* ── Logo placeholder ── */
     .logo-placeholder {
       width: 110px; height: 36px;
-      background: linear-gradient(90deg, rgba(0,87,255,0.12), rgba(0,212,255,0.06));
-      border: 1.5px dashed rgba(0,87,255,0.3);
+      background: linear-gradient(90deg, rgba(255,107,0,0.12), rgba(255,179,0,0.06));
+      border: 1.5px dashed rgba(255,107,0,0.3);
       border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.55rem;
-      color: rgba(0,87,255,0.45);
+      color: rgba(255,107,0,0.45);
       letter-spacing: 0.06em;
       text-align: center;
     }
@@ -566,7 +566,7 @@
     .eddie-sig span {
       color: var(--cyan);
       font-weight: 700;
-      text-shadow: 0 0 12px rgba(0,212,255,0.5);
+      text-shadow: 0 0 12px rgba(255,179,0,0.5);
     }
 
     /* ── Mobile fixes ── */
@@ -605,7 +605,7 @@
         <!-- Logo -->
         <a href="/" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem;">
           <img src="brand_assets/logo.png" alt="Ai7"
-            style="height:42px; width:auto; display:block; filter:drop-shadow(0 0 12px rgba(0,212,255,0.5)) drop-shadow(0 0 24px rgba(0,87,255,0.3));" />
+            style="height:42px; width:auto; display:block; filter:drop-shadow(0 0 12px rgba(255,179,0,0.5)) drop-shadow(0 0 24px rgba(255,107,0,0.3));" />
           <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:1.25rem; letter-spacing:-0.02em; line-height:1;">
             <span style="color:var(--primary);">Ai7</span><span style="color:#fff;"> OPTIVARO</span>
           </span>
@@ -646,8 +646,8 @@
       <spline-viewer id="spline-hero" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:0.7;"></spline-viewer>
 
       <!-- Glow orbs -->
-      <div class="glow-orb" style="width:600px; height:600px; background:radial-gradient(circle, rgba(0,87,255,0.12), transparent 70%); top:-100px; left:-100px;"></div>
-      <div class="glow-orb" style="width:400px; height:400px; background:radial-gradient(circle, rgba(0,212,255,0.08), transparent 70%); bottom:0; right:-50px;"></div>
+      <div class="glow-orb" style="width:600px; height:600px; background:radial-gradient(circle, rgba(255,107,0,0.12), transparent 70%); top:-100px; left:-100px;"></div>
+      <div class="glow-orb" style="width:400px; height:400px; background:radial-gradient(circle, rgba(255,179,0,0.08), transparent 70%); bottom:0; right:-50px;"></div>
 
       <div style="max-width:900px; margin:0 auto; text-align:center; position:relative; z-index:1;">
         <div class="section-label fade-up">
@@ -724,31 +724,31 @@
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem;">
           <!-- Pain cards -->
           <div class="service-card fade-up">
-            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">⚡</div>
+            <div style="width:40px; height:40px; background:rgba(255,107,0,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">⚡</div>
             <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Leads going cold</h3>
             <p style="color:var(--text-muted); font-size:0.9rem;">A prospect reaches out at 8pm. Nobody responds until morning. They've already called someone else.</p>
           </div>
           <div class="service-card fade-up">
-            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">📋</div>
+            <div style="width:40px; height:40px; background:rgba(255,107,0,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">📋</div>
             <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Manual data entry</h3>
             <p style="color:var(--text-muted); font-size:0.9rem;">Your team copy-pastes data between systems all day — work that takes hours and creates errors.</p>
           </div>
           <div class="service-card fade-up">
-            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">📊</div>
+            <div style="width:40px; height:40px; background:rgba(255,107,0,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">📊</div>
             <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Outdated reporting</h3>
             <p style="color:var(--text-muted); font-size:0.9rem;">Reports take half a week to compile. Decisions are being made on last week's numbers.</p>
           </div>
           <div class="service-card fade-up">
-            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">💸</div>
+            <div style="width:40px; height:40px; background:rgba(255,107,0,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">💸</div>
             <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Hiring to fix systems</h3>
             <p style="color:var(--text-muted); font-size:0.9rem;">You hire more people to handle problems a well-built system could solve permanently — at a fraction of the cost.</p>
           </div>
           <div class="service-card fade-up">
-            <div style="width:40px; height:40px; background:rgba(0,87,255,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">🔁</div>
+            <div style="width:40px; height:40px; background:rgba(255,107,0,0.1); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;">🔁</div>
             <h3 style="font-size:1rem; font-weight:600; margin-bottom:0.5rem;">Repetitive admin work</h3>
             <p style="color:var(--text-muted); font-size:0.9rem;">Invoices, reminders, onboarding — all manual, all dependent on someone remembering to do it.</p>
           </div>
-          <div class="service-card fade-up" style="background:linear-gradient(135deg, rgba(0,87,255,0.08), rgba(0,22,40,0.8)); border-color:rgba(0,87,255,0.2);">
+          <div class="service-card fade-up" style="background:linear-gradient(135deg, rgba(255,107,0,0.08), rgba(0,22,40,0.8)); border-color:rgba(255,107,0,0.2);">
             <p style="color:var(--text-body); font-size:1.0625rem; font-weight:500; line-height:1.65;">
               "This isn't a people problem.<br/>It's a <span style="color:var(--cyan);">systems problem</span> — and it compounds every month you leave it."
             </p>
@@ -762,7 +762,7 @@
          WHAT WE DO
     ══════════════════════════════════════════ -->
     <section style="padding:6rem 2rem; position:relative;">
-      <div class="glow-orb" style="width:500px; height:500px; background:radial-gradient(circle, rgba(0,87,255,0.07), transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%);"></div>
+      <div class="glow-orb" style="width:500px; height:500px; background:radial-gradient(circle, rgba(255,107,0,0.07), transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%);"></div>
       <div style="max-width:1000px; margin:0 auto; text-align:center;">
         <div class="section-label fade-up">What We Do</div>
         <h2 class="fade-up" style="font-size:clamp(2rem, 4vw, 3rem); color:#fff; margin-bottom:1.5rem;">
@@ -813,28 +813,28 @@
         <div class="fade-up">
           <div style="display:flex; flex-direction:column; gap:1rem;">
             <div class="glass" style="border-radius:12px; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
-              <div style="width:36px; height:36px; background:rgba(0,87,255,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">🔍</div>
+              <div style="width:36px; height:36px; background:rgba(255,107,0,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">🔍</div>
               <div>
                 <p style="font-weight:600; font-size:0.9375rem; margin-bottom:0.2rem;">Diagnosis before proposal</p>
                 <p style="color:var(--text-muted); font-size:0.8125rem;">We never recommend a solution we haven't diagnosed the problem for first.</p>
               </div>
             </div>
             <div class="glass" style="border-radius:12px; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
-              <div style="width:36px; height:36px; background:rgba(0,87,255,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">🛠️</div>
+              <div style="width:36px; height:36px; background:rgba(255,107,0,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">🛠️</div>
               <div>
                 <p style="font-weight:600; font-size:0.9375rem; margin-bottom:0.2rem;">Custom, not templated</p>
                 <p style="color:var(--text-muted); font-size:0.8125rem;">Every system is built around your specific operation — not adapted from a generic workflow.</p>
               </div>
             </div>
             <div class="glass" style="border-radius:12px; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
-              <div style="width:36px; height:36px; background:rgba(0,87,255,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">📍</div>
+              <div style="width:36px; height:36px; background:rgba(255,107,0,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">📍</div>
               <div>
                 <p style="font-weight:600; font-size:0.9375rem; margin-bottom:0.2rem;">Rwanda-native, globally capable</p>
                 <p style="color:var(--text-muted); font-size:0.8125rem;">We understand the local market. We build with global-standard technology.</p>
               </div>
             </div>
             <div class="glass" style="border-radius:12px; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
-              <div style="width:36px; height:36px; background:rgba(0,87,255,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">📊</div>
+              <div style="width:36px; height:36px; background:rgba(255,107,0,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem;">📊</div>
               <div>
                 <p style="font-weight:600; font-size:0.9375rem; margin-bottom:0.2rem;">Accountable beyond launch</p>
                 <p style="color:var(--text-muted); font-size:0.8125rem;">We monitor, refine, and fix. You're not left with a system and a good luck.</p>
@@ -860,15 +860,15 @@
 
         <!-- Result metrics row -->
         <div class="fade-up metric-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:3rem;">
-          <div style="background:rgba(0,212,255,0.04); border:1px solid rgba(0,212,255,0.15); border-radius:16px; padding:1.75rem; text-align:center;">
+          <div style="background:rgba(255,179,0,0.06); border:1px solid rgba(255,179,0,0.15); border-radius:16px; padding:1.75rem; text-align:center;">
             <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--cyan); letter-spacing:-0.03em; margin-bottom:0.25rem;">60s</p>
             <p style="color:var(--text-muted); font-size:0.875rem; line-height:1.5;">Average lead<br/>response time</p>
           </div>
-          <div style="background:rgba(0,212,255,0.04); border:1px solid rgba(0,212,255,0.15); border-radius:16px; padding:1.75rem; text-align:center;">
+          <div style="background:rgba(255,179,0,0.06); border:1px solid rgba(255,179,0,0.15); border-radius:16px; padding:1.75rem; text-align:center;">
             <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--cyan); letter-spacing:-0.03em; margin-bottom:0.25rem;">24/7</p>
             <p style="color:var(--text-muted); font-size:0.875rem; line-height:1.5;">AI working while<br/>founder sleeps</p>
           </div>
-          <div style="background:rgba(0,212,255,0.04); border:1px solid rgba(0,212,255,0.15); border-radius:16px; padding:1.75rem; text-align:center;">
+          <div style="background:rgba(255,179,0,0.06); border:1px solid rgba(255,179,0,0.15); border-radius:16px; padding:1.75rem; text-align:center;">
             <p style="font-family:'Bricolage Grotesque',sans-serif; font-size:2.5rem; font-weight:800; color:var(--cyan); letter-spacing:-0.03em; margin-bottom:0.25rem;">0</p>
             <p style="color:var(--text-muted); font-size:0.875rem; line-height:1.5;">Leads falling<br/>through cracks</p>
           </div>
@@ -898,7 +898,7 @@
           </p>
 
           <!-- Read more toggle button -->
-          <button onclick="toggleTestimonial(this)" style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.25); color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.8125rem; padding:0.6rem 1.25rem; border-radius:8px; cursor:pointer; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(0,212,255,0.15)';this.style.borderColor='rgba(0,212,255,0.5)'" onmouseout="this.style.background='rgba(0,212,255,0.08)';this.style.borderColor='rgba(0,212,255,0.25)'">
+          <button onclick="toggleTestimonial(this)" style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(255,179,0,0.08); border:1px solid rgba(0,212,255,0.25); color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.8125rem; padding:0.6rem 1.25rem; border-radius:8px; cursor:pointer; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(255,179,0,0.15)';this.style.borderColor='rgba(255,179,0,0.5)'" onmouseout="this.style.background='rgba(255,179,0,0.08)';this.style.borderColor='rgba(0,212,255,0.25)'">
             <span class="toggle-label">Read full testimonial</span>
             <svg class="toggle-chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="transition:transform 0.3s;"><path d="M6 9l6 6 6-6"/></svg>
           </button>
@@ -1080,7 +1080,7 @@
     ══════════════════════════════════════════ -->
     <section style="padding:8rem 2rem; position:relative; overflow:hidden;">
       <div class="section-divider" style="margin-bottom:6rem;"></div>
-      <div class="glow-orb" style="width:700px; height:700px; background:radial-gradient(circle, rgba(0,87,255,0.12), transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%);"></div>
+      <div class="glow-orb" style="width:700px; height:700px; background:radial-gradient(circle, rgba(255,107,0,0.12), transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%);"></div>
 
       <div style="max-width:700px; margin:0 auto; text-align:center; position:relative;">
         <div class="section-label fade-up">Let's Talk</div>
@@ -1135,7 +1135,7 @@
             <!-- Footer logo -->
             <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.25rem;">
               <img src="brand_assets/logo.png" alt="Ai7"
-                style="height:46px; width:auto; display:block; filter:drop-shadow(0 0 14px rgba(0,212,255,0.5)) drop-shadow(0 0 28px rgba(0,87,255,0.3));" />
+                style="height:46px; width:auto; display:block; filter:drop-shadow(0 0 14px rgba(255,179,0,0.5)) drop-shadow(0 0 28px rgba(255,107,0,0.3));" />
               <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:1.35rem; letter-spacing:-0.02em; line-height:1;">
                 <span style="color:var(--primary);">Ai7</span><span style="color:#fff;"> OPTIVARO</span>
               </span>
@@ -1475,7 +1475,7 @@
     }
     .legal-modal-box {
       background: #0b1221;
-      border: 1px solid rgba(0,87,255,0.2);
+      border: 1px solid rgba(255,107,0,0.2);
       border-radius: 20px;
       max-width: 720px;
       width: 100%;
@@ -1484,11 +1484,11 @@
       padding: 3rem;
       position: relative;
       scrollbar-width: thin;
-      scrollbar-color: rgba(0,87,255,0.3) transparent;
+      scrollbar-color: rgba(255,107,0,0.3) transparent;
     }
     .legal-modal-box::-webkit-scrollbar { width: 4px; }
     .legal-modal-box::-webkit-scrollbar-track { background: transparent; }
-    .legal-modal-box::-webkit-scrollbar-thumb { background: rgba(0,87,255,0.3); border-radius: 4px; }
+    .legal-modal-box::-webkit-scrollbar-thumb { background: rgba(255,107,0,0.3); border-radius: 4px; }
     .legal-close {
       position: absolute;
       top: 1.5rem;
@@ -1736,7 +1736,7 @@
       right: 0;
       width: 200px;
       height: 28px;
-      background: #040812;
+      background: #080601;
       z-index: 2147483647;
       pointer-events: none;
     }
