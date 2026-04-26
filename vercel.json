@@ -5,6 +5,7 @@
     { "source": "/services", "destination": "/services.html" },
     { "source": "/process", "destination": "/process.html" },
     { "source": "/industries", "destination": "/industries.html" },
-    { "source": "/contact", "destination": "/contact.html" }
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/testimonials", "destination": "/testimonials.html" }
   ]
 }

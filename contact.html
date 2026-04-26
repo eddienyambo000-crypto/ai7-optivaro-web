@@ -15,12 +15,12 @@
   <link rel="canonical" href="https://ai7optivaro.com/contact" />
   <link rel="icon" type="image/png" href="brand_assets/logo.png" />
   <link rel="apple-touch-icon" href="brand_assets/logo.png" />
-  <meta name="theme-color" content="#040812" />
+  <meta name="theme-color" content="#080601" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script>
-    tailwind.config = { theme: { extend: { colors: { primary:'#0057FF', cyan:'#00D4FF', bg:'#040812', 'bg-secondary':'#070F1E', 'bg-surface':'#0A1628', muted:'#8A9BB5', 'text-body':'#E8EDF5' } } } }
+    tailwind.config = { theme: { extend: { colors: { primary:'#FF6B00', cyan:'#FFB300', bg:'#080601', 'bg-secondary':'#100A02', 'bg-surface':'#1A1006', muted:'#9E8A6E', 'text-body':'#F5EDD8' } } } }
   </script>
 </head>
 
@@ -34,7 +34,7 @@
     <nav id="navbar">
       <div style="max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between;">
         <a href="/" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem;">
-          <img src="brand_assets/logo.png" alt="Ai7" style="height:42px; width:auto; display:block; filter:drop-shadow(0 0 12px rgba(0,212,255,0.5)) drop-shadow(0 0 24px rgba(0,87,255,0.3));" />
+          <img src="brand_assets/logo.png" alt="Ai7" style="height:42px; width:auto; display:block; filter:drop-shadow(0 0 12px rgba(255,179,0,0.5)) drop-shadow(0 0 24px rgba(255,107,0,0.3));" />
           <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:1.25rem; letter-spacing:-0.02em; line-height:1;">
             <span style="color:var(--primary);">Ai7</span><span style="color:#fff;"> OPTIVARO</span>
           </span>
@@ -43,6 +43,7 @@
           <a href="/services" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Services</a>
           <a href="/process" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Process</a>
           <a href="/industries" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Industries</a>
+          <a href="/testimonials" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Testimonials</a>
           <a href="/#faq" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">FAQ</a>
           <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" style="padding:0.6rem 1.25rem; font-size:0.875rem;">Book a Call</a>
         </div>
@@ -58,13 +59,14 @@
       <a href="/services" onclick="toggleMobileMenu()">Services</a>
       <a href="/process" onclick="toggleMobileMenu()">Process</a>
       <a href="/industries" onclick="toggleMobileMenu()">Industries</a>
+      <a href="/testimonials" onclick="toggleMobileMenu()">Testimonials</a>
       <a href="/#faq" onclick="toggleMobileMenu()">FAQ</a>
       <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" onclick="toggleMobileMenu()">Book a Call</a>
     </div>
 
     <!-- PAGE HERO -->
     <div class="page-hero" style="padding:10rem 2rem 4rem; text-align:center; position:relative;">
-      <div class="glow-orb" style="width:600px; height:600px; background:radial-gradient(circle, rgba(0,87,255,0.1), transparent 70%); top:0; left:50%; transform:translateX(-50%);"></div>
+      <div class="glow-orb" style="width:600px; height:600px; background:radial-gradient(circle, rgba(255,107,0,0.1), transparent 70%); top:0; left:50%; transform:translateX(-50%);"></div>
       <div style="position:relative; z-index:1;">
         <div class="section-label fade-up">Get In Touch</div>
         <h1 class="fade-up" style="font-size:clamp(2.5rem, 6vw, 4.5rem); font-weight:800; color:#fff; margin-bottom:1.25rem; letter-spacing:-0.04em; line-height:1.08;">
@@ -85,13 +87,13 @@
             <div>
               <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">YOUR NAME</label>
               <input type="text" name="name" placeholder="e.g. John Doe" required
-                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
+                style="width:100%; background:rgba(255,107,0,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
             </div>
             <div>
               <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">BUSINESS NAME</label>
               <input type="text" name="business" placeholder="e.g. StepIn Rwanda" required
-                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
+                style="width:100%; background:rgba(255,107,0,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
             </div>
           </div>
@@ -100,13 +102,13 @@
             <div>
               <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">EMAIL ADDRESS</label>
               <input type="email" name="email" placeholder="you@company.com" required
-                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
+                style="width:100%; background:rgba(255,107,0,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
             </div>
             <div>
               <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">WHATSAPP NUMBER</label>
               <input type="tel" name="whatsapp" placeholder="+250 7XX XXX XXX"
-                style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
+                style="width:100%; background:rgba(255,107,0,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'" />
             </div>
           </div>
@@ -114,7 +116,7 @@
           <div>
             <label style="display:block; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:0.5rem;">YOUR MESSAGE</label>
             <textarea name="message" placeholder="Briefly describe your business and what you'd like to automate..." rows="5" required
-              style="width:100%; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; resize:vertical; transition:border-color 0.2s; min-height:130px;"
+              style="width:100%; background:rgba(255,107,0,0.04); border:1px solid rgba(0,87,255,0.2); border-radius:10px; padding:0.875rem 1.125rem; color:#fff; font-family:'DM Sans',sans-serif; font-size:0.9375rem; outline:none; box-sizing:border-box; resize:vertical; transition:border-color 0.2s; min-height:130px;"
               onfocus="this.style.borderColor='rgba(0,87,255,0.6)'" onblur="this.style.borderColor='rgba(0,87,255,0.2)'"></textarea>
           </div>
 
@@ -150,7 +152,7 @@
         </div>
 
         <!-- Calendar option -->
-        <div class="fade-up" style="margin-top:3rem; padding:2rem; background:rgba(0,87,255,0.04); border:1px solid rgba(0,87,255,0.15); border-radius:16px; text-align:center;">
+        <div class="fade-up" style="margin-top:3rem; padding:2rem; background:rgba(255,107,0,0.04); border:1px solid rgba(0,87,255,0.15); border-radius:16px; text-align:center;">
           <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:0.75rem;">Prefer to talk directly?</p>
           <p style="color:#fff; font-weight:600; margin-bottom:1.25rem;">Book a free 30-minute strategy call — no pitch, no proposal before a diagnosis.</p>
           <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" style="font-size:0.9rem; padding:0.875rem 2rem;">
@@ -159,6 +161,32 @@
           </a>
         </div>
 
+      </div>
+    </section>
+
+    <!-- GOOGLE MAP -->
+    <section style="padding:0 2rem 6rem;">
+      <div style="max-width:900px; margin:0 auto;">
+        <div class="fade-up" style="text-align:center; margin-bottom:2rem;">
+          <div class="section-label" style="margin:0 auto 0.75rem;">Find Us</div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2rem); color:#fff; margin-bottom:0.5rem;">We're Based in Kigali, Rwanda</h2>
+          <p style="color:var(--text-muted); font-size:0.9375rem;">Kibagabaga, Kigali — building the future of African business automation.</p>
+        </div>
+        <div class="fade-up" style="border-radius:20px; overflow:hidden; border:1px solid var(--border); box-shadow:0 0 40px rgba(255,107,0,0.08);">
+          <iframe
+            src="https://maps.google.com/maps?q=Kibagabaga+Kigali+Rwanda&output=embed&z=14"
+            width="100%"
+            height="420"
+            style="display:block; border:0; filter:invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.85);"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ai7 OPTIVARO — Kibagabaga, Kigali, Rwanda">
+          </iframe>
+        </div>
+        <p style="color:var(--text-muted); font-size:0.8125rem; text-align:center; margin-top:1rem; font-family:'JetBrains Mono',monospace;">
+          📍 Kibagabaga, Kigali, Rwanda · info@ai7optivaro.com · +250 783 282 759
+        </p>
       </div>
     </section>
 
@@ -209,7 +237,7 @@
         </div>
         <div style="padding-top:2rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
           <p style="color:var(--text-muted); font-size:0.75rem;">© 2026 Ai7 OPTIVARO. All rights reserved. · Kigali, Rwanda</p>
-          <p class="eddie-sig">crafted by <span>Eddie</span></p>
+          <a href="#" class="eddie-sig" style="text-decoration:none;">Built by <span>EDDIE NYAMBO</span></a>
         </div>
       </div>
     </footer>
