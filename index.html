@@ -11,6 +11,12 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- DNS + connection pre-warming: eliminates first-connection delay for every external resource -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+  <link rel="dns-prefetch" href="https://prod.spline.design" />
   <title>Ai7 OPTIVARO — AI Automation Agency Kigali, Rwanda</title>
   <meta name="description" content="Ai7 OPTIVARO is Kigali's leading AI automation agency. We eliminate manual work, reduce operational costs, and build intelligent systems that run your business. Based in Remera, Kigali, Rwanda." />
   <meta name="keywords" content="AI automation agency Rwanda, business automation Kigali, workflow automation Africa, n8n automation Rwanda, AI solutions for businesses Rwanda, process automation Kigali" />
@@ -94,7 +100,9 @@
       }, 200);
     });
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Fonts load async — does NOT block first paint -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" /></noscript>
 
   <script>
     tailwind.config = {
@@ -589,9 +597,10 @@
 
     /* ── Hero headline: machine tagline ── */
     #hero-headline {
-      font-size: min(4.5vw, 5rem);
+      font-size: min(3.8vw, 4.5rem);
       white-space: nowrap;
       overflow: hidden;
+      will-change: opacity, transform;
     }
     #machine-text {
       display: inline-block;
@@ -607,11 +616,14 @@
       0% { background-position: 0% center; }
       100% { background-position: 200% center; }
     }
+    @media (max-width: 600px) {
+      #hero-headline { font-size: 3.6vw; letter-spacing: -0.04em; }
+    }
     @media (max-width: 480px) {
-      #hero-headline { font-size: 4.2vw; letter-spacing: -0.05em; }
+      #hero-headline { font-size: 3.4vw; letter-spacing: -0.05em; }
     }
     @media (max-width: 360px) {
-      #hero-headline { font-size: 3.8vw; letter-spacing: -0.06em; }
+      #hero-headline { font-size: 3.1vw; letter-spacing: -0.06em; }
     }
 
     /* ── Spline robot — mobile fix: show full body incl. arms ── */
@@ -697,7 +709,7 @@
         </div>
 
         <h1 class="fade-up" id="hero-headline" style="font-weight:800; color:#fff; margin-bottom:1.75rem; line-height:1.05; letter-spacing:-0.04em;">
-          <span id="machine-text">&ldquo;The Machine Behind Business&rdquo;</span>
+          <span id="machine-text">&ldquo;The Machine Behind Your Business&rdquo;</span>
         </h1>
 
         <p class="fade-up" style="font-size:clamp(1.05rem, 2vw, 1.25rem); color:var(--text-body); max-width:620px; margin:0 auto 2.5rem; line-height:1.8; font-weight:400;">
@@ -1258,7 +1270,7 @@
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    }, { passive: true });
 
     // ── Mobile menu ──
     function toggleMobileMenu() {
@@ -1357,7 +1369,7 @@
       const ring = document.getElementById('cursor-ring');
       if (!dot || !ring) return;
       let mx = -200, my = -200, rx = -200, ry = -200;
-      window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
       function tickCursor() {
         dot.style.left = mx + 'px'; dot.style.top = my + 'px';
         rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
@@ -1447,15 +1459,22 @@
       statEls.forEach(el => counterObs.observe(el));
     })();
 
-    // ── 3D card tilt ──
+    // ── 3D card tilt — RAF-throttled, touch devices skip entirely ──
     (function() {
+      if (window.matchMedia('(hover: none)').matches) return;
       document.querySelectorAll('.service-card').forEach(card => {
+        let pending = false, cx = 0, cy = 0;
         card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width - 0.5;
-          const y = (e.clientY - rect.top) / rect.height - 0.5;
-          card.style.transform = `perspective(600px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-4px)`;
-        });
+          const r = card.getBoundingClientRect();
+          cx = (e.clientX - r.left) / r.width - 0.5;
+          cy = (e.clientY - r.top) / r.height - 0.5;
+          if (pending) return;
+          pending = true;
+          requestAnimationFrame(() => {
+            card.style.transform = `perspective(600px) rotateY(${cx*10}deg) rotateX(${-cy*10}deg) translateY(-4px)`;
+            pending = false;
+          });
+        }, { passive: true });
         card.addEventListener('mouseleave', () => {
           card.style.transform = '';
           card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
@@ -1485,18 +1504,26 @@
       });
     });
 
-    // ── Parallax glow orbs on hero ──
+    // ── Parallax glow orbs on hero — RAF-throttled so it never causes jank ──
     (function() {
       const orbs = document.querySelectorAll('section:first-of-type .glow-orb');
+      if (!orbs.length) return;
+      let mx = 0, my = 0, pending = false;
       window.addEventListener('mousemove', e => {
-        const xRatio = (e.clientX / window.innerWidth - 0.5) * 30;
-        const yRatio = (e.clientY / window.innerHeight - 0.5) * 20;
-        orbs.forEach((orb, i) => {
-          const factor = i % 2 === 0 ? 1 : -0.6;
-          orb.style.transform = `translate(${xRatio * factor}px, ${yRatio * factor}px)`;
-          orb.style.transition = 'transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+        mx = e.clientX; my = e.clientY;
+        if (pending) return;
+        pending = true;
+        requestAnimationFrame(() => {
+          const xR = (mx / window.innerWidth - 0.5) * 30;
+          const yR = (my / window.innerHeight - 0.5) * 20;
+          orbs.forEach((orb, i) => {
+            const f = i % 2 === 0 ? 1 : -0.6;
+            orb.style.transform = `translate(${xR * f}px,${yR * f}px)`;
+            orb.style.transition = 'transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+          });
+          pending = false;
         });
-      });
+      }, { passive: true });
     })();
   </script>
 
@@ -1822,7 +1849,7 @@
     // ── Hero headline scramble animation ──
     (function() {
       var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!%&*';
-      var FINAL = '“The Machine Behind Business”';
+      var FINAL = '“The Machine Behind Your Business”';
       function scramble(el) {
         var frame = 0, FRAMES = 50;
         function tick() {
