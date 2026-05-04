@@ -80,16 +80,18 @@
   <meta name="theme-color" content="#080601" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    /* Load Spline only after page is interactive to avoid blocking render */
-    window.addEventListener('load', function() {
-      var s = document.createElement('script');
-      s.type = 'module';
-      s.src = 'https://unpkg.com/@splinetool/viewer@1.9.84/build/spline-viewer.js';
-      document.head.appendChild(s);
-      s.onload = function() {
-        var viewer = document.getElementById('spline-hero');
-        if (viewer) viewer.setAttribute('url', 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode');
-      };
+    /* Load Spline immediately after DOM ready for faster render */
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.type = 'module';
+        s.src = 'https://unpkg.com/@splinetool/viewer@1.9.84/build/spline-viewer.js';
+        document.head.appendChild(s);
+        s.onload = function() {
+          var viewer = document.getElementById('spline-hero');
+          if (viewer) viewer.setAttribute('url', 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode');
+        };
+      }, 200);
     });
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -584,6 +586,43 @@
       .testimonial-attribution { flex-direction: column; align-items: flex-start !important; }
       .testimonial-attribution .status-badge { margin-left: 0 !important; }
     }
+
+    /* ── Hero headline: machine tagline ── */
+    #hero-headline {
+      font-size: min(4.5vw, 5rem);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    #machine-text {
+      display: inline-block;
+      background: linear-gradient(110deg, #FF6B00 0%, #FFB300 40%, #FF8C00 70%, #FF6B00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 28px rgba(255,107,0,0.35));
+      background-size: 200% auto;
+      animation: machine-shine 4s linear infinite;
+    }
+    @keyframes machine-shine {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    @media (max-width: 480px) {
+      #hero-headline { font-size: 4.2vw; letter-spacing: -0.05em; }
+    }
+    @media (max-width: 360px) {
+      #hero-headline { font-size: 3.8vw; letter-spacing: -0.06em; }
+    }
+
+    /* ── Spline robot — mobile fix: show full body incl. arms ── */
+    @media (max-width: 768px) {
+      #spline-hero {
+        width: 160% !important;
+        left: -30% !important;
+        transform: scale(0.9);
+        transform-origin: center top;
+      }
+    }
   </style>
 </head>
 
@@ -657,8 +696,8 @@
           AI Automation Agency · Kigali, Rwanda
         </div>
 
-        <h1 class="fade-up" style="font-size:clamp(2rem, 7vw, 6rem); font-weight:800; color:#fff; margin-bottom:1.75rem; line-height:1.05; letter-spacing:-0.04em; word-break:keep-all; hyphens:none; overflow-wrap:normal;">
-          Your Business.<br/><span class="gradient-text" style="display:inline-block;">Running Itself.</span>
+        <h1 class="fade-up" id="hero-headline" style="font-weight:800; color:#fff; margin-bottom:1.75rem; line-height:1.05; letter-spacing:-0.04em;">
+          <span id="machine-text">&ldquo;The Machine Behind Business&rdquo;</span>
         </h1>
 
         <p class="fade-up" style="font-size:clamp(1.05rem, 2vw, 1.25rem); color:var(--text-body); max-width:620px; margin:0 auto 2.5rem; line-height:1.8; font-weight:400;">
@@ -1205,7 +1244,7 @@
             <button onclick="document.getElementById('modal-privacy').style.display='flex'" style="background:none; border:none; color:var(--text-muted); font-size:0.75rem; cursor:pointer; padding:0; font-family:'DM Sans',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Privacy Policy</button>
             <button onclick="document.getElementById('modal-terms').style.display='flex'" style="background:none; border:none; color:var(--text-muted); font-size:0.75rem; cursor:pointer; padding:0; font-family:'DM Sans',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Terms & Conditions</button>
           </div>
-          <a href="#" class="eddie-sig" style="text-decoration:none; cursor:pointer;" title="Eddie Nyambo — Founder & Builder">Built by <span>EDDIE NYAMBO</span></a>
+          <a href="https://eddie-portfolio-gamma.vercel.app" target="_blank" rel="noopener" class="eddie-sig" style="text-decoration:none; cursor:pointer;" title="Eddie Nyambo — Founder & Builder">Built by <span>EDDIE NYAMBO</span></a>
         </div>
 
       </div>
@@ -1778,6 +1817,33 @@
       }
       var iv = setInterval(function() { killSplineBadge(); }, 200);
       setTimeout(function() { clearInterval(iv); }, 20000);
+    })();
+
+    // ── Hero headline scramble animation ──
+    (function() {
+      var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!%&*';
+      var FINAL = '“The Machine Behind Business”';
+      function scramble(el) {
+        var frame = 0, FRAMES = 50;
+        function tick() {
+          var out = '';
+          for (var i = 0; i < FINAL.length; i++) {
+            var c = FINAL[i];
+            if (c === ' ' || c === '“' || c === '”') { out += c; continue; }
+            var revealAt = Math.floor((i / FINAL.length) * FRAMES * 0.75);
+            out += (frame >= revealAt) ? c : CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+          el.textContent = out;
+          if (++frame < FRAMES) requestAnimationFrame(tick);
+          else el.textContent = FINAL;
+        }
+        requestAnimationFrame(tick);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementById('machine-text');
+        if (!el) return;
+        setTimeout(function() { scramble(el); }, 600);
+      });
     })();
   </script>
 
