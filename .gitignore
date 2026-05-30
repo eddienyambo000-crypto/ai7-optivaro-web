@@ -1,4 +1,7 @@
 node_modules/
+.next/
+out/
+evc-clean-push/
 temporary screenshots/
 .DS_Store
 Thumbs.db
