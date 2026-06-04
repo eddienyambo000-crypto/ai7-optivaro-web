@@ -189,14 +189,24 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 1.25rem 0;
-  transition: background 0.3s, backdrop-filter 0.3s;
+  padding: 1.1rem 0;
+  transition: background 0.3s, backdrop-filter 0.3s, padding 0.3s;
 }
 nav.scrolled {
-  background: rgba(4, 8, 18, 0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(11, 15, 18, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-soft, rgba(255,255,255,0.07));
+  padding: 0.75rem 0;
 }
+/* Logo lockup with tagline */
+.nav-lock { display: flex; flex-direction: column; line-height: 1.05; }
+.nav-name { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.18rem; letter-spacing: -0.01em; }
+.nav-name b { color: var(--cyan); font-weight: 800; }
+.nav-tagline { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan-deep, #7FCDD2); margin-top: 3px; opacity: 0.9; }
+/* Active nav state */
+.desktop-nav a.active { color: var(--cyan); position: relative; }
+.desktop-nav a.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--cyan); border-radius: 2px; }
+.mobile-menu a.active { color: var(--cyan); }
 
 /* ── Process steps ── */
 .step-number {
