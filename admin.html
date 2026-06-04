@@ -3,1070 +3,645 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ai7 OPTIVARO — Admin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Ai7 Optivaro — Admin CMS</title>
+  <link rel="icon" type="image/png" href="brand_assets/logo.png" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" /></noscript>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #040812;
-      --surface: #0b1221;
-      --border: rgba(255,255,255,0.06);
-      --primary: #0057FF;
-      --cyan: #00D4FF;
-      --text: #ffffff;
-      --text-muted: #8a9bb5;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    /* ── Login Screen ── */
-    #login-screen {
-      width: 100%;
-      max-width: 420px;
-    }
-
-    .login-logo {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-
-    .login-logo img {
-      height: 48px;
-      width: auto;
-      filter: drop-shadow(0 0 12px rgba(0,212,255,0.5));
-      margin-bottom: 0.75rem;
-    }
-
-    .login-logo h1 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .login-logo h1 span { color: var(--primary); }
-
-    .login-logo p {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--cyan);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-top: 0.25rem;
-    }
-
-    .login-card {
-      background: var(--surface);
-      border: 1px solid rgba(0,87,255,0.2);
-      border-radius: 20px;
-      padding: 2.5rem;
-    }
-
-    .login-card h2 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin-bottom: 0.375rem;
-    }
-
-    .login-card p {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      margin-bottom: 2rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.875rem 1rem;
-      color: #fff;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.9375rem;
-      outline: none;
-      transition: border-color 0.2s;
-      resize: vertical;
-    }
-
-    .form-group textarea { min-height: 80px; line-height: 1.6; }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: rgba(0,87,255,0.5);
-    }
-
-    .form-group .hint {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 0.4rem;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .login-btn {
-      width: 100%;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 0.9rem;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 0.5rem;
-      transition: background 0.2s, transform 0.15s;
-    }
-
-    .login-btn:hover { background: #0047dd; transform: translateY(-1px); }
-    .login-btn:active { transform: translateY(0); }
-
-    .login-error {
-      color: #ff4d4d;
-      font-size: 0.8125rem;
-      margin-top: 0.75rem;
-      text-align: center;
-      display: none;
-    }
-
-    /* ── Dashboard ── */
-    #dashboard {
-      display: none;
-      width: 100%;
-      max-width: 1100px;
-    }
-
-    .dash-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .dash-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .dash-logo img {
-      height: 40px;
-      filter: drop-shadow(0 0 10px rgba(0,212,255,0.4));
-    }
-
-    .dash-logo span {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-weight: 800;
-      font-size: 1.2rem;
-      letter-spacing: -0.02em;
-    }
-
-    .dash-logo span b { color: var(--primary); font-weight: 800; }
-
-    .dash-meta {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .dash-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--cyan);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: rgba(0,212,255,0.06);
-      border: 1px solid rgba(0,212,255,0.15);
-      border-radius: 100px;
-      padding: 0.3rem 0.75rem;
-    }
-
-    .logout-btn {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      border-radius: 8px;
-      padding: 0.4rem 0.875rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.8125rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .logout-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
-
-    .dash-welcome {
-      margin-bottom: 2rem;
-    }
-
-    .dash-welcome h2 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.5rem;
-    }
-
-    .dash-welcome p {
-      color: var(--text-muted);
-      font-size: 0.9375rem;
-    }
-
-    /* ── Tabs ── */
-    .tab-bar {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 2.5rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 0;
-    }
-
-    .tab-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      cursor: pointer;
-      padding: 0.625rem 1.25rem;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -1px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .tab-btn:hover { color: #fff; }
-
-    .tab-btn.active {
-      color: #fff;
-      border-bottom-color: var(--primary);
-    }
-
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-
-    .section-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--cyan);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .dash-card {
-      background: var(--surface);
-      border: 1px solid rgba(0,87,255,0.15);
-      border-radius: 16px;
-      padding: 1.75rem;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .dash-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--cyan));
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .dash-card:hover {
-      border-color: rgba(0,87,255,0.4);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(0,87,255,0.15);
-    }
-
-    .dash-card:hover::before { opacity: 1; }
-
-    .card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-
-    .card-icon.blue { background: rgba(0,87,255,0.15); }
-    .card-icon.cyan { background: rgba(0,212,255,0.1); }
-    .card-icon.green { background: rgba(0,200,100,0.1); }
-    .card-icon.orange { background: rgba(255,150,0,0.1); }
-    .card-icon.purple { background: rgba(120,80,255,0.1); }
-
-    .card-title {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.375rem;
-    }
-
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 0.8125rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    .card-link {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--cyan);
-      letter-spacing: 0.06em;
-      display: flex;
-      align-items: center;
-      gap: 0.375rem;
-    }
-
-    .dash-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 2rem 0;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-
-    .info-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.25rem;
-    }
-
-    .info-card .label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    .info-card .value {
-      font-size: 0.875rem;
-      color: #fff;
-      font-weight: 500;
-    }
-
-    .info-card .value a {
-      color: var(--cyan);
-      text-decoration: none;
-    }
-
-    .info-card .value a:hover { text-decoration: underline; }
-
-    /* ── Site Editor ── */
-    .editor-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    @media (max-width: 700px) {
-      .editor-grid { grid-template-columns: 1fr; }
-    }
-
-    .editor-card {
-      background: var(--surface);
-      border: 1px solid rgba(0,87,255,0.15);
-      border-radius: 20px;
-      padding: 2rem;
-    }
-
-    .editor-card.full-width {
-      grid-column: 1 / -1;
-    }
-
-    .editor-card h3 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.375rem;
-    }
-
-    .editor-card .sub {
-      color: var(--text-muted);
-      font-size: 0.8125rem;
-      margin-bottom: 1.75rem;
-      line-height: 1.6;
-    }
-
-    .token-setup {
-      background: rgba(0,87,255,0.05);
-      border: 1px solid rgba(0,87,255,0.2);
-      border-radius: 14px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .token-setup h4 {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .token-setup ol {
-      color: var(--text-muted);
-      font-size: 0.8125rem;
-      line-height: 1.9;
-      padding-left: 1.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .token-setup ol li { margin-bottom: 0.125rem; }
-
-    .token-setup .connected {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8125rem;
-      color: #00c864;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 0.75rem 1.5rem;
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-size: 0.9375rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn-primary:hover { background: #0047dd; transform: translateY(-1px); }
-    .btn-primary:active { transform: translateY(0); }
-    .btn-primary:disabled { background: #1a2a4a; color: #4a6080; cursor: not-allowed; transform: none; }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.05);
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.75rem 1.5rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.9375rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn-secondary:hover { background: rgba(255,255,255,0.08); color: #fff; }
-
-    .btn-row {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 1.75rem;
-    }
-
-    .editor-status {
-      font-size: 0.8125rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      display: none;
-    }
-
-    .editor-status.success {
-      background: rgba(0,200,100,0.08);
-      border: 1px solid rgba(0,200,100,0.2);
-      color: #00c864;
-    }
-
-    .editor-status.error {
-      background: rgba(255,77,77,0.08);
-      border: 1px solid rgba(255,77,77,0.2);
-      color: #ff6b6b;
-    }
-
-    .editor-status.loading {
-      background: rgba(0,87,255,0.08);
-      border: 1px solid rgba(0,87,255,0.2);
-      color: var(--cyan);
-    }
-
-    .disconnect-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      font-family: 'JetBrains Mono', monospace;
-      cursor: pointer;
-      text-decoration: underline;
-      padding: 0;
-      margin-left: 0.5rem;
-    }
-
-    .disconnect-btn:hover { color: #ff6b6b; }
-
-    .dash-footer {
-      margin-top: 3rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      font-family: 'JetBrains Mono', monospace;
+      --navy:#0B0F12; --surface:#11161B; --card:#161D24; --card2:#1C242C;
+      --cyan:#A7E6E8; --cyan-deep:#7FCDD2; --orange:#EB6911; --orange-h:#FF7A1F;
+      --green:#00D97E; --yellow:#F59E0B; --red:#ef4444;
+      --text:#E8EDF2; --muted:#8593A0; --dim:#4A5560;
+      --border:rgba(167,230,232,0.12); --border2:rgba(255,255,255,0.06); --r:10px;
+      --font-h:'Montserrat',sans-serif; --font:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font);background:var(--navy);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font-family:var(--font)}
+    h1,h2,h3{font-family:var(--font-h);color:#fff}
+
+    /* Login */
+    #login{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:9999;padding:1.5rem}
+    #login.hide{display:none}
+    .login-box{width:100%;max-width:400px;padding:2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:16px}
+    .login-logo{font-family:var(--font-h);font-weight:800;font-size:1.1rem;letter-spacing:-0.01em;margin-bottom:0.2rem}
+    .login-logo .b{color:var(--cyan)} .login-logo .o{color:#fff}
+    .login-sub{font-size:0.72rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:2rem;font-family:var(--mono);text-transform:uppercase}
+    #login label{display:block;font-size:0.62rem;font-family:var(--mono);letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
+    #login input{width:100%;padding:0.8rem 1rem;background:var(--card);border:1px solid var(--border2);border-radius:var(--r);color:#fff;font-size:0.9rem;outline:none;margin-bottom:1rem;transition:border-color 0.2s}
+    #login input:focus{border-color:var(--cyan-deep)}
+    .btn-login{width:100%;padding:0.85rem;background:var(--orange);color:#fff;font-family:var(--font-h);font-weight:700;font-size:0.85rem;border:none;border-radius:var(--r);cursor:pointer;transition:background 0.2s}
+    .btn-login:hover{background:var(--orange-h)}
+    .login-err{color:var(--red);font-size:0.78rem;margin-top:0.75rem;display:none}
+    .login-err.show{display:block}
+    .login-warn{margin-top:1.25rem;font-size:0.7rem;color:var(--dim);line-height:1.5}
+
+    /* App layout */
+    #app{display:none;min-height:100vh}
+    #app.show{display:flex}
+    .sidebar{width:230px;min-height:100vh;background:var(--surface);border-right:1px solid var(--border2);display:flex;flex-direction:column;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto}
+    .sb-brand{padding:1.5rem 1.25rem 1rem;border-bottom:1px solid var(--border2)}
+    .sb-brand .name{font-family:var(--font-h);font-weight:800;font-size:1rem}
+    .sb-brand .name .b{color:var(--cyan)} .sb-brand .name .o{color:#fff}
+    .sb-brand .tag{font-size:0.62rem;color:var(--muted);font-family:var(--mono);letter-spacing:0.08em;margin-top:0.2rem}
+    .sb-nav{flex:1;padding:1rem 0.75rem;display:flex;flex-direction:column;gap:0.25rem}
+    .sb-item{display:flex;align-items:center;gap:0.7rem;padding:0.7rem 0.85rem;border-radius:var(--r);color:var(--muted);cursor:pointer;font-weight:500;font-size:0.88rem;transition:background 0.15s,color 0.15s}
+    .sb-item svg{width:18px;height:18px}
+    .sb-item:hover{background:var(--card);color:var(--text)}
+    .sb-item.on{background:rgba(167,230,232,0.1);color:var(--cyan)}
+    .sb-footer{padding:1rem 0.75rem;border-top:1px solid var(--border2)}
+    .logout-btn{display:flex;align-items:center;gap:0.5rem;width:100%;padding:0.65rem 0.85rem;background:none;border:1px solid var(--border2);border-radius:var(--r);color:var(--muted);cursor:pointer;font-size:0.82rem;transition:all 0.2s}
+    .logout-btn:hover{border-color:var(--border);color:#fff}
+    .logout-btn svg{width:14px;height:14px}
+
+    .main-area{flex:1;padding:2rem;max-width:100%;overflow-x:hidden}
+    .pg-hd{margin-bottom:1.75rem}
+    .pg-hd h1{font-size:1.5rem;font-weight:800}
+    .pg-hd p{color:var(--muted);font-size:0.85rem;margin-top:0.2rem}
+    .view{display:none}
+    .view.on{display:block}
+
+    .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:2rem}
+    .stat-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:1.25rem}
+    .stat-lbl{font-size:0.66rem;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+    .stat-val{font-family:var(--font-h);font-weight:800;font-size:2rem;margin-top:0.3rem}
+    .stat-val.cyan{color:var(--cyan)} .stat-val.green{color:var(--green)} .stat-val.orange{color:var(--orange)} .stat-val.yellow{color:var(--yellow)}
+
+    .toolbar{display:flex;gap:0.65rem;flex-wrap:wrap;align-items:center;margin-bottom:1.25rem}
+    .toolbar input,.toolbar select{padding:0.55rem 0.85rem;background:var(--card);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:0.82rem;outline:none}
+    .toolbar input{flex:1;min-width:180px}
+    .toolbar input:focus,.toolbar select:focus{border-color:var(--cyan-deep)}
+    .toolbar select option{background:var(--card)}
+
+    .btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1rem;border-radius:var(--r);font-family:var(--font);font-weight:600;font-size:0.8rem;cursor:pointer;border:1px solid transparent;transition:all 0.2s}
+    .btn svg{width:15px;height:15px}
+    .btn-orange{background:var(--orange);color:#fff;border:none}
+    .btn-orange:hover{background:var(--orange-h)}
+    .btn-border{background:transparent;border:1px solid var(--border2);color:var(--muted)}
+    .btn-border:hover{border-color:var(--border);color:#fff}
+    .btn-danger{background:rgba(239,68,68,0.12);color:#f87171;border:1px solid rgba(239,68,68,0.3)}
+    .btn-danger:hover{background:rgba(239,68,68,0.2)}
+
+    .tbl-wrap{background:var(--card);border:1px solid var(--border2);border-radius:12px;overflow:hidden}
+    table{width:100%;border-collapse:collapse}
+    thead th{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0.85rem 1rem;border-bottom:1px solid var(--border2);background:var(--surface)}
+    tbody td{padding:0.85rem 1rem;border-bottom:1px solid var(--border2);font-size:0.84rem;vertical-align:middle}
+    tbody tr:last-child td{border-bottom:none}
+    tbody tr:hover{background:rgba(255,255,255,0.02)}
+    .thumb{width:46px;height:46px;border-radius:8px;object-fit:cover;border:1px solid var(--border2)}
+    .thumb-ph{width:46px;height:46px;border-radius:8px;background:var(--card2);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:800;color:var(--cyan);font-size:0.8rem}
+    .badge{display:inline-block;padding:0.2rem 0.6rem;border-radius:100px;font-size:0.64rem;font-family:var(--mono);letter-spacing:0.04em;text-transform:uppercase}
+    .badge-green{background:rgba(0,217,126,0.12);color:var(--green)}
+    .badge-yellow{background:rgba(245,158,11,0.12);color:var(--yellow)}
+    .badge-cyan{background:rgba(167,230,232,0.12);color:var(--cyan)}
+    .badge-dim{background:rgba(255,255,255,0.05);color:var(--muted)}
+    .act-row{display:flex;gap:0.35rem;flex-wrap:wrap}
+    .icon-btn{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:var(--card2);border:1px solid var(--border2);border-radius:7px;color:var(--muted);cursor:pointer;transition:all 0.2s}
+    .icon-btn:hover{border-color:var(--border);color:#fff}
+    .icon-btn.del:hover{color:#f87171;border-color:rgba(239,68,68,0.4)}
+    .icon-btn svg{width:14px;height:14px}
+    .empty-row td{text-align:center;padding:2.5rem;color:var(--muted)}
+
+    /* Form panel */
+    .panel{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:1000;padding:1.5rem;overflow-y:auto;align-items:flex-start;justify-content:center}
+    .panel.open{display:flex}
+    .form-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;width:100%;max-width:620px;margin:auto}
+    .form-card h2{font-size:1.2rem;font-weight:800;margin-bottom:0.25rem}
+    .fsub{font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem}
+    .fg{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .f-item{display:flex;flex-direction:column}
+    .f-item.f-full{grid-column:1/-1}
+    .f-item label{font-size:0.62rem;font-family:var(--mono);letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
+    .f-item label em{color:var(--orange);font-style:normal}
+    .f-item input,.f-item select,.f-item textarea{padding:0.65rem 0.85rem;background:var(--card);border:1px solid var(--border2);border-radius:8px;color:#fff;font-size:0.85rem;outline:none;transition:border-color 0.2s}
+    .f-item input:focus,.f-item select:focus,.f-item textarea:focus{border-color:var(--cyan-deep)}
+    .f-item textarea{resize:vertical;min-height:90px}
+    .f-item select option{background:var(--card)}
+    .upload-zone{border:1.5px dashed var(--border2);border-radius:var(--r);padding:1.25rem;text-align:center;cursor:pointer;transition:all 0.2s}
+    .upload-zone:hover{border-color:var(--cyan-deep);background:rgba(167,230,232,0.03)}
+    .upload-zone p{color:var(--muted);font-size:0.78rem}
+    .upload-zone span{color:var(--cyan)}
+    #file-in,#photo-file-in{display:none}
+    .img-preview{margin-top:0.6rem;display:flex;align-items:center;gap:0.6rem}
+    .img-preview img{width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid var(--border2)}
+    .up-lbl{font-size:0.7rem;color:var(--muted);font-family:var(--mono)}
+    .form-acts{display:flex;gap:0.65rem;justify-content:flex-end;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--border2)}
+
+    /* Toast + delete */
+    #toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:0.8rem 1.25rem;font-size:0.84rem;z-index:9000;transform:translateY(5rem);opacity:0;transition:all 0.3s;pointer-events:none;max-width:320px}
+    #toast.show{transform:translateY(0);opacity:1}
+    #toast.ok{border-color:rgba(0,217,126,0.4)} #toast.err{border-color:rgba(239,68,68,0.4)}
+    #del-dialog{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);z-index:2000;align-items:center;justify-content:center;padding:1.5rem}
+    #del-dialog.open{display:flex}
+    .del-box{background:var(--surface);border:1px solid rgba(239,68,68,0.3);border-radius:14px;padding:2rem;max-width:380px;width:100%}
+    .del-box h3{font-size:1.05rem;font-weight:800;margin-bottom:0.5rem}
+    .del-box p{color:var(--muted);font-size:0.85rem;margin-bottom:1.5rem}
+    .del-acts{display:flex;gap:0.65rem;justify-content:flex-end}
+    .ld{display:flex;align-items:center;gap:0.6rem;color:var(--muted);font-size:0.8rem;padding:2rem;font-family:var(--mono);justify-content:center}
+    .spin{width:16px;height:16px;border:2px solid var(--border2);border-top-color:var(--cyan);border-radius:50%;animation:sp 0.6s linear infinite}
+    @keyframes sp{to{transform:rotate(360deg)}}
+    .stub-note{background:var(--card);border:1px dashed var(--border2);border-radius:12px;padding:2.5rem;text-align:center;color:var(--muted)}
+    .stub-note h3{color:var(--cyan);font-size:1.05rem;margin-bottom:0.5rem}
+
+    @media(max-width:768px){
+      .sidebar{display:none}
+      .main-area{padding:1.25rem}
+      .fg{grid-template-columns:1fr}
+      table thead{display:none}
+      table,tbody,tr,td{display:block}
+      tbody tr{background:var(--card);border-radius:var(--r);margin-bottom:0.65rem;padding:0.75rem;border:1px solid var(--border2)}
+      tbody td{padding:0.3rem 0;border:none}
+      tbody td::before{content:attr(data-l);font-size:0.58rem;font-family:var(--mono);color:var(--dim);text-transform:uppercase;display:block;margin-bottom:0.15rem}
+      .tbl-wrap{background:transparent;border:none}
     }
   </style>
 </head>
 <body>
 
-  <!-- ── LOGIN SCREEN ── -->
-  <div id="login-screen">
-    <div class="login-logo">
-      <img src="brand_assets/logo.png" alt="Ai7" onerror="this.style.display='none'" />
-      <h1><span>Ai7</span> OPTIVARO</h1>
-      <p>Admin Portal</p>
-    </div>
-
-    <div class="login-card">
-      <h2>Welcome back.</h2>
-      <p>Sign in to access the Ai7 OPTIVARO control panel.</p>
-
-      <div class="form-group">
-        <label>Username</label>
-        <input type="text" id="username" placeholder="Enter username" autocomplete="off" />
-      </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="password" placeholder="Enter password" onkeydown="if(event.key==='Enter') login()" />
-      </div>
-
-      <button class="login-btn" onclick="login()">Sign In →</button>
-      <p class="login-error" id="login-error">Incorrect credentials. Try again.</p>
+  <!-- LOGIN -->
+  <div id="login">
+    <div class="login-box">
+      <div class="login-logo"><span class="b">Ai7</span><span class="o"> OPTIVARO</span></div>
+      <div class="login-sub">Admin CMS · Staff Only</div>
+      <label>Password</label>
+      <input type="password" id="pwd" placeholder="Enter admin password" />
+      <button class="btn-login" onclick="doLogin()">Sign In →</button>
+      <div class="login-err" id="login-err">Incorrect password. Try again.</div>
+      <p class="login-warn">This panel manages live website content (team, testimonials, photos) and reads incoming leads. Keep this password private.</p>
     </div>
   </div>
 
-  <!-- ── DASHBOARD ── -->
-  <div id="dashboard">
-    <div class="dash-header">
-      <div class="dash-logo">
-        <img src="brand_assets/logo.png" alt="Ai7" onerror="this.style.display='none'" />
-        <span><b>Ai7</b> OPTIVARO</span>
-      </div>
-      <div class="dash-meta">
-        <span class="dash-badge">Admin Panel</span>
-        <button class="logout-btn" onclick="logout()">Sign Out</button>
-      </div>
-    </div>
-
-    <div class="dash-welcome">
-      <h2>Good to see you, Boss.</h2>
-      <p>Everything running. Here's your control panel for Ai7 OPTIVARO.</p>
-    </div>
-
-    <!-- Tab Bar -->
-    <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('tools')">Dashboard</button>
-      <button class="tab-btn" onclick="switchTab('editor')">Edit Website</button>
-    </div>
-
-    <!-- ── TAB: Dashboard ── -->
-    <div id="tab-tools" class="tab-panel active">
-
-      <p class="section-title">Core Tools</p>
-      <div class="cards-grid">
-
-        <a href="https://analytics.google.com" target="_blank" class="dash-card">
-          <div class="card-icon blue">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#0057FF" stroke-width="1.75"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-          </div>
-          <div class="card-title">Google Analytics</div>
-          <div class="card-desc">See who visits the website, where they come from, and how long they stay.</div>
-          <div class="card-link">Open Dashboard →</div>
-        </a>
-
-        <a href="https://formspree.io/forms" target="_blank" class="dash-card">
-          <div class="card-icon cyan">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00D4FF" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="card-title">Lead Submissions</div>
-          <div class="card-desc">View every contact form submission — name, email, WhatsApp, goals.</div>
-          <div class="card-link">View Leads →</div>
-        </a>
-
-        <a href="https://search.google.com/search-console" target="_blank" class="dash-card">
-          <div class="card-icon green">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00c864" stroke-width="1.75"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          </div>
-          <div class="card-title">Google Search Console</div>
-          <div class="card-desc">See how the site ranks on Google — search terms, clicks, impressions.</div>
-          <div class="card-link">View Search Data →</div>
-        </a>
-
-        <a href="https://vercel.com/dashboard" target="_blank" class="dash-card">
-          <div class="card-icon orange">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#ff9600" stroke-width="1.75"><path d="M12 2L2 19.8h20L12 2z"/></svg>
-          </div>
-          <div class="card-title">Vercel Deployments</div>
-          <div class="card-desc">Monitor the live website — deployments, uptime, and performance.</div>
-          <div class="card-link">Open Vercel →</div>
-        </a>
-
-        <a href="https://improvmx.com" target="_blank" class="dash-card">
-          <div class="card-icon purple">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#7850ff" stroke-width="1.75"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="card-title">Email Forwarding</div>
-          <div class="card-desc">Manage company email addresses — info@ai7optivaro.com and team emails.</div>
-          <div class="card-link">Manage Emails →</div>
-        </a>
-
-        <a href="https://ai7optivaro.com" target="_blank" class="dash-card">
-          <div class="card-icon cyan">
-            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="#00D4FF" stroke-width="1.75"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          </div>
-          <div class="card-title">Live Website</div>
-          <div class="card-desc">View the public-facing Ai7 OPTIVARO website as clients see it.</div>
-          <div class="card-link">Visit Site →</div>
-        </a>
-
-      </div>
-
-      <div class="dash-divider"></div>
-
-      <p class="section-title">Business Info</p>
-      <div class="info-grid">
-        <div class="info-card">
-          <div class="label">Website</div>
-          <div class="value"><a href="https://ai7optivaro.com" target="_blank">ai7optivaro.com</a></div>
+  <!-- APP -->
+  <div id="app">
+    <aside class="sidebar">
+      <div class="sb-brand"><div class="name"><span class="b">Ai7</span><span class="o"> OPTIVARO</span></div><div class="tag">CMS · v1.0</div></div>
+      <nav class="sb-nav">
+        <div class="sb-item on" id="sb-dashboard" onclick="nav('dashboard')">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Dashboard
         </div>
-        <div class="info-card">
-          <div class="label">Business Email</div>
-          <div class="value"><a href="mailto:info@ai7optivaro.com">info@ai7optivaro.com</a></div>
+        <div class="sb-item" id="sb-team" onclick="nav('team')">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Team
         </div>
-        <div class="info-card">
-          <div class="label">WhatsApp</div>
-          <div class="value"><a href="https://wa.me/250783282759" target="_blank">+250 783 282 759</a></div>
+        <div class="sb-item" id="sb-testimonials" onclick="nav('testimonials')">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M11.05 3.93 9.53 7.6 5.57 7.94a1 1 0 0 0-.57 1.75l3 2.6-.9 3.88a1 1 0 0 0 1.49 1.08L12 15.4l3.41 1.85a1 1 0 0 0 1.49-1.08l-.9-3.88 3-2.6a1 1 0 0 0-.57-1.75l-3.96-.34-1.52-3.67a1 1 0 0 0-1.9 0z"/></svg>
+          Testimonials
         </div>
-        <div class="info-card">
-          <div class="label">Instagram</div>
-          <div class="value"><a href="https://www.instagram.com/ai7group25/" target="_blank">@ai7group25</a></div>
+        <div class="sb-item" id="sb-photos" onclick="nav('photos')">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          Photos
         </div>
-        <div class="info-card">
-          <div class="label">Book a Call</div>
-          <div class="value"><a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank">Calendar Link</a></div>
+        <div class="sb-item" id="sb-inquiries" onclick="nav('inquiries')">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Leads
         </div>
-        <div class="info-card">
-          <div class="label">Location</div>
-          <div class="value">Kigali, Kibagabaga, Rwanda</div>
+        <div class="sb-item" id="sb-blog" onclick="nav('blog')">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Blog
         </div>
-      </div>
-
-    </div><!-- /tab-tools -->
-
-    <!-- ── TAB: Edit Website ── -->
-    <div id="tab-editor" class="tab-panel">
-
-      <!-- GitHub Token Setup -->
-      <div class="editor-card full-width" style="margin-bottom: 1.5rem;">
-        <h3>GitHub Connection</h3>
-        <p class="sub">Connect your GitHub account once. This lets you save changes directly to the live website.</p>
-
-        <div id="token-setup-block" class="token-setup">
-          <h4>
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#0057FF" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-            One-time setup — takes 2 minutes
-          </h4>
-          <ol>
-            <li>Go to <strong>github.com → Settings → Developer settings → Personal access tokens → Tokens (classic)</strong></li>
-            <li>Click <strong>"Generate new token (classic)"</strong></li>
-            <li>Give it a name like <em>ai7-admin</em>, set expiration to <strong>No expiration</strong></li>
-            <li>Check the <strong>repo</strong> box (full repository access)</li>
-            <li>Click <strong>"Generate token"</strong> and copy it</li>
-            <li>Paste it below — it's saved on this device only</li>
-          </ol>
-          <div class="form-group" style="margin-bottom: 0.75rem;">
-            <label>GitHub Personal Access Token</label>
-            <input type="password" id="gh-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
-          </div>
-          <button class="btn-primary" onclick="saveToken()">Connect GitHub →</button>
-        </div>
-
-        <div id="token-connected-block" style="display:none;">
-          <div class="token-setup" style="background: rgba(0,200,100,0.05); border-color: rgba(0,200,100,0.2);">
-            <div class="connected">
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#00c864" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              GitHub connected — changes go live in ~30 seconds after saving
-              <button class="disconnect-btn" onclick="disconnectToken()">Disconnect</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Content Fields -->
-      <div class="editor-grid">
-
-        <!-- Hero Text -->
-        <div class="editor-card">
-          <h3>Hero Section</h3>
-          <p class="sub">The main headline and subheadline visitors see first.</p>
-
-          <div class="form-group">
-            <label>Headline — Line 1</label>
-            <input type="text" id="edit-h1-line1" placeholder="Your Business." />
-          </div>
-          <div class="form-group">
-            <label>Headline — Line 2 (gradient text)</label>
-            <input type="text" id="edit-h1-line2" placeholder="Running Itself." />
-          </div>
-          <div class="form-group">
-            <label>Subheadline</label>
-            <textarea id="edit-sub" placeholder="We build the AI automation systems..."></textarea>
-          </div>
-        </div>
-
-        <!-- Contact & Links -->
-        <div class="editor-card">
-          <h3>Contact & Links</h3>
-          <p class="sub">Phone, calendar, Instagram — updated everywhere on the site at once.</p>
-
-          <div class="form-group">
-            <label>WhatsApp Number</label>
-            <input type="text" id="edit-whatsapp" placeholder="250783282759" />
-            <div class="hint">Digits only, no spaces or +. Example: 250783282759</div>
-          </div>
-          <div class="form-group">
-            <label>Calendar Booking Link</label>
-            <input type="text" id="edit-calendar" placeholder="https://calendar.app.google/..." />
-          </div>
-          <div class="form-group">
-            <label>Instagram Handle</label>
-            <input type="text" id="edit-instagram" placeholder="ai7group25" />
-            <div class="hint">Without the @ symbol</div>
-          </div>
-        </div>
-
-      </div><!-- /editor-grid -->
-
-      <div class="btn-row">
-        <button class="btn-secondary" onclick="loadSiteContent()">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.08"/></svg>
-          Load Current Values
-        </button>
-        <button class="btn-primary" id="save-btn" onclick="saveSiteContent()">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Save & Publish
+      </nav>
+      <div class="sb-footer">
+        <button class="logout-btn" onclick="doLogout()">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1"/></svg>
+          Sign out
         </button>
       </div>
+    </aside>
 
-      <div id="editor-status" class="editor-status"></div>
+    <main class="main-area">
+      <!-- DASHBOARD -->
+      <div class="view on" id="view-dashboard">
+        <div class="pg-hd"><h1>Dashboard</h1><p>Overview of your live site content and incoming leads</p></div>
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-lbl">Team Members</div><div class="stat-val cyan" id="ds-team">—</div></div>
+          <div class="stat-card"><div class="stat-lbl">Live Testimonials</div><div class="stat-val green" id="ds-rev-live">—</div></div>
+          <div class="stat-card"><div class="stat-lbl">Pending Reviews</div><div class="stat-val yellow" id="ds-rev-pending">—</div></div>
+          <div class="stat-card"><div class="stat-lbl">Photos</div><div class="stat-val" id="ds-photos">—</div></div>
+          <div class="stat-card"><div class="stat-lbl">Total Leads</div><div class="stat-val orange" id="ds-leads">—</div></div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+          <span style="font-family:var(--mono);font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Recent Leads</span>
+        </div>
+        <div class="tbl-wrap">
+          <table><thead><tr><th>Date</th><th>Name</th><th>Business</th><th>Phone</th><th>Actions</th></tr></thead>
+          <tbody id="ds-leads-tbody"><tr class="empty-row"><td colspan="5"><div class="ld"><div class="spin"></div>Loading…</div></td></tr></tbody></table>
+        </div>
+      </div>
 
-    </div><!-- /tab-editor -->
+      <!-- TEAM -->
+      <div class="view" id="view-team">
+        <div class="pg-hd"><h1>Team</h1><p>People shown on the /team page and homepage teaser</p></div>
+        <div class="toolbar">
+          <input type="text" id="team-search" placeholder="Search team…" oninput="renderTeam()" />
+          <button class="btn btn-orange" onclick="openTeam()"><svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add Member</button>
+        </div>
+        <div class="tbl-wrap">
+          <table><thead><tr><th>Photo</th><th>Name</th><th>Role</th><th>Order</th><th>Visible</th><th>Actions</th></tr></thead>
+          <tbody id="team-tbody"><tr class="empty-row"><td colspan="6"><div class="ld"><div class="spin"></div>Loading…</div></td></tr></tbody></table>
+        </div>
+      </div>
 
-    <div class="dash-footer">
-      Ai7 OPTIVARO Admin Panel · Built by Eddie & the Ai7 team
+      <!-- TESTIMONIALS -->
+      <div class="view" id="view-testimonials">
+        <div class="pg-hd"><h1>Testimonials</h1><p>Approve before they go live. Mark one as Featured to pin it to the homepage.</p></div>
+        <div class="toolbar">
+          <input type="text" id="rev-search" placeholder="Search reviews…" oninput="renderReviews()" />
+          <select id="rev-filter" onchange="renderReviews()">
+            <option value="">All</option><option value="live">Live (approved)</option><option value="pending">Pending</option>
+          </select>
+          <button class="btn btn-orange" onclick="openReview()"><svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add Review</button>
+        </div>
+        <div class="tbl-wrap">
+          <table><thead><tr><th>Client</th><th>Quote</th><th>Result</th><th>Status</th><th>Featured</th><th>Actions</th></tr></thead>
+          <tbody id="rev-tbody"><tr class="empty-row"><td colspan="6"><div class="ld"><div class="spin"></div>Loading…</div></td></tr></tbody></table>
+        </div>
+      </div>
+
+      <!-- PHOTOS -->
+      <div class="view" id="view-photos">
+        <div class="pg-hd"><h1>Photos</h1><p>Image library — upload once, reuse anywhere (copy a photo's URL into a team member or review)</p></div>
+        <div class="toolbar">
+          <button class="btn btn-orange" onclick="document.getElementById('photo-file-in').click()"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1M12 3v13M8 7l4-4 4 4"/></svg>Upload Photo</button>
+          <input type="file" id="photo-file-in" accept="image/*" multiple onchange="uploadPhotos(event)" />
+          <span class="up-lbl" id="photo-up-status"></span>
+        </div>
+        <div class="tbl-wrap">
+          <table><thead><tr><th>Image</th><th>Label</th><th>URL</th><th>Actions</th></tr></thead>
+          <tbody id="photo-tbody"><tr class="empty-row"><td colspan="4"><div class="ld"><div class="spin"></div>Loading…</div></td></tr></tbody></table>
+        </div>
+      </div>
+
+      <!-- LEADS -->
+      <div class="view" id="view-inquiries">
+        <div class="pg-hd"><h1>Leads</h1><p>Everyone who submitted the website form (newest first)</p></div>
+        <div class="tbl-wrap">
+          <table><thead><tr><th>Date</th><th>Name</th><th>Business</th><th>Phone</th><th>Email</th><th>Message</th><th>Reply</th></tr></thead>
+          <tbody id="inq-tbody"><tr class="empty-row"><td colspan="7"><div class="ld"><div class="spin"></div>Loading…</div></td></tr></tbody></table>
+        </div>
+      </div>
+
+      <!-- BLOG (stub) -->
+      <div class="view" id="view-blog">
+        <div class="pg-hd"><h1>Blog</h1><p>Coming in Phase 2</p></div>
+        <div class="stub-note">
+          <h3>Blog is ready to switch on later</h3>
+          <p>The database table and structure for blog posts already exist. When you're ready to start publishing articles, we'll wire this tab and a public /blog page to it — no re-architecting needed.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- TEAM FORM -->
+  <div class="panel" id="team-panel">
+    <div class="form-card">
+      <h2 id="team-form-title">Add Team Member</h2>
+      <div class="fsub">Shown publicly on the /team page once "Visible" is on.</div>
+      <input type="hidden" id="te-id"/>
+      <div class="fg">
+        <div class="f-item"><label>Full name <em>*</em></label><input id="te-name" placeholder="e.g. Eddie Nyambo"/></div>
+        <div class="f-item"><label>Role <em>*</em></label><input id="te-role" placeholder="e.g. AI Automation Engineer"/></div>
+        <div class="f-item f-full"><label>Short line / bio</label><input id="te-bio" placeholder="One sentence about what they do"/></div>
+        <div class="f-item"><label>With Ai7 since</label><input id="te-since" type="date"/></div>
+        <div class="f-item"><label>Sort order</label><input id="te-order" type="number" value="0"/></div>
+        <div class="f-item"><label>Visible on site?</label><select id="te-active"><option value="true">Yes — show</option><option value="false">No — hide</option></select></div>
+        <div class="f-item f-full">
+          <label>Photo</label>
+          <div class="upload-zone" onclick="document.getElementById('file-in').click()"><p>Click to upload a headshot · <span>JPEG, PNG, WebP</span></p></div>
+          <input type="file" id="file-in" accept="image/*" onchange="onTeamPhoto(event)"/>
+          <div class="img-preview" id="te-photo-preview" style="display:none"><img id="te-photo-img"/><span class="up-lbl" id="te-photo-status"></span></div>
+          <input type="hidden" id="te-photo-url"/>
+        </div>
+      </div>
+      <div class="form-acts">
+        <button class="btn btn-border" onclick="closeTeam()">Cancel</button>
+        <button class="btn btn-orange" id="save-team-btn" onclick="saveTeam()"><svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Save Member</button>
+      </div>
     </div>
   </div>
+
+  <!-- REVIEW FORM -->
+  <div class="panel" id="rev-panel">
+    <div class="form-card">
+      <h2 id="rev-form-title">Add Testimonial</h2>
+      <div class="fsub">Approved reviews appear on the site. The Featured one pins to the homepage proof slot.</div>
+      <input type="hidden" id="re-id"/>
+      <div class="fg">
+        <div class="f-item"><label>Client name <em>*</em></label><input id="re-name" placeholder="e.g. Jean de Dieu Habaguhirwa"/></div>
+        <div class="f-item"><label>Business</label><input id="re-biz" placeholder="e.g. StepIn Coaching"/></div>
+        <div class="f-item"><label>Role</label><input id="re-role" placeholder="e.g. Founder"/></div>
+        <div class="f-item"><label>Result metric</label><input id="re-metric" placeholder="e.g. 70%+ admin time cut"/></div>
+        <div class="f-item"><label>Industry</label><input id="re-industry" placeholder="e.g. Coaching & Education"/></div>
+        <div class="f-item"><label>Status</label><select id="re-approved"><option value="true">Approved — live</option><option value="false">Pending — hidden</option></select></div>
+        <div class="f-item"><label>Featured on homepage?</label><select id="re-featured"><option value="false">No</option><option value="true">Yes — pin to homepage</option></select></div>
+        <div class="f-item f-full"><label>Quote <em>*</em></label><textarea id="re-quote" placeholder="The client's words…"></textarea></div>
+      </div>
+      <div class="form-acts">
+        <button class="btn btn-border" onclick="closeReview()">Cancel</button>
+        <button class="btn btn-orange" id="save-rev-btn" onclick="saveReview()"><svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Save Review</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE -->
+  <div id="del-dialog">
+    <div class="del-box">
+      <h3>Confirm delete</h3>
+      <p id="del-msg">This cannot be undone.</p>
+      <div class="del-acts">
+        <button class="btn btn-border" onclick="closeDel()">Cancel</button>
+        <button class="btn btn-danger" id="del-ok">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast"></div>
 
   <script>
-    /* ── Auth ── */
-    const CREDENTIALS = { username: 'ai7admin', password: 'Optivaro2026!' };
+    /* ══ CONFIG ══ */
+    const SUPABASE_URL  = 'https://zjvroxaehidqjocyjqkp.supabase.co';
+    const SUPABASE_SVC  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqdnJveGFlaGlkcWpvY3lqcWtwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDU3MjE2MCwiZXhwIjoyMDk2MTQ4MTYwfQ.tziiXHKsyJNP7VJ8nCbzTyNs3a7awCmN2dpy26Xq9v8';
+    const BUCKET        = 'media';
+    const ADMIN_PWD     = 'Optivaro2026!';
 
-    function login() {
-      const u = document.getElementById('username').value.trim();
-      const p = document.getElementById('password').value.trim();
-      const err = document.getElementById('login-error');
-      if (u === CREDENTIALS.username && p === CREDENTIALS.password) {
-        sessionStorage.setItem('ai7_admin', 'true');
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'block';
-        err.style.display = 'none';
-        checkTokenStatus();
+    let db = null;
+    function initDB(){ if(SUPABASE_URL==='YOUR_SUPABASE_URL'||!window.supabase) return null; return window.supabase.createClient(SUPABASE_URL, SUPABASE_SVC); }
+
+    /* ══ AUTH ══ */
+    document.getElementById('pwd').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+    function doLogin(){
+      if(document.getElementById('pwd').value === ADMIN_PWD){
+        sessionStorage.setItem('ai7_admin','1');
+        document.getElementById('login').classList.add('hide');
+        document.getElementById('app').classList.add('show');
+        db = initDB(); loadDashboard();
       } else {
-        err.style.display = 'block';
-        document.getElementById('password').value = '';
+        document.getElementById('login-err').classList.add('show');
+        document.getElementById('pwd').value='';
       }
     }
-
-    function logout() {
-      sessionStorage.removeItem('ai7_admin');
-      document.getElementById('dashboard').style.display = 'none';
-      document.getElementById('login-screen').style.display = 'block';
-      document.getElementById('username').value = '';
-      document.getElementById('password').value = '';
+    function doLogout(){ sessionStorage.removeItem('ai7_admin'); location.reload(); }
+    if(sessionStorage.getItem('ai7_admin')==='1'){
+      document.getElementById('login').classList.add('hide');
+      document.getElementById('app').classList.add('show');
+      db = initDB();
     }
 
-    if (sessionStorage.getItem('ai7_admin') === 'true') {
-      document.getElementById('login-screen').style.display = 'none';
-      document.getElementById('dashboard').style.display = 'block';
-      checkTokenStatus();
+    /* ══ NAV ══ */
+    let curView='dashboard';
+    function nav(v){
+      ['dashboard','team','testimonials','photos','inquiries','blog'].forEach(n=>{
+        document.getElementById('view-'+n).classList.toggle('on', n===v);
+        document.getElementById('sb-'+n).classList.toggle('on', n===v);
+      });
+      curView=v;
+      if(v==='dashboard') loadDashboard();
+      if(v==='team') loadTeam();
+      if(v==='testimonials') loadReviews();
+      if(v==='photos') loadPhotos();
+      if(v==='inquiries') loadInquiries();
+    }
+    window.addEventListener('DOMContentLoaded',()=>{ if(sessionStorage.getItem('ai7_admin')==='1') loadDashboard(); });
+
+    /* ══ DATA STORES ══ */
+    let allTeam=[], allRev=[], allPhotos=[], allInq=[];
+
+    /* ══ DASHBOARD ══ */
+    async function loadDashboard(){
+      if(!db){ noDb(); return; }
+      const [t,r,p,i] = await Promise.all([
+        db.from('team_members').select('*').order('sort_order'),
+        db.from('testimonials').select('*').order('created_at',{ascending:false}),
+        db.from('site_photos').select('*').order('created_at',{ascending:false}),
+        db.from('inquiries').select('*').order('created_at',{ascending:false})
+      ]);
+      allTeam=t.data||[]; allRev=r.data||[]; allPhotos=p.data||[]; allInq=i.data||[];
+      document.getElementById('ds-team').textContent=allTeam.length;
+      document.getElementById('ds-rev-live').textContent=allRev.filter(x=>x.approved).length;
+      document.getElementById('ds-rev-pending').textContent=allRev.filter(x=>!x.approved).length;
+      document.getElementById('ds-photos').textContent=allPhotos.length;
+      document.getElementById('ds-leads').textContent=allInq.length;
+      const tb=document.getElementById('ds-leads-tbody');
+      const recent=allInq.slice(0,6);
+      tb.innerHTML = recent.length ? recent.map(i=>`<tr>
+        <td data-l="Date">${fmtDate(i.created_at)}</td>
+        <td data-l="Name" style="font-weight:600">${h(i.name)}</td>
+        <td data-l="Business">${h(i.business||'—')}</td>
+        <td data-l="Phone">${h(i.phone||'—')}</td>
+        <td data-l="Actions"><a class="icon-btn" href="https://wa.me/${(i.phone||'').replace(/\D/g,'')}" target="_blank" title="WhatsApp"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 2.1.55 4.1 1.52 5.83L.06 24l6.35-1.63A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></a></td>
+      </tr>`).join('') : `<tr class="empty-row"><td colspan="5">No leads yet.</td></tr>`;
+    }
+    function noDb(){
+      ['ds-team','ds-rev-live','ds-rev-pending','ds-photos','ds-leads'].forEach(id=>document.getElementById(id).textContent='–');
+      document.getElementById('ds-leads-tbody').innerHTML=`<tr class="empty-row"><td colspan="5">Connect Supabase (paste your URL + service key in admin.html) to manage live content.</td></tr>`;
     }
 
-    /* ── Tabs ── */
-    function switchTab(name) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.getElementById('tab-' + name).classList.add('active');
-      event.currentTarget.classList.add('active');
+    /* ══ TEAM ══ */
+    async function loadTeam(){ if(!db){toast('Connect Supabase first','err');return;} const {data}=await db.from('team_members').select('*').order('sort_order'); allTeam=data||[]; renderTeam(); }
+    function renderTeam(){
+      const q=(document.getElementById('team-search').value||'').toLowerCase();
+      const list=allTeam.filter(m=>!q||(m.name+' '+(m.role||'')).toLowerCase().includes(q));
+      const tb=document.getElementById('team-tbody');
+      tb.innerHTML = list.length ? list.map(m=>`<tr>
+        <td data-l="Photo">${m.photo_url?`<img class="thumb" src="${h(m.photo_url)}"/>`:`<div class="thumb-ph">${ini(m.name)}</div>`}</td>
+        <td data-l="Name" style="font-weight:600">${h(m.name)}</td>
+        <td data-l="Role" style="color:var(--cyan-deep)">${h(m.role||'')}</td>
+        <td data-l="Order">${m.sort_order??0}</td>
+        <td data-l="Visible"><span class="badge ${m.active?'badge-green':'badge-dim'}">${m.active?'Visible':'Hidden'}</span></td>
+        <td data-l="Actions"><div class="act-row">
+          <button class="icon-btn" onclick='openTeam(${esc(m)})' title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></button>
+          <button class="icon-btn del" onclick="askDel('team_members','${m.id}','${h(m.name)}')" title="Delete"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        </div></td>
+      </tr>`).join('') : `<tr class="empty-row"><td colspan="6">No team members yet.</td></tr>`;
     }
-
-    /* ── GitHub Token ── */
-    function checkTokenStatus() {
-      const token = localStorage.getItem('gh_token');
-      document.getElementById('token-setup-block').style.display = token ? 'none' : 'block';
-      document.getElementById('token-connected-block').style.display = token ? 'block' : 'none';
-    }
-
-    function saveToken() {
-      const t = document.getElementById('gh-token-input').value.trim();
-      if (!t) return;
-      localStorage.setItem('gh_token', t);
-      checkTokenStatus();
-      showStatus('GitHub connected! Click "Load Current Values" to pull the site content.', 'success');
-    }
-
-    function disconnectToken() {
-      localStorage.removeItem('gh_token');
-      document.getElementById('gh-token-input').value = '';
-      checkTokenStatus();
-      showStatus('Disconnected from GitHub.', 'error');
-    }
-
-    /* ── GitHub API ── */
-    const GITHUB = {
-      owner: 'eddienyambo000-crypto',
-      repo: 'ai7-optivaro-web',
-      file: 'index.html',
-      branch: 'master'
-    };
-
-    async function fetchFile(token) {
-      const res = await fetch(
-        `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${GITHUB.file}`,
-        { headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' } }
-      );
-      if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
-      return res.json();
-    }
-
-    async function loadSiteContent() {
-      const token = localStorage.getItem('gh_token');
-      if (!token) { showStatus('Connect GitHub first (see setup above).', 'error'); return; }
-      showStatus('Loading current site content…', 'loading');
-      try {
-        const data = await fetchFile(token);
-        const html = decodeBase64(data.content);
-
-        // Hero H1 line 1 — text before <br/>
-        const h1Match = html.match(/class="gradient-text"[^>]*>([^<]+)<\/span>/);
-        const h1FullMatch = html.match(/([^<\n]{3,60})<br\/>.*?class="gradient-text"[^>]*>([^<]+)<\/span>/);
-        if (h1FullMatch) {
-          document.getElementById('edit-h1-line1').value = h1FullMatch[1].trim();
-          document.getElementById('edit-h1-line2').value = h1FullMatch[2].trim();
-        }
-
-        // Subheadline
-        const subMatch = html.match(/We build the AI automation systems[^<]*/);
-        if (subMatch) document.getElementById('edit-sub').value = subMatch[0].trim();
-
-        // Calendar link
-        const calMatch = html.match(/https:\/\/calendar\.app\.google\/[A-Za-z0-9]+/);
-        if (calMatch) document.getElementById('edit-calendar').value = calMatch[0];
-
-        // WhatsApp wa.me number
-        const waMatch = html.match(/wa\.me\/(\d+)/);
-        if (waMatch) document.getElementById('edit-whatsapp').value = waMatch[1];
-
-        // Instagram handle
-        const igMatch = html.match(/instagram\.com\/([^/"?\s]+)/);
-        if (igMatch) document.getElementById('edit-instagram').value = igMatch[1];
-
-        showStatus('Loaded. Edit the fields above and click Save & Publish.', 'success');
-      } catch (e) {
-        showStatus('Failed to load: ' + e.message + ' — check your token has repo access.', 'error');
+    let editTeamId=null, teamPhotoUrl='';
+    function openTeam(m){
+      editTeamId=null; teamPhotoUrl='';
+      document.getElementById('team-form-title').textContent='Add Team Member';
+      ['te-name','te-role','te-bio','te-since','te-photo-url'].forEach(id=>document.getElementById(id).value='');
+      document.getElementById('te-order').value='0';
+      document.getElementById('te-active').value='true';
+      document.getElementById('te-photo-preview').style.display='none';
+      if(m){
+        editTeamId=m.id;
+        document.getElementById('team-form-title').textContent='Edit Team Member';
+        document.getElementById('te-name').value=m.name||'';
+        document.getElementById('te-role').value=m.role||'';
+        document.getElementById('te-bio').value=m.bio_line||'';
+        document.getElementById('te-since').value=m.since||'';
+        document.getElementById('te-order').value=m.sort_order??0;
+        document.getElementById('te-active').value=String(m.active);
+        if(m.photo_url){ teamPhotoUrl=m.photo_url; document.getElementById('te-photo-img').src=m.photo_url; document.getElementById('te-photo-preview').style.display='flex'; }
       }
+      openPanel('team-panel');
+    }
+    function closeTeam(){ closePanel('team-panel'); }
+    async function onTeamPhoto(e){
+      const f=e.target.files[0]; if(!f) return; e.target.value='';
+      document.getElementById('te-photo-preview').style.display='flex';
+      document.getElementById('te-photo-status').textContent='Uploading…';
+      const url=await uploadToBucket(f);
+      if(url){ teamPhotoUrl=url; document.getElementById('te-photo-img').src=url; document.getElementById('te-photo-status').textContent='Uploaded ✓'; }
+      else document.getElementById('te-photo-status').textContent='Upload failed';
+    }
+    async function saveTeam(){
+      const name=document.getElementById('te-name').value.trim();
+      const role=document.getElementById('te-role').value.trim();
+      if(!name||!role){ toast('Name and role are required','err'); return; }
+      const btn=document.getElementById('save-team-btn'); btn.disabled=true; btn.style.opacity='0.7';
+      const payload={ name, role, bio_line:document.getElementById('te-bio').value.trim()||null,
+        since:document.getElementById('te-since').value||null,
+        sort_order:parseInt(document.getElementById('te-order').value)||0,
+        active:document.getElementById('te-active').value==='true',
+        photo_url:teamPhotoUrl||null };
+      let err;
+      if(editTeamId){ ({error:err}=await db.from('team_members').update(payload).eq('id',editTeamId)); }
+      else { ({error:err}=await db.from('team_members').insert(payload)); }
+      btn.disabled=false; btn.style.opacity='1';
+      if(err){ toast('Save failed: '+err.message,'err'); return; }
+      closeTeam(); toast(editTeamId?'Member updated':'Member added','ok'); await loadTeam();
     }
 
-    async function saveSiteContent() {
-      const token = localStorage.getItem('gh_token');
-      if (!token) { showStatus('Connect GitHub first.', 'error'); return; }
-
-      const btn = document.getElementById('save-btn');
-      btn.disabled = true;
-      showStatus('Saving to GitHub…', 'loading');
-
-      try {
-        const data = await fetchFile(token);
-        let html = decodeBase64(data.content);
-        const sha = data.sha;
-
-        const newH1Line1   = document.getElementById('edit-h1-line1').value.trim();
-        const newH1Line2   = document.getElementById('edit-h1-line2').value.trim();
-        const newSub       = document.getElementById('edit-sub').value.trim();
-        const newWa        = document.getElementById('edit-whatsapp').value.trim().replace(/\D/g, '');
-        const newCal       = document.getElementById('edit-calendar').value.trim();
-        const newIg        = document.getElementById('edit-instagram').value.trim().replace(/^@/, '');
-
-        // Replace H1 — match "Line1<br/><span class="gradient-text"...>Line2</span>"
-        html = html.replace(
-          /([^<\n]{2,80})<br\/>(<span[^>]*class="gradient-text"[^>]*>)[^<]+(<\/span>)/,
-          `${newH1Line1}<br/>$2${newH1Line2}$3`
-        );
-
-        // Replace subheadline — find unique paragraph text
-        const oldSubMatch = html.match(/We build the AI automation systems[^<]*/);
-        if (oldSubMatch && newSub) {
-          html = html.split(oldSubMatch[0]).join(newSub);
-        }
-
-        // Replace all calendar links
-        if (newCal) {
-          html = html.replace(/https:\/\/calendar\.app\.google\/[A-Za-z0-9]+/g, newCal);
-        }
-
-        // Replace WhatsApp wa.me numbers
-        if (newWa) {
-          const oldWaMatch = html.match(/wa\.me\/(\d+)/);
-          if (oldWaMatch) {
-            const oldWa = oldWaMatch[1];
-            // Replace wa.me links
-            html = html.split(`wa.me/${oldWa}`).join(`wa.me/${newWa}`);
-            // Replace display phone (formatted: +XXX XXX XXX XXX)
-            const oldDisplay = formatPhone(oldWa);
-            const newDisplay = formatPhone(newWa);
-            html = html.split(oldDisplay).join(newDisplay);
-            // Also replace unformatted in href="tel:..." if present
-            html = html.split(oldWa).join(newWa);
-          }
-        }
-
-        // Replace Instagram handle
-        if (newIg) {
-          const oldIgMatch = html.match(/instagram\.com\/([^/"?\s]+)/);
-          if (oldIgMatch) {
-            const oldIg = oldIgMatch[1];
-            html = html.split(`instagram.com/${oldIg}`).join(`instagram.com/${newIg}/`);
-            html = html.split(`@${oldIg}`).join(`@${newIg}`);
-          }
-        }
-
-        // Commit to GitHub
-        const body = JSON.stringify({
-          message: 'update site content via admin panel',
-          content: encodeBase64(html),
-          sha: sha,
-          branch: GITHUB.branch
-        });
-
-        const putRes = await fetch(
-          `https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repo}/contents/${GITHUB.file}`,
-          {
-            method: 'PUT',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-              'Accept': 'application/vnd.github.v3+json'
-            },
-            body
-          }
-        );
-
-        if (putRes.ok) {
-          showStatus('Saved! Site is updating now — live in about 30 seconds. Refresh ai7optivaro.com to see changes.', 'success');
-        } else {
-          const errData = await putRes.json();
-          throw new Error(errData.message || putRes.status);
-        }
-      } catch (e) {
-        showStatus('Save failed: ' + e.message, 'error');
-      } finally {
-        btn.disabled = false;
+    /* ══ TESTIMONIALS ══ */
+    async function loadReviews(){ if(!db){toast('Connect Supabase first','err');return;} const {data}=await db.from('testimonials').select('*').order('created_at',{ascending:false}); allRev=data||[]; renderReviews(); }
+    function renderReviews(){
+      const q=(document.getElementById('rev-search').value||'').toLowerCase();
+      const f=document.getElementById('rev-filter').value;
+      let list=allRev.filter(r=>!q||(r.client_name+' '+(r.business||'')+' '+r.quote).toLowerCase().includes(q));
+      if(f==='live') list=list.filter(r=>r.approved); if(f==='pending') list=list.filter(r=>!r.approved);
+      const tb=document.getElementById('rev-tbody');
+      tb.innerHTML = list.length ? list.map(r=>`<tr>
+        <td data-l="Client" style="font-weight:600">${h(r.client_name)}<div style="font-size:0.72rem;color:var(--muted)">${h([r.role,r.business].filter(Boolean).join(' · '))}</div></td>
+        <td data-l="Quote" style="color:var(--muted);font-size:0.78rem;max-width:240px">${h((r.quote||'').slice(0,90))}${(r.quote||'').length>90?'…':''}</td>
+        <td data-l="Result">${r.result_metric?`<span class="badge badge-cyan">${h(r.result_metric)}</span>`:'—'}</td>
+        <td data-l="Status"><span class="badge ${r.approved?'badge-green':'badge-yellow'}">${r.approved?'Live':'Pending'}</span></td>
+        <td data-l="Featured">${r.featured?'<span class="badge badge-cyan">Homepage</span>':'—'}</td>
+        <td data-l="Actions"><div class="act-row">
+          <button class="btn btn-border" style="padding:0.35rem 0.6rem;font-size:0.72rem" onclick="toggleApprove('${r.id}',${r.approved})">${r.approved?'Unpublish':'Approve'}</button>
+          <button class="btn btn-border" style="padding:0.35rem 0.6rem;font-size:0.72rem" onclick="toggleFeatured('${r.id}',${r.featured})">${r.featured?'Unpin':'Feature'}</button>
+          <button class="icon-btn" onclick='openReview(${esc(r)})' title="Edit"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-5"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></button>
+          <button class="icon-btn del" onclick="askDel('testimonials','${r.id}','${h(r.client_name)}')" title="Delete"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+        </div></td>
+      </tr>`).join('') : `<tr class="empty-row"><td colspan="6">No testimonials yet.</td></tr>`;
+    }
+    async function toggleApprove(id,cur){ if(db){const{error}=await db.from('testimonials').update({approved:!cur}).eq('id',id);if(error){toast('Failed','err');return;}} const r=allRev.find(x=>x.id===id); if(r)r.approved=!cur; renderReviews(); toast(!cur?'Review is now live':'Review hidden','ok'); }
+    async function toggleFeatured(id,cur){
+      if(db){
+        if(!cur){ await db.from('testimonials').update({featured:false}).neq('id',id); }
+        const{error}=await db.from('testimonials').update({featured:!cur}).eq('id',id); if(error){toast('Failed','err');return;}
+        await loadReviews();
       }
+      toast(!cur?'Pinned to homepage':'Unpinned','ok');
+    }
+    let editRevId=null;
+    function openReview(r){
+      editRevId=null;
+      document.getElementById('rev-form-title').textContent='Add Testimonial';
+      ['re-name','re-biz','re-role','re-metric','re-industry','re-quote'].forEach(id=>document.getElementById(id).value='');
+      document.getElementById('re-approved').value='true'; document.getElementById('re-featured').value='false';
+      if(r){
+        editRevId=r.id; document.getElementById('rev-form-title').textContent='Edit Testimonial';
+        document.getElementById('re-name').value=r.client_name||''; document.getElementById('re-biz').value=r.business||'';
+        document.getElementById('re-role').value=r.role||''; document.getElementById('re-metric').value=r.result_metric||'';
+        document.getElementById('re-industry').value=r.industry||''; document.getElementById('re-quote').value=r.quote||'';
+        document.getElementById('re-approved').value=String(r.approved); document.getElementById('re-featured').value=String(r.featured);
+      }
+      openPanel('rev-panel');
+    }
+    function closeReview(){ closePanel('rev-panel'); }
+    async function saveReview(){
+      const client_name=document.getElementById('re-name').value.trim();
+      const quote=document.getElementById('re-quote').value.trim();
+      if(!client_name||!quote){ toast('Client name and quote are required','err'); return; }
+      const btn=document.getElementById('save-rev-btn'); btn.disabled=true; btn.style.opacity='0.7';
+      const featured=document.getElementById('re-featured').value==='true';
+      const payload={ client_name, business:document.getElementById('re-biz').value.trim()||null,
+        role:document.getElementById('re-role').value.trim()||null, result_metric:document.getElementById('re-metric').value.trim()||null,
+        industry:document.getElementById('re-industry').value.trim()||null, quote,
+        approved:document.getElementById('re-approved').value==='true', featured };
+      if(featured && db){ await db.from('testimonials').update({featured:false}).neq('id', editRevId||'00000000-0000-0000-0000-000000000000'); }
+      let err;
+      if(editRevId){ ({error:err}=await db.from('testimonials').update(payload).eq('id',editRevId)); }
+      else { ({error:err}=await db.from('testimonials').insert(payload)); }
+      btn.disabled=false; btn.style.opacity='1';
+      if(err){ toast('Save failed: '+err.message,'err'); return; }
+      closeReview(); toast(editRevId?'Review updated':'Review added','ok'); await loadReviews();
     }
 
-    /* ── Helpers ── */
-    function formatPhone(digits) {
-      const d = digits.replace(/\D/g, '');
-      if (d.length === 12) return `+${d.slice(0,3)} ${d.slice(3,6)} ${d.slice(6,9)} ${d.slice(9)}`;
-      if (d.length === 9) return `+250 ${d.slice(0,3)} ${d.slice(3,6)} ${d.slice(6)}`;
-      return '+' + d;
+    /* ══ PHOTOS ══ */
+    async function loadPhotos(){ if(!db){toast('Connect Supabase first','err');return;} const {data}=await db.from('site_photos').select('*').order('created_at',{ascending:false}); allPhotos=data||[]; renderPhotos(); }
+    function renderPhotos(){
+      const tb=document.getElementById('photo-tbody');
+      tb.innerHTML = allPhotos.length ? allPhotos.map(p=>`<tr>
+        <td data-l="Image"><img class="thumb" src="${h(p.image_url)}"/></td>
+        <td data-l="Label">${h(p.label||'—')}</td>
+        <td data-l="URL"><button class="btn btn-border" style="padding:0.3rem 0.6rem;font-size:0.72rem" onclick="copyUrl('${h(p.image_url)}')">Copy URL</button></td>
+        <td data-l="Actions"><button class="icon-btn del" onclick="askDel('site_photos','${p.id}','this photo')" title="Delete"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></td>
+      </tr>`).join('') : `<tr class="empty-row"><td colspan="4">No photos uploaded yet.</td></tr>`;
+    }
+    async function uploadPhotos(e){
+      const files=[...e.target.files]; e.target.value=''; if(!files.length) return;
+      if(!db){ toast('Connect Supabase first','err'); return; }
+      const status=document.getElementById('photo-up-status');
+      for(let i=0;i<files.length;i++){
+        status.textContent=`Uploading ${i+1}/${files.length}…`;
+        const url=await uploadToBucket(files[i]);
+        if(url) await db.from('site_photos').insert({ label:files[i].name, image_url:url });
+      }
+      status.textContent=''; toast('Photos uploaded','ok'); await loadPhotos();
+    }
+    function copyUrl(u){ navigator.clipboard.writeText(u).then(()=>toast('URL copied','ok')); }
+
+    /* ══ LEADS ══ */
+    async function loadInquiries(){ if(!db){toast('Connect Supabase first','err');return;} const {data}=await db.from('inquiries').select('*').order('created_at',{ascending:false}); allInq=data||[]; renderInq(); }
+    function renderInq(){
+      const tb=document.getElementById('inq-tbody');
+      tb.innerHTML = allInq.length ? allInq.map(i=>`<tr>
+        <td data-l="Date" style="font-size:0.78rem;color:var(--muted)">${fmtDate(i.created_at)}</td>
+        <td data-l="Name" style="font-weight:600">${h(i.name)}</td>
+        <td data-l="Business">${h(i.business||'—')}</td>
+        <td data-l="Phone">${h(i.phone||'—')}</td>
+        <td data-l="Email" style="font-size:0.78rem">${h(i.email||'—')}</td>
+        <td data-l="Message" style="color:var(--muted);font-size:0.78rem;max-width:220px">${h((i.message||'').slice(0,90))}${(i.message||'').length>90?'…':''}</td>
+        <td data-l="Reply"><a class="btn btn-border" style="padding:0.35rem 0.6rem;font-size:0.72rem" href="https://wa.me/${(i.phone||'').replace(/\D/g,'')}?text=${encodeURIComponent('Hi '+i.name+', thanks for reaching out to Ai7 Optivaro!')}" target="_blank">WhatsApp</a></td>
+      </tr>`).join('') : `<tr class="empty-row"><td colspan="7">No leads yet.</td></tr>`;
     }
 
-    function decodeBase64(b64) {
-      return decodeURIComponent(
-        Array.from(atob(b64.replace(/\n/g, '')))
-          .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-          .join('')
-      );
+    /* ══ DELETE ══ */
+    let delTable='', delId='';
+    function askDel(table,id,label){ delTable=table; delId=id; document.getElementById('del-msg').textContent=`Delete "${label}"? This cannot be undone.`; document.getElementById('del-dialog').classList.add('open'); document.getElementById('del-ok').onclick=doDel; }
+    function closeDel(){ document.getElementById('del-dialog').classList.remove('open'); }
+    async function doDel(){
+      const t=delTable, id=delId; closeDel();
+      if(db){ const{error}=await db.from(t).delete().eq('id',id); if(error){ toast('Delete failed','err'); return; } }
+      toast('Deleted','ok');
+      if(t==='team_members') loadTeam(); else if(t==='testimonials') loadReviews(); else if(t==='site_photos') loadPhotos();
     }
 
-    function encodeBase64(str) {
-      return btoa(
-        encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p1) =>
-          String.fromCharCode(parseInt(p1, 16))
-        )
-      );
+    /* ══ STORAGE ══ */
+    async function uploadToBucket(file){
+      if(!db) return null;
+      const fname=`${Date.now()}-${file.name.replace(/\s+/g,'_')}`;
+      const {error}=await db.storage.from(BUCKET).upload(fname, file, { contentType:file.type, upsert:false });
+      if(error){ console.warn(error); toast('Upload failed: '+error.message,'err'); return null; }
+      const {data}=db.storage.from(BUCKET).getPublicUrl(fname);
+      return data?.publicUrl||null;
     }
 
-    function showStatus(msg, type) {
-      const el = document.getElementById('editor-status');
-      el.textContent = msg;
-      el.className = 'editor-status ' + type;
-      el.style.display = 'block';
-    }
+    /* ══ PANELS + UTILS ══ */
+    function openPanel(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+    function closePanel(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+    function h(s){ if(s==null) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function esc(o){ return JSON.stringify(o).replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
+    function ini(n){ return (n||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
+    function fmtDate(iso){ if(!iso) return '—'; return new Date(iso).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }
+    let toastT;
+    function toast(msg,type=''){ const t=document.getElementById('toast'); t.textContent=msg; t.className='show '+(type||''); clearTimeout(toastT); toastT=setTimeout(()=>t.className='',3200); }
   </script>
-
 </body>
 </html>

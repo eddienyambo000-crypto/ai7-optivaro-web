@@ -6,6 +6,7 @@
     { "source": "/process", "destination": "/process.html" },
     { "source": "/industries", "destination": "/industries.html" },
     { "source": "/contact", "destination": "/contact.html" },
-    { "source": "/testimonials", "destination": "/testimonials.html" }
+    { "source": "/testimonials", "destination": "/testimonials.html" },
+    { "source": "/team", "destination": "/team.html" }
   ]
 }
