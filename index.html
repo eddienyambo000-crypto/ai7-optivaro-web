@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <title>Ai7 OPTIVARO — AI Automation Agency in Kigali, Rwanda</title>
-  <meta name="description" content="Stop losing customers to slow replies and dropped follow-ups. Ai7 Optivaro builds AI systems that answer every lead in 60 seconds and capture bookings 24/7. Free audit — Kicukiro, Kigali." />
+  <meta name="description" content="Stop losing customers to slow replies and dropped follow-ups. Ai7 Optivaro builds AI systems that answer every lead in 60 seconds and capture bookings 24/7. Free audit — Kigali, Rwanda." />
   <meta name="keywords" content="AI automation agency Rwanda, business automation Kigali, lead response Rwanda, WhatsApp booking automation, AI for hotels clinics restaurants Rwanda" />
 
   <meta property="og:type" content="website" />
@@ -46,17 +46,39 @@
     "foundingDate": "2025",
     "email": "info@ai7optivaro.com",
     "telephone": "+250783282759",
-    "address": { "@type": "PostalAddress", "streetAddress": "50 KK 15 Rd, Sonatube, Kicukiro", "addressLocality": "Kigali", "addressCountry": "RW" },
+    "address": { "@type": "PostalAddress", "streetAddress": "KG 313 St", "addressLocality": "Kigali", "addressCountry": "RW" },
+    "location": [
+      { "@type": "Place", "name": "Kibagabaga Office", "address": { "@type": "PostalAddress", "streetAddress": "KG 313 St", "addressLocality": "Kigali", "addressCountry": "RW" } },
+      { "@type": "Place", "name": "Kicukiro Office", "address": { "@type": "PostalAddress", "streetAddress": "50 KK 15 Rd, Sonatube", "addressLocality": "Kigali", "addressCountry": "RW" } }
+    ],
     "geo": { "@type": "GeoCoordinates", "latitude": -1.9441, "longitude": 30.0619 },
-    "areaServed": ["Rwanda", "Africa"],
+    "areaServed": ["Kigali", "Rwanda", "Africa"],
     "serviceType": ["AI Automation", "Lead Response Automation", "WhatsApp Booking Automation", "Business Process Automation"],
     "sameAs": ["https://www.instagram.com/ai7optivaro/", "https://www.linkedin.com/company/ai7-optivaro/"],
     "contactPoint": { "@type": "ContactPoint", "telephone": "+250783282759", "contactType": "customer service", "availableLanguage": ["English", "French", "Kinyarwanda"] }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Does this actually work for a business like mine?", "acceptedAnswer": { "@type": "Answer", "text": "If customers reach you by phone, WhatsApp, or walk-in — and some of them slip through — then yes. We start with a free diagnosis of your specific business. If automation isn't the right move for you right now, we'll tell you honestly." } },
+      { "@type": "Question", "name": "Will it disrupt how my business runs today?", "acceptedAnswer": { "@type": "Answer", "text": "No. We build alongside the tools and processes you already use, test everything before it goes live, and roll out in stages. Your day-to-day keeps running while we work in the background." } },
+      { "@type": "Question", "name": "Will it actually make me money?", "acceptedAnswer": { "@type": "Answer", "text": "The goal is simple: stop losing the customers you're already attracting. When every lead gets answered and every booking gets captured, the revenue that used to leak out quietly starts staying in." } },
+      { "@type": "Question", "name": "How long does it take to build?", "acceptedAnswer": { "@type": "Answer", "text": "Most systems are live within a few weeks, not months. We start with the piece that stops the biggest leak first, so you see value early." } },
+      { "@type": "Question", "name": "Do I need to understand tech to work with you?", "acceptedAnswer": { "@type": "Answer", "text": "Not at all. You explain your business; we handle the technical side. We use proven, industry-standard tools and connect them to whatever you already use." } },
+      { "@type": "Question", "name": "Is my business data safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We use secure, trusted platforms and only connect what's needed to make your system work. We never sell or share your data, and we keep your customer information protected." } },
+      { "@type": "Question", "name": "What happens after it's built — am I on my own?", "acceptedAnswer": { "@type": "Answer", "text": "No. We stay accountable after launch. If something needs adjusting as your business grows, we're there to support and improve it." } },
+      { "@type": "Question", "name": "Why should I trust you?", "acceptedAnswer": { "@type": "Answer", "text": "We start by giving, not selling — a free audit with real value, whether you hire us or not. We have a live client system running today, and we'd rather tell you the truth than win a deal that isn't right for you." } }
+    ]
+  }
+  </script>
 
-  <link rel="icon" type="image/png" href="brand_assets/logo.png" />
-  <link rel="apple-touch-icon" href="brand_assets/logo.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="brand_assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="brand_assets/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="brand_assets/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#0B0F12" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -286,9 +308,15 @@
     .social-row svg{width:16px;height:16px}
 
     /* Floats */
-    #wa-float{position:fixed;bottom:24px;right:24px;z-index:780;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);transition:transform .2s}
-    #wa-float:hover{transform:scale(1.08)}
-    #wa-float svg{width:28px;height:28px;fill:#fff}
+    #wa-float{position:fixed;bottom:24px;right:24px;z-index:780;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);opacity:0;transform:translateY(16px) scale(.7);transition:opacity .45s var(--ease),transform .45s var(--ease),box-shadow .2s}
+    #wa-float.show{opacity:1;transform:translateY(0) scale(1)}
+    #wa-float:hover{transform:translateY(0) scale(1.08);box-shadow:0 10px 30px rgba(37,211,102,.55)}
+    #wa-float svg{width:29px;height:29px;fill:#fff}
+    #wa-float::after{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid #25D366;opacity:0;animation:waPing 2.6s ease-out infinite 2s}
+    @keyframes waPing{0%{opacity:.6;transform:scale(1)}80%,100%{opacity:0;transform:scale(1.5)}}
+    .wa-label{position:fixed;bottom:38px;right:92px;z-index:780;background:#fff;color:#0b1f17;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.82rem;padding:9px 14px;border-radius:11px;box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;transform:translateX(10px);transition:opacity .4s var(--ease),transform .4s var(--ease);pointer-events:none;white-space:nowrap}
+    .wa-label::after{content:'';position:absolute;right:-6px;top:50%;transform:translateY(-50%);border-left:7px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent}
+    .wa-label.show{opacity:1;transform:translateX(0)}
     /* Sticky mobile CTA */
     #mcta{position:fixed;left:0;right:0;bottom:0;z-index:790;display:none;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(11,15,18,.94);backdrop-filter:blur(12px);border-top:1px solid var(--border-soft)}
     #mcta a{width:100%}
@@ -332,6 +360,7 @@
       .form-row{grid-template-columns:1fr}
       #mcta{display:block}
       #wa-float{bottom:84px}
+      .wa-label{display:none}
       body{padding-bottom:76px}
       .display{font-size:clamp(1.8rem,7vw,2.4rem)}
     }
@@ -439,6 +468,63 @@
     </div>
   </section>
 
+  <!-- 2b. LOST-REVENUE CALCULATOR -->
+  <style>
+    #calc .calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    .calc-inputs{display:flex;flex-direction:column;gap:28px}
+    .calc-field label{display:flex;justify-content:space-between;align-items:baseline;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.95rem;color:#fff;margin-bottom:12px}
+    .calc-field label .v{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:1rem;color:var(--cyan)}
+    .calc-range{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:var(--navy-3);outline:none;cursor:pointer}
+    .calc-range::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--cyan);cursor:pointer;border:4px solid var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.5),0 0 0 1px var(--cyan-deep);transition:transform .15s var(--ease)}
+    .calc-range::-webkit-slider-thumb:active{transform:scale(1.15)}
+    .calc-range::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--cyan);cursor:pointer;border:4px solid var(--navy);box-shadow:0 2px 10px rgba(0,0,0,.5)}
+    .calc-result{background:linear-gradient(160deg,var(--navy-2),var(--navy-3));border:1px solid var(--border);border-radius:22px;padding:40px;text-align:center;box-shadow:0 30px 70px rgba(0,0,0,.4);position:relative;overflow:hidden}
+    .calc-result::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--cyan))}
+    .calc-result .cap{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+    .calc-result .big{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--orange);line-height:1.05;margin:12px 0 4px;letter-spacing:-.02em}
+    .calc-result .per{color:var(--text-soft);font-weight:600;font-family:'Montserrat',sans-serif;margin-bottom:8px}
+    .calc-result .est{font-size:.78rem;color:var(--text-muted)}
+    .calc-cta{margin-top:28px;padding-top:28px;border-top:1px solid var(--border-soft)}
+    .calc-cta p{font-family:'Montserrat',sans-serif;font-weight:700;color:#fff;font-size:1.05rem;margin-bottom:16px}
+    @media(max-width:900px){#calc .calc-grid{grid-template-columns:1fr;gap:32px}.calc-result{padding:32px 24px}}
+  </style>
+  <section id="calc" class="sec-navy" style="padding-top:24px">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Your hidden leak</span>
+        <h2 class="display">See what the leak is<br>actually costing you.</h2>
+        <p class="lead">Drag the sliders to match your business. This is a rough estimate — the free audit finds the exact number.</p>
+      </div>
+      <div class="calc-grid">
+        <div class="calc-inputs reveal">
+          <div class="calc-field">
+            <label>Customer enquiries per week <span class="v" id="cv-inq">80</span></label>
+            <input type="range" class="calc-range" id="c-inq" min="10" max="300" step="5" value="80" oninput="calcUpdate()" />
+          </div>
+          <div class="calc-field">
+            <label>How many go unanswered or answered late <span class="v" id="cv-late">12</span></label>
+            <input type="range" class="calc-range" id="c-late" min="0" max="50" step="1" value="12" oninput="calcUpdate()" />
+          </div>
+          <div class="calc-field">
+            <label>Average value of one customer (RWF) <span class="v" id="cv-val">50,000</span></label>
+            <input type="range" class="calc-range" id="c-val" min="10000" max="500000" step="5000" value="50000" oninput="calcUpdate()" />
+          </div>
+        </div>
+        <div class="calc-result reveal">
+          <div class="cap">You could be losing around</div>
+          <div class="big"><span id="calc-out">2,598,000</span> RWF</div>
+          <div class="per">every month</div>
+          <div class="est">Estimated from your inputs — not a quote. Real leaks are usually bigger than owners expect.</div>
+          <div class="calc-cta">
+            <p>Want to know exactly where it's leaking?</p>
+            <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary magnetic" data-booking style="width:100%">Get Your Free Audit
+              <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 3. WHAT CHANGES -->
   <section class="sec-cyan">
     <div class="wrap">
@@ -467,9 +553,9 @@
             <div class="proof-author"><div class="proof-avatar" id="proof-avatar">JH</div><div><div style="font-family:'Montserrat',sans-serif;font-weight:700;color:#fff" id="proof-name">Jean de Dieu Habaguhirwa</div><div style="font-size:.85rem;color:var(--text-muted)" id="proof-biz">Founder · StepIn Knowledge Business Coaching</div></div></div>
           </div>
           <div class="proof-metrics" id="stats">
-            <div class="metric"><div class="n" data-count="60" data-suffix="s">0s</div><div class="l">Average lead response time</div></div>
-            <div class="metric"><div class="n" data-count="24" data-suffix="/7">0</div><div class="l">Working while he sleeps</div></div>
-            <div class="metric"><div class="n" data-count="70" data-suffix="%+">0%+</div><div class="l">Admin time cut</div></div>
+            <div class="metric"><div class="n" data-count="60" data-suffix="s">60s</div><div class="l">Average lead response time</div></div>
+            <div class="metric"><div class="n" data-count="24" data-suffix="/7">24/7</div><div class="l">Working while he sleeps</div></div>
+            <div class="metric"><div class="n" data-count="70" data-suffix="%+">70%+</div><div class="l">Admin time cut</div></div>
           </div>
         </div>
       </div>
@@ -559,7 +645,7 @@
       <div style="margin-top:32px" class="reveal"><a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary magnetic" style="font-size:1.1rem;padding:1.1rem 2.5rem">Get Your Free Audit<svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
       <div class="cta-form reveal">
         <p style="font-family:'Montserrat',sans-serif;font-weight:700;color:#fff;margin-bottom:6px">Prefer we reach out? Drop your details.</p>
-        <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:24px">We reply within minutes — you'll see our speed-to-lead in action.</p>
+        <p style="font-size:.88rem;color:var(--text-muted);margin-bottom:24px">We'll get back to you fast — usually the same day.</p>
         <form id="lead-form" onsubmit="return submitLead(event)">
           <div class="form-row"><div class="field"><label>Your name *</label><input name="name" required placeholder="Full name" /></div><div class="field"><label>Business *</label><input name="business" required placeholder="Business name" /></div></div>
           <div class="form-row"><div class="field"><label>WhatsApp *</label><input name="phone" required placeholder="+250 7XX XXX XXX" /></div><div class="field"><label>Email</label><input name="email" type="email" placeholder="you@email.com" /></div></div>
@@ -567,7 +653,7 @@
           <button type="submit" class="btn-primary" style="width:100%" id="lead-btn">Send & Get a Fast Reply<svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
           <p class="form-note">We'll never spam you. Your details are only used to reply to your request.</p>
         </form>
-        <div class="form-success" id="lead-success"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3>Got it — we're on it.</h3><p style="color:var(--text-muted)">Thanks! We've received your request and you'll hear from us within minutes.</p></div>
+        <div class="form-success" id="lead-success"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3>Got it — we're on it.</h3><p style="color:var(--text-muted)">Thanks! We've received your request and we'll get back to you fast.</p></div>
       </div>
       <div style="margin-top:32px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap" class="reveal">
         <a href="mailto:info@ai7optivaro.com" class="link-quiet"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>info@ai7optivaro.com</a>
@@ -583,24 +669,43 @@
         <div>
           <a href="/" class="nav-logo" style="margin-bottom:20px"><img src="brand_assets/logo.png" alt="Ai7 Optivaro" style="height:42px" /><span class="nav-lock"><span class="nav-name"><b>AI7</b> OPTIVARO</span><span class="nav-tagline">The Machine Behind Your Business</span></span></a>
           <p style="color:var(--text-muted);font-size:.9rem;max-width:300px;margin-bottom:16px">We build the AI systems that answer every lead, capture every booking, and make sure nothing falls through the cracks. Custom-built for Rwanda and beyond.</p>
-          <p style="color:var(--text-muted);font-size:.82rem;display:flex;align-items:center;gap:6px"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>50 KK 15 Rd, Sonatube, Kicukiro, Kigali</p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <p style="color:var(--text-muted);font-size:.82rem;display:flex;align-items:flex-start;gap:8px"><svg width="14" height="14" fill="none" stroke="var(--cyan-deep)" stroke-width="2" viewBox="0 0 24 24" style="margin-top:2px;flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><b style="color:#fff;font-weight:600">Kibagabaga Office</b><br>KG 313 St, Kigali</span></p>
+            <p style="color:var(--text-muted);font-size:.82rem;display:flex;align-items:flex-start;gap:8px"><svg width="14" height="14" fill="none" stroke="var(--cyan-deep)" stroke-width="2" viewBox="0 0 24 24" style="margin-top:2px;flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span><b style="color:#fff;font-weight:600">Kicukiro Office</b><br>50 KK 15 Rd, Sonatube, Kigali</span></p>
+          </div>
         </div>
         <div><p class="footer-label">NAVIGATION</p><div class="footer-col-links"><a href="/services">Services</a><a href="/process">How We Work</a><a href="/industries">Industries</a><a href="/team">Team</a><a href="/testimonials">Testimonials</a><a href="#faq">FAQ</a></div></div>
         <div><p class="footer-label">GET IN TOUCH</p><div class="footer-col-links"><a href="mailto:info@ai7optivaro.com">info@ai7optivaro.com</a><a href="https://wa.me/250783282759" target="_blank">+250 783 282 759</a><a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" style="color:var(--orange);font-weight:600">Get Your Free Audit →</a></div>
           <div class="social-row"><a href="https://www.instagram.com/ai7optivaro/" target="_blank" aria-label="Instagram"><svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a><a href="https://www.linkedin.com/company/ai7-optivaro/" target="_blank" aria-label="LinkedIn"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a><a href="https://wa.me/250783282759" target="_blank" aria-label="WhatsApp"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.1 1.52 5.83L.06 24l6.35-1.63A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm0 21.94c-1.78 0-3.52-.48-5.07-1.38l-.36-.22-3.77.97 1-3.67-.24-.38A9.94 9.94 0 0 1 2.06 12C2.06 6.51 6.51 2.06 12 2.06S21.94 6.51 21.94 12 17.49 21.94 12 21.94z"/></svg></a></div>
         </div>
       </div>
-      <div class="footer-bottom"><div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap"><p>© 2026 AI7 Optivaro · Kigali, Rwanda</p><button onclick="document.getElementById('modal-privacy').style.display='flex'">Privacy Policy</button><button onclick="document.getElementById('modal-terms').style.display='flex'">Terms &amp; Conditions</button></div></div>
+      <p style="color:var(--text-muted);font-size:.78rem;border-top:1px solid var(--border-soft);padding-top:24px;margin-bottom:16px">AI7 Optivaro Ltd · RDB Registration No: [____] · TIN: [____] · Kigali, Rwanda</p>
+      <div class="footer-bottom" style="border-top:none;padding-top:0"><div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap"><p>© 2026 AI7 Optivaro · Kigali, Rwanda</p><button onclick="document.getElementById('modal-privacy').style.display='flex'">Privacy Policy</button><button onclick="document.getElementById('modal-terms').style.display='flex'">Terms &amp; Conditions</button></div></div>
     </div>
   </footer>
 
   <!-- Floats -->
-  <a id="wa-float" href="https://wa.me/250783282759?text=Hi%20Ai7%20OPTIVARO%2C%20I%27d%20like%20to%20discuss%20automation%20for%20my%20business." target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.07-.12-.27-.2-.57-.34z"/><path d="M12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.1 1.52 5.83L.06 24l6.35-1.63A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm0 21.94c-1.78 0-3.52-.48-5.07-1.38l-.36-.22-3.77.97 1-3.67-.24-.38A9.94 9.94 0 0 1 2.06 12C2.06 6.51 6.51 2.06 12 2.06S21.94 6.51 21.94 12 17.49 21.94 12 21.94z"/></svg></a>
+  <span class="wa-label" id="wa-label">Chat with us</span>
+  <a id="wa-float" href="https://wa.me/250783282759?text=Hi%20AI7%20Optivaro%2C%20I%27d%20like%20to%20learn%20more" target="_blank" aria-label="Chat with us on WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.07-.12-.27-.2-.57-.34z"/><path d="M12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.1 1.52 5.83L.06 24l6.35-1.63A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm0 21.94c-1.78 0-3.52-.48-5.07-1.38l-.36-.22-3.77.97 1-3.67-.24-.38A9.94 9.94 0 0 1 2.06 12C2.06 6.51 6.51 2.06 12 2.06S21.94 6.51 21.94 12 17.49 21.94 12 21.94z"/></svg></a>
   <div id="mcta"><a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary">Get Your Free Audit</a></div>
 
   <!-- Modals -->
-  <div class="modal" id="modal-privacy"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('modal-privacy').style.display='none'">&times;</button><h2>Privacy Policy</h2><p>Ai7 Optivaro respects your privacy. This policy explains how we handle the information you share with us.</p><h4>What we collect</h4><p>When you submit a form or book an audit, we collect the details you provide — your name, business, contact information, and your message. We use this only to respond to your enquiry and provide our services.</p><h4>How we use it</h4><p>Your information is used to contact you, understand your needs, and deliver our services. We never sell or rent your data to third parties.</p><h4>Data security</h4><p>We store information on secure, trusted platforms and limit access to what's necessary. You can request that we delete your information at any time by emailing info@ai7optivaro.com.</p></div></div>
+  <div class="modal" id="modal-privacy"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('modal-privacy').style.display='none'">&times;</button><h2>Privacy Policy</h2><p>Ai7 Optivaro respects your privacy. This policy explains how we handle the information you share with us.</p><h4>What we collect</h4><p>When you submit a form or book an audit, we collect the details you provide — your name, business, contact information, and your message. We use this only to respond to your enquiry and provide our services.</p><h4>How we use it</h4><p>Your information is used to contact you, understand your needs, and deliver our services. We never sell or rent your data to third parties.</p><h4>Data security</h4><p>We store information on secure, trusted platforms and limit access to what's necessary. You can request that we delete your information at any time by emailing info@ai7optivaro.com.</p><h4>Your rights under Rwandan law</h4><p>We handle personal data in line with Rwanda's Law N° 058/2021 on the Protection of Personal Data and Privacy. You have the right to access the personal data we hold about you, ask us to correct it, and request its deletion. We only collect what we need, use it for the purpose you shared it, and do not sell it. To exercise any of these rights, email info@ai7optivaro.com.</p></div></div>
   <div class="modal" id="modal-terms"><div class="modal-box"><button class="modal-close" onclick="document.getElementById('modal-terms').style.display='none'">&times;</button><h2>Terms &amp; Conditions</h2><p>By using this website and our services, you agree to the following terms.</p><h4>Our services</h4><p>Ai7 Optivaro provides AI automation and business systems consulting. Any proposal, scope, and pricing is agreed in writing before work begins. The free audit carries no obligation to purchase.</p><h4>Your responsibilities</h4><p>You agree to provide accurate information and the access needed for us to deliver agreed services.</p><h4>Limitation</h4><p>We work to deliver reliable systems, but cannot guarantee specific business outcomes, as results depend on factors outside our control. Our liability is limited to the fees paid for the relevant service.</p></div></div>
+
+  <!-- Booking modal -->
+  <div class="modal" id="booking-modal">
+    <div class="modal-box" style="max-width:780px;padding:0;overflow:hidden">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border-soft)">
+        <span style="font-family:'Montserrat',sans-serif;font-weight:700;color:#fff;font-size:1.05rem">Book your free audit</span>
+        <button class="modal-close" style="float:none;font-size:1.7rem" onclick="closeBooking()" aria-label="Close">&times;</button>
+      </div>
+      <div style="height:72vh;min-height:520px;background:var(--navy)">
+        <iframe id="booking-frame" title="Book a free audit with Ai7 Optivaro" style="width:100%;height:100%;border:0" loading="lazy"></iframe>
+      </div>
+      <div style="padding:12px 24px;border-top:1px solid var(--border-soft);text-align:center;font-size:.82rem;color:var(--text-muted)">Calendar not loading? <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" style="color:var(--cyan);font-weight:600">Open the booking page →</a></div>
+    </div>
+  </div>
 
   <script>
     /* ── Supabase ── */
@@ -616,6 +721,21 @@
     addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 50), { passive:true });
     function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
 
+    /* ── WhatsApp widget entrance + label ── */
+    const waFloat=document.getElementById('wa-float'), waLabel=document.getElementById('wa-label');
+    if(waFloat){
+      setTimeout(()=>waFloat.classList.add('show'),1500);
+      setTimeout(()=>waLabel&&waLabel.classList.add('show'),2300);
+      setTimeout(()=>waLabel&&waLabel.classList.remove('show'),6500);
+      waFloat.addEventListener('mouseenter',()=>waLabel&&waLabel.classList.add('show'));
+      waFloat.addEventListener('mouseleave',()=>waLabel&&waLabel.classList.remove('show'));
+    }
+
+    /* ── Booking modal (embed Google scheduler, plain link fallback) ── */
+    function openBooking(e){ if(e)e.preventDefault(); const m=document.getElementById('booking-modal'); const f=document.getElementById('booking-frame'); if(!f.src) f.src='https://calendar.app.google/EBdnYtCDFWenPeLf7'; m.style.display='flex'; document.body.style.overflow='hidden'; }
+    function closeBooking(){ document.getElementById('booking-modal').style.display='none'; document.body.style.overflow=''; }
+    document.querySelectorAll('[data-booking], a[href*="calendar.app.google"]').forEach(a=>a.addEventListener('click',openBooking));
+
     /* ── Reveal with stagger ── */
     const revObs = new IntersectionObserver((es)=>{es.forEach((e,i)=>{ if(e.isIntersecting){ const sibs=[...e.target.parentElement.children].filter(c=>c.classList.contains('reveal')); const idx=sibs.indexOf(e.target); e.target.style.transitionDelay=(idx>0?idx*70:0)+'ms'; e.target.classList.add('in'); revObs.unobserve(e.target);} });},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
     document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
@@ -627,6 +747,30 @@
     /* ── Stat count-up ── */
     const statObs = new IntersectionObserver((es)=>{es.forEach(e=>{ if(e.isIntersecting){ const el=e.target; const target=+el.dataset.count; const suf=el.dataset.suffix||''; if(reduceMotion){el.textContent=target+suf;statObs.unobserve(el);return;} let cur=0; const dur=1300, t0=performance.now(); const tick=(t)=>{const p=Math.min((t-t0)/dur,1); const val=Math.round((1-Math.pow(1-p,3))*target); el.textContent=val+suf; if(p<1)requestAnimationFrame(tick);}; requestAnimationFrame(tick); statObs.unobserve(el);} });},{threshold:.5});
     document.querySelectorAll('#stats .n').forEach(el=>statObs.observe(el));
+
+    /* ── Lost-revenue calculator ── */
+    const fmt = n => Math.round(n).toLocaleString('en-US');
+    function setFill(el){ const p=(el.value-el.min)/(el.max-el.min)*100; el.style.background=`linear-gradient(90deg,var(--cyan) ${p}%, var(--navy-3) ${p}%)`; }
+    let calcRAF, calcShown=2598000;
+    function animateCalc(to){
+      const out=document.getElementById('calc-out'); if(!out) return;
+      if(reduceMotion){ out.textContent=fmt(to); calcShown=to; return; }
+      cancelAnimationFrame(calcRAF); const from=calcShown, t0=performance.now(), dur=500;
+      const tick=(t)=>{ const p=Math.min((t-t0)/dur,1); const v=from+(to-from)*(1-Math.pow(1-p,3)); out.textContent=fmt(v); if(p<1)calcRAF=requestAnimationFrame(tick); else calcShown=to; };
+      calcRAF=requestAnimationFrame(tick);
+    }
+    function calcUpdate(){
+      const inq=document.getElementById('c-inq'), late=document.getElementById('c-late'), val=document.getElementById('c-val');
+      if(!inq) return;
+      // a late/unanswered enquiry can't exceed total enquiries
+      if(+late.value > +inq.value){ late.value = inq.value; }
+      [inq,late,val].forEach(setFill);
+      document.getElementById('cv-inq').textContent = inq.value;
+      document.getElementById('cv-late').textContent = late.value;
+      document.getElementById('cv-val').textContent = fmt(+val.value);
+      animateCalc(+late.value * +val.value * 4.33);
+    }
+    if(document.getElementById('c-inq')) calcUpdate();
 
     /* ── How-it-works line draw ── */
     const flow=document.getElementById('flow');
