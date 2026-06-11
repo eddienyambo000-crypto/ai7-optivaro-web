@@ -29,7 +29,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   color: #fff;
   letter-spacing: -0.02em;
   line-height: 1.12;
@@ -102,7 +102,7 @@ body::after {
   gap: 0.5rem;
   background: var(--primary);
   color: #fff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
   font-size: 0.9375rem;
   padding: 0.875rem 2rem;
@@ -134,7 +134,7 @@ body::after {
   gap: 0.5rem;
   background: transparent;
   color: var(--text-body);
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
   font-size: 0.9375rem;
   padding: 0.875rem 2rem;
@@ -200,7 +200,7 @@ nav.scrolled {
 }
 /* Logo lockup with tagline */
 .nav-lock { display: flex; flex-direction: column; line-height: 1.05; }
-.nav-name { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.18rem; letter-spacing: -0.01em; }
+.nav-name { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.18rem; letter-spacing: -0.01em; }
 .nav-name b { color: var(--cyan); font-weight: 800; }
 .nav-tagline { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan-deep, #7FCDD2); margin-top: 3px; opacity: 0.9; }
 /* Active nav state */
@@ -270,7 +270,7 @@ nav.scrolled {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 1.75rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   color: var(--text);
@@ -320,7 +320,7 @@ nav.scrolled {
 }
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--text);
