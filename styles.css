@@ -16,6 +16,12 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+a, button, input, textarea, select { touch-action: manipulation; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 8px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
 html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
