@@ -158,7 +158,7 @@
       if(!sb){ grid.innerHTML='<div class="lds">Blog is being set up.</div>'; return; }
       const {data}=await sb.from('blog_posts').select('*').eq('published',true).order('created_at',{ascending:false});
       if(!data||!data.length){ grid.innerHTML='<div class="lds">No articles yet — check back soon.</div>'; return; }
-      grid.innerHTML=data.map(p=>`<a class="post-card fade-up visible" href="/blog/${encodeURIComponent(p.slug)}">
+      grid.innerHTML=data.map(p=>`<a class="post-card fade-up visible" href="/blog?post=${encodeURIComponent(p.slug)}">
         <div class="cov">${p.cover_url?`<img src="${p.cover_url}" alt="${esc(p.title)}" loading="lazy"/>`:''}</div>
         <div class="body"><span class="dt">${fmtDate(p.created_at)}</span><h2>${esc(p.title)}</h2><p>${esc(p.excerpt||'')}</p><span class="more">Read article →</span></div>
       </a>`).join('');
