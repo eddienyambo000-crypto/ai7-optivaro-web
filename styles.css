@@ -209,6 +209,9 @@ nav.scrolled {
 .nav-name { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.18rem; letter-spacing: -0.01em; }
 .nav-name b { color: var(--cyan); font-weight: 800; }
 .nav-tagline { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan-deep, #7FCDD2); margin-top: 3px; opacity: 0.9; }
+/* Shared desktop nav links (consistent across all pages) */
+.desktop-nav a:not(.btn-primary) { color: var(--text-body); font-size: 0.92rem; font-weight: 500; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+.desktop-nav a:not(.btn-primary):hover { color: var(--cyan); }
 /* Active nav state */
 .desktop-nav a.active { color: var(--cyan); position: relative; }
 .desktop-nav a.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: var(--cyan); border-radius: 2px; }

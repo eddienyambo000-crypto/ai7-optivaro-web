@@ -39,12 +39,13 @@
             <span style="color:var(--cyan);">Ai7</span><span style="color:#fff;"> OPTIVARO</span><br><span style="font-family:'JetBrains Mono',monospace;font-weight:400;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#7FCDD2;display:inline-block;margin-top:3px;">The Machine Behind Your Business</span>
           </span>
         </a>
-        <div style="display:flex; align-items:center; gap:2.5rem;" class="desktop-nav">
-          <a href="/services" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Services</a>
-          <a href="/process" style="color:#fff; font-size:0.9rem; font-weight:500; text-decoration:none;">Process</a>
-          <a href="/industries" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Industries</a>
-          <a href="/testimonials" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">Testimonials</a>
-          <a href="/#faq" style="color:var(--text-muted); font-size:0.9rem; font-weight:500; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-muted)'">FAQ</a>
+        <div style="display:flex; align-items:center; gap:1.75rem;" class="desktop-nav">
+          <a href="/services">Services</a>
+          <a href="/process" class="active">How We Work</a>
+          <a href="/industries">Industries</a>
+          <a href="/team">Team</a>
+          <a href="/blog">Blog</a>
+          <a href="/contact">Contact</a>
           <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" style="padding:0.6rem 1.25rem; font-size:0.875rem;">Get Your Free Audit</a>
         </div>
         <button id="hamburger" aria-label="Open menu" style="display:none; background:transparent; border:none; cursor:pointer; color:#fff; padding:0.25rem;" onclick="toggleMobileMenu()">
@@ -57,10 +58,11 @@
     <div class="mobile-menu" id="mobileMenu">
       <button onclick="toggleMobileMenu()" style="position:absolute; top:1.5rem; right:2rem; background:transparent; border:none; color:#fff; cursor:pointer; font-size:1.5rem;">✕</button>
       <a href="/services" onclick="toggleMobileMenu()">Services</a>
-      <a href="/process" onclick="toggleMobileMenu()">Process</a>
+      <a href="/process" onclick="toggleMobileMenu()" class="active">How We Work</a>
       <a href="/industries" onclick="toggleMobileMenu()">Industries</a>
-      <a href="/testimonials" onclick="toggleMobileMenu()">Testimonials</a>
-      <a href="/#faq" onclick="toggleMobileMenu()">FAQ</a>
+      <a href="/team" onclick="toggleMobileMenu()">Team</a>
+      <a href="/blog" onclick="toggleMobileMenu()">Blog</a>
+      <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
       <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" onclick="toggleMobileMenu()">Get Your Free Audit</a>
     </div>
 

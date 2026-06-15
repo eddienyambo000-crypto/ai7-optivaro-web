@@ -7,6 +7,8 @@
     { "source": "/industries", "destination": "/industries.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/testimonials", "destination": "/testimonials.html" },
-    { "source": "/team", "destination": "/team.html" }
+    { "source": "/team", "destination": "/team.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/blog/:slug", "destination": "/blog.html" }
   ]
 }

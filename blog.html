@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HTT730P15N"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HTT730P15N');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — AI7 Optivaro | AI &amp; Automation Insights for Rwandan Businesses</title>
+  <meta name="description" content="Practical articles on AI, automation, and WhatsApp bots for businesses in Rwanda — from AI7 Optivaro, an AI company in Kigali." />
+  <link rel="canonical" href="https://ai7optivaro.com/blog" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AI7 Optivaro Blog — AI &amp; Automation in Rwanda" />
+  <meta property="og:description" content="Practical AI and automation insights for Rwandan businesses, from an AI company in Kigali." />
+  <meta property="og:image" content="https://ai7optivaro.com/brand_assets/logo.png" />
+  <meta property="og:url" content="https://ai7optivaro.com/blog" />
+  <link rel="icon" type="image/png" sizes="32x32" href="brand_assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="brand_assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0B0F12" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .blog-wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+    .blog-hero{padding:9rem 0 2.5rem;text-align:center}
+    .blog-hero h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;letter-spacing:-0.02em;color:#fff;margin:0.75rem 0}
+    .blog-hero p{color:var(--text-muted);max-width:60ch;margin:0 auto;font-size:1.05rem}
+    .post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:1.5rem 0 6rem}
+    .post-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.3,1),border-color .3s,box-shadow .3s;display:flex;flex-direction:column}
+    .post-card:hover{transform:translateY(-5px);border-color:rgba(167,230,232,0.28);box-shadow:0 18px 44px rgba(0,0,0,.4)}
+    .post-card .cov{aspect-ratio:16/9;background:linear-gradient(135deg,#11161B,#161D24);overflow:hidden}
+    .post-card .cov img{width:100%;height:100%;object-fit:cover}
+    .post-card .body{padding:1.5rem;display:flex;flex-direction:column;gap:.6rem;flex:1}
+    .post-card .dt{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan-deep)}
+    .post-card h2{font-size:1.12rem;font-weight:700;color:#fff;line-height:1.3}
+    .post-card p{color:var(--text-muted);font-size:.9rem;line-height:1.6;flex:1}
+    .post-card .more{color:var(--cyan);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.85rem}
+    /* single post */
+    .post-single{max-width:760px;margin:0 auto;padding:8.5rem 1.5rem 5rem}
+    .post-single .back{display:inline-flex;align-items:center;gap:.5rem;color:var(--text-muted);font-size:.85rem;margin-bottom:2rem;transition:color .2s}
+    .post-single .back:hover{color:var(--cyan)}
+    .post-single .dt{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan-deep)}
+    .post-single h1{font-size:clamp(1.9rem,4.5vw,2.8rem);font-weight:700;letter-spacing:-0.02em;color:#fff;line-height:1.18;margin:.75rem 0 1.5rem}
+    .post-single .cover{width:100%;border-radius:16px;margin-bottom:2rem;border:1px solid var(--border)}
+    .post-body{color:var(--text-body);font-size:1.05rem;line-height:1.8}
+    .post-body h2{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:#fff;margin:2.25rem 0 .85rem;letter-spacing:-0.01em}
+    .post-body h3{font-family:'Space Grotesk',sans-serif;font-size:1.18rem;color:#fff;margin:1.75rem 0 .6rem}
+    .post-body p{margin-bottom:1.15rem;max-width:68ch}
+    .post-body ul,.post-body ol{margin:0 0 1.15rem 1.25rem;display:flex;flex-direction:column;gap:.5rem}
+    .post-body li{padding-left:.25rem}
+    .post-body strong{color:#fff;font-weight:600}
+    .post-body a{color:var(--cyan);text-decoration:underline;text-underline-offset:3px}
+    .post-cta{margin-top:3rem;padding:2rem;background:var(--bg-secondary);border:1px solid var(--border);border-radius:18px;text-align:center}
+    .post-cta h3{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;color:#fff;margin-bottom:1rem}
+    .lds{text-align:center;padding:4rem 1rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.06em}
+    @media(max-width:900px){.post-grid{grid-template-columns:1fr;gap:1.25rem}}
+  </style>
+</head>
+<body>
+  <div class="page-content">
+    <!-- NAV -->
+    <nav id="navbar">
+      <div style="max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between;">
+        <a href="/" style="text-decoration:none; display:flex; align-items:center; gap:0.5rem;">
+          <img src="brand_assets/logo.png" alt="Ai7 Optivaro" style="height:42px; width:auto; display:block; filter:drop-shadow(0 0 12px rgba(167,230,232,0.45));" />
+          <span style="font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:1.25rem; letter-spacing:-0.02em; line-height:1;">
+            <span style="color:var(--cyan);">Ai7</span><span style="color:#fff;"> OPTIVARO</span><br><span style="font-family:'JetBrains Mono',monospace;font-weight:400;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:#7FCDD2;display:inline-block;margin-top:3px;">The Machine Behind Your Business</span>
+          </span>
+        </a>
+        <div style="display:flex; align-items:center; gap:1.75rem;" class="desktop-nav">
+          <a href="/services">Services</a>
+          <a href="/process">How We Work</a>
+          <a href="/industries">Industries</a>
+          <a href="/team">Team</a>
+          <a href="/blog" class="active">Blog</a>
+          <a href="/contact">Contact</a>
+          <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" style="padding:0.6rem 1.25rem; font-size:0.875rem;">Get Your Free Audit</a>
+        </div>
+        <button id="hamburger" aria-label="Open menu" style="display:none; background:transparent; border:none; cursor:pointer; color:#fff; padding:0.25rem;" onclick="toggleMobileMenu()">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <button onclick="toggleMobileMenu()" style="position:absolute; top:1.5rem; right:2rem; background:transparent; border:none; color:#fff; cursor:pointer; font-size:1.5rem;">✕</button>
+      <a href="/services" onclick="toggleMobileMenu()">Services</a>
+      <a href="/process" onclick="toggleMobileMenu()">How We Work</a>
+      <a href="/industries" onclick="toggleMobileMenu()">Industries</a>
+      <a href="/team" onclick="toggleMobileMenu()">Team</a>
+      <a href="/blog" onclick="toggleMobileMenu()" class="active">Blog</a>
+      <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+      <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary" onclick="toggleMobileMenu()">Get Your Free Audit</a>
+    </div>
+
+    <!-- LIST VIEW -->
+    <div id="list-view">
+      <div class="blog-wrap blog-hero fade-up">
+        <div class="section-label" style="margin:0 auto;">AI7 Optivaro Blog</div>
+        <h1>AI &amp; automation, explained for<br>Rwandan businesses.</h1>
+        <p>Practical, no-jargon articles on getting more customers, answering your WhatsApp automatically, and using AI to grow a business in Kigali.</p>
+      </div>
+      <div class="blog-wrap">
+        <div class="post-grid" id="post-grid"><div class="lds">Loading posts…</div></div>
+      </div>
+    </div>
+
+    <!-- SINGLE VIEW -->
+    <article id="single-view" class="post-single" style="display:none">
+      <a href="/blog" class="back"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All articles</a>
+      <div class="dt" id="s-date"></div>
+      <h1 id="s-title"></h1>
+      <img class="cover" id="s-cover" alt="" style="display:none" />
+      <div class="post-body" id="s-body"></div>
+      <div class="post-cta">
+        <h3>Want this kind of system for your business?</h3>
+        <a href="https://calendar.app.google/EBdnYtCDFWenPeLf7" target="_blank" class="btn-primary">Get Your Free Audit</a>
+      </div>
+    </article>
+
+    <!-- FOOTER -->
+    <footer style="border-top:1px solid var(--border); padding:3.5rem 2rem 2.5rem; margin-top:2rem;">
+      <div style="max-width:1100px; margin:0 auto; display:flex; flex-wrap:wrap; gap:2rem; justify-content:space-between; align-items:flex-start;">
+        <div style="max-width:340px">
+          <p style="color:var(--text-muted); font-size:.9rem; line-height:1.7;"><strong style="color:#fff;font-weight:600">AI7 Optivaro is an AI company in Kigali, Rwanda.</strong> We build AI automation, WhatsApp bots, and websites for local businesses.</p>
+          <a href="https://wa.me/250783282759" target="_blank" style="display:inline-flex;align-items:center;gap:.5rem;color:var(--cyan);font-size:.875rem;margin-top:1rem;">WhatsApp: +250 783 282 759</a>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:.6rem;">
+          <a href="/services" style="color:var(--text-muted);font-size:.875rem;">Services</a>
+          <a href="/industries" style="color:var(--text-muted);font-size:.875rem;">Industries</a>
+          <a href="/team" style="color:var(--text-muted);font-size:.875rem;">Team</a>
+          <a href="/contact" style="color:var(--text-muted);font-size:.875rem;">Contact</a>
+        </div>
+      </div>
+      <p style="max-width:1100px;margin:2rem auto 0;color:var(--text-muted);font-size:.78rem;border-top:1px solid var(--border);padding-top:1.5rem;">AI7 Optivaro Ltd · RDB Registration No: 260611043184510 · TIN: 155865478 · AI Company in Kigali, Rwanda · © 2026</p>
+    </footer>
+  </div>
+
+  <a href="https://wa.me/250783282759?text=Hi%20AI7%20Optivaro%2C%20I%27d%20like%20to%20learn%20more" target="_blank" id="wa-float" aria-label="Chat on WhatsApp" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:700;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.1 1.52 5.83L.06 24l6.35-1.63A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></a>
+
+  <script>
+    const SUPABASE_URL='https://zjvroxaehidqjocyjqkp.supabase.co';
+    const SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqdnJveGFlaGlkcWpvY3lqcWtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NzIxNjAsImV4cCI6MjA5NjE0ODE2MH0.Ggrh9Rh6p3JfegxlAJpyLL3HGxB421tDT1LdIU_EuI8';
+    let sb=null; try{ sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON);}catch(e){}
+    function toggleMobileMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+    const navbar=document.getElementById('navbar'); addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>50),{passive:true});
+    function checkNav(){const h=document.getElementById('hamburger'),d=document.querySelector('.desktop-nav'); if(innerWidth<860){h.style.display='block';d.style.display='none';}else{h.style.display='none';d.style.display='flex';document.getElementById('mobileMenu').classList.remove('open');}}
+    checkNav(); addEventListener('resize',checkNav);
+    const fmtDate=d=>{try{return new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}catch(e){return'';}};
+
+    function getSlug(){ const m=location.pathname.match(/^\/blog\/(.+?)\/?$/); if(m)return decodeURIComponent(m[1]); const q=new URLSearchParams(location.search).get('post'); return q||null; }
+
+    async function init(){
+      const slug=getSlug();
+      if(slug){ await loadSingle(slug); } else { await loadList(); }
+      document.querySelectorAll('.fade-up').forEach(el=>el.classList.add('visible'));
+    }
+    async function loadList(){
+      const grid=document.getElementById('post-grid');
+      if(!sb){ grid.innerHTML='<div class="lds">Blog is being set up.</div>'; return; }
+      const {data}=await sb.from('blog_posts').select('*').eq('published',true).order('created_at',{ascending:false});
+      if(!data||!data.length){ grid.innerHTML='<div class="lds">No articles yet — check back soon.</div>'; return; }
+      grid.innerHTML=data.map(p=>`<a class="post-card fade-up visible" href="/blog/${encodeURIComponent(p.slug)}">
+        <div class="cov">${p.cover_url?`<img src="${p.cover_url}" alt="${esc(p.title)}" loading="lazy"/>`:''}</div>
+        <div class="body"><span class="dt">${fmtDate(p.created_at)}</span><h2>${esc(p.title)}</h2><p>${esc(p.excerpt||'')}</p><span class="more">Read article →</span></div>
+      </a>`).join('');
+    }
+    async function loadSingle(slug){
+      document.getElementById('list-view').style.display='none';
+      const v=document.getElementById('single-view'); v.style.display='block';
+      if(!sb){ document.getElementById('s-title').textContent='Article unavailable'; return; }
+      const {data}=await sb.from('blog_posts').select('*').eq('slug',slug).eq('published',true).limit(1);
+      if(!data||!data.length){ document.getElementById('s-title').textContent='Article not found'; document.getElementById('s-body').innerHTML='<p><a href="/blog" style="color:var(--cyan)">← Back to all articles</a></p>'; return; }
+      const p=data[0];
+      document.title=p.title+' — AI7 Optivaro Blog';
+      document.getElementById('s-date').textContent=fmtDate(p.created_at);
+      document.getElementById('s-title').textContent=p.title;
+      if(p.cover_url){ const c=document.getElementById('s-cover'); c.src=p.cover_url; c.alt=p.title; c.style.display='block'; }
+      document.getElementById('s-body').innerHTML=p.body||'<p>'+esc(p.excerpt||'')+'</p>';
+    }
+    function esc(s){ if(s==null)return''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    init();
+  </script>
+</body>
+</html>
