@@ -365,7 +365,9 @@
   <script>
     /* ══ CONFIG ══ */
     const SUPABASE_URL  = 'https://zjvroxaehidqjocyjqkp.supabase.co';
-    const SUPABASE_SVC  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpqdnJveGFlaGlkcWpvY3lqcWtwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDU3MjE2MCwiZXhwIjoyMDk2MTQ4MTYwfQ.tziiXHKsyJNP7VJ8nCbzTyNs3a7awCmN2dpy26Xq9v8';
+    /* SECURITY: the service_role key was REMOVED from the client (it bypassed RLS and was publicly exposed).
+       This admin is parked until the secure rebuild (Supabase Auth + RLS + Edge Functions). Rotate the old key in the dashboard. */
+    const SUPABASE_SVC  = '';
     const BUCKET        = 'media';
     const ADMIN_PWD     = 'Optivaro2026!';
 
